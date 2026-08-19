@@ -66,6 +66,24 @@ function initCounters() {
 }
 
 /* ── Hero Slider ── */
+function positionSliderControls() {
+  const slider = document.querySelector('.hero-slider');
+  if (!slider) return;
+  const statsBar = slider.querySelector('.hero-stats-bar');
+  const controls = slider.querySelector('.slider-controls');
+  if (!statsBar || !controls) return;
+
+  const gap = 14;
+  const statsHeight = statsBar.offsetHeight;
+  const controlsHeight = controls.offsetHeight;
+
+  controls.style.bottom = (statsHeight + gap) + 'px';
+
+  slider.querySelectorAll('.slide-content').forEach(slideContent => {
+    slideContent.style.paddingBottom = (statsHeight + controlsHeight + gap * 2) + 'px';
+  });
+}
+
 function initHeroSlider() {
   const slider = document.querySelector('.hero-slider');
   if (!slider) return;
@@ -112,6 +130,15 @@ function initHeroSlider() {
   slides[0].classList.add('active');
   dots[0]?.classList.add('active');
   startAutoplay();
+
+  // Keep controls clear of the stats bar (handles all breakpoints)
+  positionSliderControls();
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(positionSliderControls, 150);
+  });
+  window.addEventListener('load', positionSliderControls);
 
   // Controls
   prevBtn?.addEventListener('click', () => { stopAutoplay(); prev(); startAutoplay(); });

@@ -108,6 +108,7 @@
     }
     .why-float-label { font-size: var(--fs-xs); color: var(--text-muted); }
     .why-feat { display: flex; gap: var(--sp-4); margin-bottom: var(--sp-5); }
+    .why-btns { display: flex; gap: var(--sp-4); margin-top: var(--sp-6); flex-wrap: wrap; }
     .why-feat-icon {
       width: 48px; height: 48px; border-radius: var(--radius-lg); flex-shrink: 0;
       background: linear-gradient(135deg, rgba(78,168,222,0.1), rgba(15,91,99,0.08));
@@ -179,6 +180,8 @@
       .brand-logo-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); }
       .brand-logo-card { padding: var(--sp-3) var(--sp-2); }
       .why-feat { gap: var(--sp-3); }
+      .why-btns { flex-direction: column; align-items: stretch; }
+      .why-btns .btn { width: 100%; text-align: center; }
       .why-float-card { right: var(--sp-2); left: auto; min-width: 140px; padding: var(--sp-3); }
       [dir="rtl"] .why-float-card { left: var(--sp-2); right: auto; }
       .ac-type-title { font-size: var(--fs-lg); }
@@ -684,7 +687,7 @@
             <div class="why-feat-desc">We use only R32 and R410A eco refrigerants and promote energy-efficient units.</div>
           </div>
         </div>
-        <div style="display:flex; gap: var(--sp-4); margin-top: var(--sp-6); flex-wrap:wrap;">
+        <div class="why-btns">
           <a href="about.html" class="btn btn--teal">Our Story</a>
           <a href="contact.html" class="btn btn--outline">Schedule a Visit</a>
         </div>
