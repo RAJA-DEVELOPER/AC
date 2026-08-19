@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="5 Warning Signs Your AC Needs Immediate Servicing — Expert HVAC advice from ArcticCool.">
+  <title>5 Warning Signs Your AC Needs Servicing — ArcticCool Blog</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    /* Article Hero */
+    .article-hero {
+      background: var(--midnight);
+      padding: calc(72px + 4rem) 0 4rem;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+      min-height: 380px;
+    }
+    .article-hero-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      opacity: 0.35;
+    }
+    .article-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(23,33,43,0.94) 0%, rgba(23,33,43,0.75) 60%, rgba(15,91,99,0.45) 100%);
+    }
+    .article-hero-content { position: relative; z-index: 2; max-width: 820px; }
+    .article-hero-title { font-family: var(--font-heading); font-size: clamp(1.85rem, 4.5vw, 3.25rem); font-weight: var(--fw-extrabold); color: white; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: var(--sp-4); }
+    .article-hero-subtitle { color: rgba(255,255,255,0.85); font-size: var(--fs-md); max-width: 60ch; line-height: var(--lh-relaxed); }
+    /* Article Layout */
+    .article-layout {
+      display: grid; grid-template-columns: 1fr 300px;
+      gap: var(--sp-10); align-items: start;
+      padding: var(--sp-12) 0;
+    }
+    /* Article Content */
+    .article-content { max-width: 720px; }
+    .article-meta { display: flex; align-items: center; gap: var(--sp-5); flex-wrap: wrap; margin-bottom: var(--sp-8); padding-bottom: var(--sp-6); border-bottom: 1px solid var(--border-color); }
+    .article-author { display: flex; align-items: center; gap: var(--sp-3); }
+    .article-author-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .article-author-name { font-weight: var(--fw-semibold); font-size: var(--fs-sm); color: var(--text-primary); }
+    .article-author-role { font-size: var(--fs-xs); color: var(--text-muted); }
+    .article-meta-item { font-size: var(--fs-xs); color: var(--text-muted); display: flex; align-items: center; gap: var(--sp-1); }
+    /* Prose */
+    .prose { line-height: var(--lh-relaxed); color: var(--text-secondary); }
+    .prose h2 { font-size: var(--fs-2xl); color: var(--text-primary); margin: var(--sp-10) 0 var(--sp-4); }
+    .prose h3 { font-size: var(--fs-xl); color: var(--text-primary); margin: var(--sp-8) 0 var(--sp-3); }
+    .prose p { margin-bottom: var(--sp-5); }
+    .prose ul, .prose ol { padding-left: var(--sp-6); margin-bottom: var(--sp-5); }
+    [dir="rtl"] .prose ul, [dir="rtl"] .prose ol { padding-left: 0; padding-right: var(--sp-6); }
+    .prose li { margin-bottom: var(--sp-2); }
+    .prose blockquote {
+      border-left: 4px solid var(--arctic); padding: var(--sp-4) var(--sp-6);
+      background: rgba(78,168,222,0.06); border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      margin: var(--sp-6) 0; font-style: italic; color: var(--text-secondary);
+    }
+    [dir="rtl"] .prose blockquote { border-left: none; border-right: 4px solid var(--arctic); border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .prose img { border-radius: var(--radius-xl); margin: var(--sp-6) 0; }
+    .prose .callout {
+      background: rgba(78,168,222,0.08); border: 1px solid rgba(78,168,222,0.2);
+      border-radius: var(--radius-xl); padding: var(--sp-5);
+      margin: var(--sp-6) 0; display: flex; gap: var(--sp-4);
+    }
+    .prose .warning-callout {
+      background: rgba(234,179,8,0.08); border-color: rgba(234,179,8,0.3);
+    }
+    /* Sign cards */
+    .sign-card {
+      display: flex; gap: var(--sp-5);
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl); padding: var(--sp-6);
+      margin-bottom: var(--sp-5); transition: all var(--t-normal);
+    }
+    .sign-card:hover { box-shadow: var(--shadow-md); border-color: rgba(78,168,222,0.3); }
+    .sign-num {
+      font-family: var(--font-heading); font-size: var(--fs-3xl);
+      font-weight: var(--fw-extrabold); color: rgba(78,168,222,0.2);
+      line-height: 1; flex-shrink: 0; width: 48px;
+    }
+    /* Social Share */
+    .share-bar { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; margin: var(--sp-8) 0; padding: var(--sp-5); background: var(--bg-tertiary); border-radius: var(--radius-xl); }
+    .share-label { font-weight: var(--fw-semibold); font-size: var(--fs-sm); }
+    .share-btn { padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-full); font-size: var(--fs-xs); font-weight: var(--fw-semibold); border: 1.5px solid var(--border-color); background: var(--bg-card); cursor: pointer; transition: all var(--t-fast); }
+    .share-btn:hover { background: var(--arctic); color: white; border-color: var(--arctic); }
+    /* Author Card */
+    .author-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-2xl); padding: var(--sp-8); text-align: center; margin: var(--sp-10) 0; }
+    .author-card-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto var(--sp-4); border: 3px solid var(--arctic); }
+    /* Sidebar */
+    .article-sidebar { position: sticky; top: calc(72px + 2rem); }
+    .sidebar-toc { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-2xl); padding: var(--sp-6); margin-bottom: var(--sp-5); }
+    .toc-title { font-weight: var(--fw-bold); margin-bottom: var(--sp-4); font-size: var(--fs-md); }
+    .toc-link { display: block; padding: var(--sp-2) 0; font-size: var(--fs-sm); color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--border-light); transition: color var(--t-fast); }
+    .toc-link:hover { color: var(--arctic); }
+    .toc-link:last-child { border-bottom: none; }
+    /* Related Posts */
+    .related-section { background: var(--bg-tertiary); padding: var(--sp-16) 0; }
+    /* Comments */
+    .comment { display: flex; gap: var(--sp-4); margin-bottom: var(--sp-6); }
+    .comment-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .comment-body { flex: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: var(--sp-5); }
+    .comment-header { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-2); flex-wrap: wrap; }
+    .comment-name { font-weight: var(--fw-semibold); font-size: var(--fs-sm); }
+    .comment-date { font-size: var(--fs-xs); color: var(--text-muted); }
+    .comment-text { font-size: var(--fs-sm); color: var(--text-secondary); line-height: var(--lh-relaxed); }
+    @media (max-width: 1024px) {
+      .article-layout { grid-template-columns: 1fr; gap: var(--sp-8); }
+      .article-sidebar { position: static; }
+    }
+    @media (max-width: 768px) {
+      .article-hero { padding: calc(72px + 2.5rem) 0 2.5rem; min-height: auto; }
+      .article-hero-title { font-size: clamp(1.6rem, 5.5vw, 2.25rem); }
+      .article-hero-subtitle { font-size: var(--fs-sm); }
+      .article-meta { gap: var(--sp-3); }
+      .author-card { padding: var(--sp-6) var(--sp-4); }
+    }
+    @media (max-width: 480px) {
+      .article-hero { padding: calc(60px + 2rem) 0 2rem; }
+      .article-hero-title { font-size: clamp(1.45rem, 5.5vw, 1.85rem); }
+      .article-hero-subtitle { font-size: var(--fs-xs); }
+      .article-meta { gap: var(--sp-2); }
+      .article-meta-item { font-size: 11px; }
+      .share-bar { gap: var(--sp-2); padding: var(--sp-4); }
+      .share-btn { padding: var(--sp-2) var(--sp-3); }
+      .sign-card { padding: var(--sp-4); gap: var(--sp-3); }
+      .sign-num { font-size: var(--fs-2xl); width: 36px; }
+      .prose h2 { font-size: var(--fs-xl); }
+      .prose h3 { font-size: var(--fs-lg); }
+    }
+    @media (max-width: 360px) {
+      .article-hero { padding: calc(56px + 1.5rem) 0 1.5rem; }
+      .article-hero-title { font-size: 1.35rem; }
+      .article-author-img { width: 36px; height: 36px; }
+      .share-label { flex-basis: 100%; }
+      .comment-body { padding: var(--sp-4); }
+    }
+    @media (max-width: 320px) {
+      .article-hero { padding: calc(54px + 1.25rem) 0 1.25rem; }
+      .article-hero-title { font-size: 1.22rem; }
+      .article-hero-subtitle { font-size: 11px; }
+      .article-layout { padding: var(--sp-6) 0; }
+      .sign-card { padding: var(--sp-3); gap: var(--sp-2); }
+      .sign-num { font-size: var(--fs-xl); width: 28px; }
+      .prose h2 { font-size: 1.25rem; margin: var(--sp-5) 0 var(--sp-2); }
+      .prose h3 { font-size: 1.1rem; }
+      .prose p { font-size: var(--fs-sm); }
+      .prose blockquote { padding: var(--sp-3) var(--sp-4); font-size: 12px; }
+      .share-bar { padding: var(--sp-3); }
+      .share-btn { padding: 4px 8px; font-size: 10px; }
+      .author-card { padding: var(--sp-4) var(--sp-3); }
+      .author-card-img { width: 64px; height: 64px; }
+      .comment { gap: var(--sp-2); }
+      .comment-avatar { width: 32px; height: 32px; }
+      .comment-body { padding: var(--sp-3); }
+      .comment-text { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-logo"><div class="loader-ring"></div><div class="loader-text">Arctic<span>Cool</span></div></div></div>
+<header class="navbar">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div><span class="nav-logo-text">Arctic<span>Cool</span></span></a>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="home2.html" class="nav-link">Home 2</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button class="rtl-toggle" aria-label="Toggle RTL">RTL</button>
+        <div class="profile-wrap">
+          <button class="profile-toggle" aria-label="Account menu" aria-expanded="false" title="Account"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+          <div class="profile-menu">
+            <a href="login.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Login / Signup</a>
+            <a href="dashboard.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span> User Dashboard</a>
+            <a href="admin.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Admin Dashboard</a>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn--primary btn--sm">Book Service</a>
+        <button class="nav-burger" aria-expanded="false" aria-label="Toggle menu"><span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span></button>
+      </div>
+    </nav>
+  </div>
+  <nav class="nav-mobile">
+    <a href="index.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
+    <a href="home2.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg> Home 2</a>
+    <a href="about.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
+    <a href="services.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Services</a>
+    <a href="blog.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Blog</a>
+    <a href="contact.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Contact</a>
+    <div style="padding: var(--sp-6) var(--sp-2); display:flex; gap: var(--sp-3);"><a href="contact.html" class="btn btn--primary btn--full">Book Service</a></div>
+  </nav>
+</header>
+
+<main>
+
+<!-- SECTION 1 — ARTICLE HERO -->
+<section class="article-hero" aria-label="Article header">
+  <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&q=80" alt="HVAC technician inspecting AC unit" class="article-hero-bg" loading="eager" id="articleHeroImg">
+  <div class="article-hero-overlay"></div>
+  <div class="container" style="position: relative; z-index: 2; width: 100%;">
+    <div class="article-hero-content reveal-up">
+      <div style="display:flex; gap: var(--sp-3); margin-bottom: var(--sp-4); flex-wrap: wrap;" id="articleBadges">
+        <span class="badge badge--arctic">Maintenance</span>
+        <span class="badge" style="background:rgba(255,255,255,0.12); color: rgba(255,255,255,0.85);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 5 min read</span>
+      </div>
+      <h1 class="article-hero-title" id="articleHeroTitle">5 Warning Signs Your AC Needs Immediate Servicing This Summer</h1>
+      <p class="article-hero-subtitle" id="articleHeroSub">Don't wait for a complete breakdown. These early indicators can save you thousands in repair costs.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2 — ARTICLE CONTENT + SIDEBAR -->
+<section class="section" aria-label="Article content">
+  <div class="container">
+    <div class="article-layout">
+      <!-- Main Article -->
+      <article class="article-content">
+        <!-- Meta -->
+        <div class="article-meta">
+          <div class="article-author">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=88&q=80" alt="Vikram Singh" class="article-author-img">
+            <div>
+              <div class="article-author-name">Vikram Singh</div>
+              <div class="article-author-role">Senior HVAC Engineer, ArcticCool</div>
+            </div>
+          </div>
+          <div class="article-meta-item" id="articleDate"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> August 15, 2025</div>
+          <div class="article-meta-item"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 12,847 views</div>
+          <div class="article-meta-item"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> 24 comments</div>
+        </div>
+        <!-- Prose -->
+        <div class="prose" id="articleProse">
+          <p>Every summer, thousands of air conditioning units across India fail at the worst possible moment — peak heatwave, full house, no technician available for days. The frustrating truth is that most of these failures could have been prevented with early detection and timely maintenance.</p>
+          <p>As a senior HVAC engineer with over a decade at ArcticCool, I've diagnosed thousands of AC units. In this guide, I'll share the five most reliable early warning signs that your AC is crying out for professional attention.</p>
+          <div class="callout">
+            <span style="font-size:1.5rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span>
+            <div><strong>Quick Tip:</strong> Bookmark this page and check your AC against these signs before summer hits. Preventive servicing costs ₹500–₹1,500. Emergency repairs during peak season can cost ₹5,000–₹25,000+.</div>
+          </div>
+          <h2>The 5 Critical Warning Signs</h2>
+          <div class="sign-card">
+            <div class="sign-num">01</div>
+            <div>
+              <h3 style="margin:0 0 var(--sp-2);">Warm or Insufficient Cooling</h3>
+              <p style="color:var(--text-muted); margin:0;">If your AC runs for 20+ minutes but the room remains warm, it usually signals one of three issues: low refrigerant (gas leak), dirty evaporator coils, or a failing compressor. Don't ignore this — running a gas-starved compressor leads to permanent damage worth ₹8,000–₹20,000 to replace.</p>
+            </div>
+          </div>
+          <div class="sign-card">
+            <div class="sign-num">02</div>
+            <div>
+              <h3 style="margin:0 0 var(--sp-2);">Unusual Sounds — Rattling, Grinding or Hissing</h3>
+              <p style="color:var(--text-muted); margin:0;">A healthy AC runs quietly. Rattling suggests loose components or debris in the blower. Grinding indicates worn motor bearings. Hissing is almost always a refrigerant leak — a safety concern that needs immediate attention, as refrigerants can be harmful in enclosed spaces.</p>
+            </div>
+          </div>
+          <div class="sign-card">
+            <div class="sign-num">03</div>
+            <div>
+              <h3 style="margin:0 0 var(--sp-2);">Water Leaks or Excessive Condensation</h3>
+              <p style="color:var(--text-muted); margin:0;">A little condensation is normal. But if you see water pooling inside near the indoor unit, it indicates a blocked drainage pipe, frozen evaporator coils, or a refrigerant issue. Left unchecked, this can damage walls, ceiling and electrical components — leading to costly repairs beyond the AC itself.</p>
+            </div>
+          </div>
+          <div class="sign-card">
+            <div class="sign-num">04</div>
+            <div>
+              <h3 style="margin:0 0 var(--sp-2);">Foul or Musty Odours</h3>
+              <p style="color:var(--text-muted); margin:0;">Musty smells indicate mould or bacterial growth inside the unit — typically on the evaporator coil or drainage tray. This is a serious air quality concern, especially for children and people with respiratory conditions. A burning smell could indicate electrical issues and requires immediate shutdown and professional inspection.</p>
+            </div>
+          </div>
+          <div class="sign-card">
+            <div class="sign-num">05</div>
+            <div>
+              <h3 style="margin:0 0 var(--sp-2);">Sudden Spike in Electricity Bills</h3>
+              <p style="color:var(--text-muted); margin:0;">If your monthly electricity bill increases by 20–30% without changing your usage habits, your AC is likely working harder than it should. Dirty filters, low refrigerant, or failing components force the compressor to overwork — consuming significantly more power while delivering less cooling.</p>
+            </div>
+          </div>
+          <blockquote>
+            "An AC that's serviced annually costs on average 35% less to run and lasts 4–6 years longer than an unmaintained unit of the same model." — ArcticCool Service Data, 2024
+          </blockquote>
+          <h2>What to Do When You Spot These Signs</h2>
+          <p>Acting quickly when you notice any of these warning signs can mean the difference between a ₹600 filter cleaning and a ₹15,000 compressor replacement. Here's your action plan:</p>
+          <ol>
+            <li><strong>Don't ignore it</strong> — the problem will not resolve itself and will worsen with continued use.</li>
+            <li><strong>Stop running the unit</strong> if you hear grinding sounds or notice burning smells.</li>
+            <li><strong>Call a certified technician</strong> within 24–48 hours for a proper diagnosis.</li>
+            <li><strong>Don't attempt DIY repairs</strong> — refrigerant handling requires licensed certification.</li>
+            <li><strong>Consider an AMC plan</strong> for ongoing preventive maintenance and priority service.</li>
+          </ol>
+          <div class="callout warning-callout">
+            <span style="font-size:1.5rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+            <div><strong>Safety Warning:</strong> If your AC emits a burning smell or sparks, switch it off immediately at the circuit breaker and call us on +91 98200 12345. Do not attempt to restart it.</div>
+          </div>
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=720&q=80" alt="HVAC technician performing diagnostic check" loading="lazy">
+          <h2>How ArcticCool Can Help</h2>
+          <p>Our certified technicians carry digital diagnostic tools that can identify 90% of AC faults on the first visit. With same-day service available in 40+ cities, we'll have your AC running perfectly before the heat becomes unbearable.</p>
+          <p>Book a diagnostic visit today for just ₹299 (waived if you proceed with any repair or service). Our transparent pricing means no surprise bills — ever.</p>
+        </div>
+        <!-- Share Bar -->
+        <div class="share-bar">
+          <span class="share-label">Share this article:</span>
+          <button class="share-btn" onclick="window.ArcticCool?.ToastManager.show('Link copied!','success')"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Copy Link</button>
+          <button class="share-btn">𝕏 Twitter</button>
+          <button class="share-btn">in LinkedIn</button>
+          <button class="share-btn">f Facebook</button>
+          <button class="share-btn"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> WhatsApp</button>
+        </div>
+        <!-- Author Card -->
+        <div class="author-card">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=160&q=80" alt="Vikram Singh" class="author-card-img" loading="lazy">
+          <h3>Vikram Singh</h3>
+          <p style="color:var(--arctic); font-size:var(--fs-sm); margin-bottom:var(--sp-3);">Senior HVAC Engineer, ArcticCool</p>
+          <p style="font-size:var(--fs-sm); color:var(--text-muted); max-width:50ch; margin:0 auto;">12 years in HVAC engineering. Certified by ISHRAE and ASHRAE. Passionate about helping customers get the most from their climate control systems.</p>
+        </div>
+        <!-- Comments -->
+        <div id="comments">
+          <h2 style="margin-bottom: var(--sp-6);">Comments (24)</h2>
+          <div class="comment">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&q=80" alt="Rahul" class="comment-avatar" loading="lazy">
+            <div class="comment-body">
+              <div class="comment-header">
+                <span class="comment-name">Rahul Mehta</span>
+                <span class="comment-date">Aug 16, 2025 · 10:42 AM</span>
+              </div>
+              <div class="comment-text">This is exactly what happened to my Daikin last summer! The hissing sound was the gas leak. I waited 2 weeks and ended up paying ₹12,000 for a new compressor. Lesson learned — call immediately!</div>
+            </div>
+          </div>
+          <div class="comment">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=88&q=80" alt="Priya" class="comment-avatar" loading="lazy">
+            <div class="comment-body">
+              <div class="comment-header">
+                <span class="comment-name">Priya Sharma</span>
+                <span class="comment-date">Aug 16, 2025 · 2:15 PM</span>
+              </div>
+              <div class="comment-text">The electricity bill spike is the one I always miss! My Samsung shows perfectly fine cooling but my bill shot up 40% this month. Booking a diagnostic today after reading this. Thank you!</div>
+            </div>
+          </div>
+          <!-- Comment Form -->
+          <div style="background: var(--bg-tertiary); border-radius: var(--radius-2xl); padding: var(--sp-6); margin-top: var(--sp-6);">
+            <h3 style="margin-bottom: var(--sp-5);">Leave a Comment</h3>
+            <form data-validate onsubmit="">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="commentName">Full Name *</label>
+                  <input type="text" id="commentName" class="form-input" placeholder="Your name" required minlength="2">
+                  <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="commentEmail">Email *</label>
+                  <input type="email" id="commentEmail" class="form-input" placeholder="your@email.com" required>
+                  <span class="form-error"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="commentText">Comment *</label>
+                <textarea id="commentText" class="form-textarea" placeholder="Share your experience or question..." required minlength="10"></textarea>
+                <span class="form-error"></span>
+              </div>
+              <button type="submit" class="btn btn--primary" data-label="Post Comment">Post Comment</button>
+            </form>
+          </div>
+        </div>
+      </article>
+      <!-- Sidebar -->
+      <aside class="article-sidebar reveal-right">
+        <!-- TOC -->
+        <div class="sidebar-toc">
+          <div class="toc-title"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Table of Contents</div>
+          <a href="#" class="toc-link">The 5 Critical Warning Signs</a>
+          <a href="#" class="toc-link">01. Warm / Insufficient Cooling</a>
+          <a href="#" class="toc-link">02. Unusual Sounds</a>
+          <a href="#" class="toc-link">03. Water Leaks</a>
+          <a href="#" class="toc-link">04. Foul Odours</a>
+          <a href="#" class="toc-link">05. Electricity Bill Spike</a>
+          <a href="#" class="toc-link">What To Do Next</a>
+          <a href="#" class="toc-link">How ArcticCool Can Help</a>
+        </div>
+        <!-- CTA Widget -->
+        <div style="background: linear-gradient(135deg, var(--teal), var(--midnight)); border-radius: var(--radius-2xl); padding: var(--sp-6); color: white; margin-bottom: var(--sp-5);">
+          <div style="font-size: 2rem; margin-bottom: var(--sp-3);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+          <h4 style="color:white; margin-bottom: var(--sp-2);">Need a Technician?</h4>
+          <p style="font-size: var(--fs-sm); opacity: 0.75; margin-bottom: var(--sp-4);">Book a diagnostic visit for just ₹299. Same-day available.</p>
+          <a href="contact.html" class="btn btn--primary btn--full">Book Now</a>
+        </div>
+        <!-- Popular Posts -->
+        <div class="sidebar-toc">
+          <div class="toc-title"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> Related Articles</div>
+          <a href="blog-details.html" style="display:flex; gap: var(--sp-3); text-decoration:none; margin-bottom:var(--sp-4);">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=80&q=70" alt="Inverter" style="width:56px;height:56px;border-radius:var(--radius-md);object-fit:cover;" loading="lazy">
+            <div><div style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--text-primary);line-height:1.35;">Inverter vs Non-Inverter AC: Complete 2025 Guide</div><div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:2px;">7 min read</div></div>
+          </a>
+          <a href="blog-details.html" style="display:flex; gap: var(--sp-3); text-decoration:none;">
+            <img src="https://images.unsplash.com/photo-1614267157481-ca2b81ac6fcc?w=80&q=70" alt="Energy" style="width:56px;height:56px;border-radius:var(--radius-md);object-fit:cover;" loading="lazy">
+            <div><div style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--text-primary);line-height:1.35;">10 Ways to Cut Your AC Electricity Bill</div><div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:2px;">6 min read</div></div>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 5 — RELATED ARTICLES -->
+<section class="related-section" aria-labelledby="related-heading">
+  <div class="container">
+    <div class="section-header reveal-up">
+      <span class="section-tag">Keep Reading</span>
+      <h2 class="section-title" id="related-heading">Related <span>Articles</span></h2>
+    </div>
+    <div class="grid grid-3 stagger">
+      <div class="blog-card">
+        <div style="overflow:hidden;border-radius:var(--radius-2xl) var(--radius-2xl) 0 0;"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Inverter" class="blog-card-img" loading="lazy"></div>
+        <div class="blog-card-body" style="border:1px solid var(--border-color);border-top:none;border-radius:0 0 var(--radius-2xl) var(--radius-2xl);">
+          <div class="blog-card-meta"><span class="badge badge--teal">Buying Guide</span><span>Aug 10</span></div>
+          <h3 class="blog-card-title"><a href="blog-details.html">Inverter vs Non-Inverter AC: Complete 2025 Guide</a></h3>
+          <a href="blog-details.html" class="btn btn--outline btn--sm" style="margin-top:var(--sp-4);">Read →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div style="overflow:hidden;border-radius:var(--radius-2xl) var(--radius-2xl) 0 0;"><img src="https://images.unsplash.com/photo-1614267157481-ca2b81ac6fcc?w=500&q=80" alt="Energy" class="blog-card-img" loading="lazy"></div>
+        <div class="blog-card-body" style="border:1px solid var(--border-color);border-top:none;border-radius:0 0 var(--radius-2xl) var(--radius-2xl);">
+          <div class="blog-card-meta"><span class="badge badge--copper">Energy Tips</span><span>Jul 28</span></div>
+          <h3 class="blog-card-title"><a href="blog-details.html">10 Ways to Cut Your AC Electricity Bill</a></h3>
+          <a href="blog-details.html" class="btn btn--outline btn--sm" style="margin-top:var(--sp-4);">Read →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div style="overflow:hidden;border-radius:var(--radius-2xl) var(--radius-2xl) 0 0;"><img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=500&q=80" alt="Air quality" class="blog-card-img" loading="lazy"></div>
+        <div class="blog-card-body" style="border:1px solid var(--border-color);border-top:none;border-radius:0 0 var(--radius-2xl) var(--radius-2xl);">
+          <div class="blog-card-meta"><span class="badge badge--arctic">Health</span><span>Jul 12</span></div>
+          <h3 class="blog-card-title"><a href="blog-details.html">AC & Indoor Air Quality: What You Must Know</a></h3>
+          <a href="blog-details.html" class="btn btn--outline btn--sm" style="margin-top:var(--sp-4);">Read →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo nav-logo" style="margin-bottom: var(--sp-4);">
+          <div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+          <span class="nav-logo-text">Arctic<span>Cool</span></span>
+        </a>
+        <p class="footer-desc">India's most trusted premium HVAC brand. Delivering world-class air conditioning solutions for homes and businesses since 2009.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-link" aria-label="YouTube"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
+        </div>
+      </div>
+      <!-- Services -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">AC Installation</a></li>
+          <li><a href="services.html">Repair & Service</a></li>
+          <li><a href="services.html">Deep Cleaning</a></li>
+          <li><a href="services.html">Gas Charging</a></li>
+          <li><a href="services.html">AMC Plans</a></li>
+          <li><a href="services.html">Commercial HVAC</a></li>
+        </ul>
+      </div>
+      <!-- Company & Portals -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="home2.html">Home 2</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog & Insights</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="dashboard.html">Customer Portal</a></li>
+          <li><a href="admin.html">Ops Command Center</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span>42, HVAC Tower, Andheri West, Mumbai 400053</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>+91 98200 12345</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <span>hello@arcticcool.in</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span>Mon–Sat 8am–8pm | Sun 9am–5pm</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ArcticCool Pvt Ltd. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">↑</button>
+<div class="toast-container" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script src="js/animations.js"></script>
+<script>
+  (function () {
+    var POSTS = {
+      1: {
+        img: 'https://plus.unsplash.com/premium_photo-1682145344450-34d8323dec84?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D',
+        alt: '5 Warning Signs article',
+        badge: 'Maintenance', badgeClass: 'badge--arctic',
+        read: '5 min read', date: 'August 15, 2025',
+        title: '5 Warning Signs Your AC Needs Immediate Servicing This Summer',
+        sub: 'Don\'t wait for a complete breakdown. These early indicators can save you thousands in repair costs.'
+      },
+      2: {
+        img: 'https://plus.unsplash.com/premium_photo-1682126052466-d60d479d5188?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D',
+        alt: 'Inverter vs Non-Inverter AC',
+        badge: 'Buying Guide', badgeClass: 'badge--teal',
+        read: '7 min read', date: 'August 10, 2025',
+        title: 'Inverter vs Non-Inverter AC: The Complete Comparison Guide for 2025',
+        sub: 'Breaking down the real cost savings, performance differences and when each type makes sense.',
+        prose: '\
+<p>If you are shopping for a new air conditioner in 2025, the single biggest decision you will make is choosing between an inverter and a non-inverter (fixed-speed) model. It affects everything — your electricity bill, your comfort, your maintenance costs and how long the unit lasts.</p>\
+<p>In this guide we compare the two technologies honestly, using real usage patterns in Indian homes, so you can choose the right one for your budget and room.</p>\
+<div class="callout"><span style="font-size:1.5rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><div><strong>Quick Answer:</strong> If you run your AC for 4+ hours a day in summer and care about long-term savings, buy an inverter. If you use it rarely or have a very tight budget, a fixed-speed unit still makes sense.</div></div>\
+<h2>How Each Technology Works</h2>\
+<p>A non-inverter AC has a compressor that either runs at full speed or switches off completely. To maintain the set temperature it cycles on and off, which wastes energy during every restart and causes bigger temperature swings.</p>\
+<p>An inverter AC uses a variable-speed compressor that runs continuously but adjusts its speed. When the room is hot it runs fast; once the target temperature is reached it slows down to a gentle hum, using only the energy needed to hold the temperature.</p>\
+<h2>Cost Comparison</h2>\
+<div class="sign-card"><div class="sign-num">01</div><div><h3 style="margin:0 0 var(--sp-2);">Purchase Price</h3><p style="color:var(--text-muted); margin:0;">Inverter units cost roughly ₹4,000–₹10,000 more upfront for the same cooling capacity. Brands recover this through energy savings within 2–3 summers of regular use.</p></div></div>\
+<div class="sign-card"><div class="sign-num">02</div><div><h3 style="margin:0 0 var(--sp-2);">Running Cost</h3><p style="color:var(--text-muted); margin:0;">Inverters typically consume 30–50% less electricity. For an AC run 8 hours daily at 1.5 tons, that is roughly ₹1,200–₹2,000 saved every month during peak season.</p></div></div>\
+<div class="sign-card"><div class="sign-num">03</div><div><h3 style="margin:0 0 var(--sp-2);">Lifespan & Service</h3><p style="color:var(--text-muted); margin:0;">Inverter compressors generally last longer because they avoid harsh start-stop cycles. Both types need the same annual servicing — filter cleaning, coil cleaning and gas checks.</p></div></div>\
+<blockquote>"On average, an inverter AC pays back its price difference in 20–24 months of normal Indian summer usage." — ArcticCool Service Data, 2025</blockquote>\
+<h2>When a Non-Inverter Still Wins</h2>\
+<ol>\
+<li><strong>Very low usage</strong> — under 2 hours a day, the savings never recover the premium.</li>\
+<li><strong>Small bedrooms</strong> — a 1-ton fixed unit is enough and cheaper.</li>\
+<li><strong>Voltage fluctuation areas</strong> — fixed-speed compressors tolerate unstable power better.</li>\
+<li><strong>Budget-first buyers</strong> — a good non-inverter from a leading brand beats a no-name inverter.</li>\
+</ol>\
+<h2>How ArcticCool Can Help</h2>\
+<p>Not sure which capacity or technology fits your room? Our experts measure your space, sunlight and usage pattern, then recommend the right unit — no upselling, ever.</p>\
+<p>We also install both types at flat transparent rates with a 90-day workmanship warranty. Call us at +91 98200 12345 for a free consultation.</p>'
+      },
+      3: {
+        img: 'https://plus.unsplash.com/premium_photo-1661715583676-165c827b1cff?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D',
+        alt: 'Energy saving tips',
+        badge: 'Energy Tips', badgeClass: 'badge--copper',
+        read: '6 min read', date: 'July 28, 2025',
+        title: '10 Proven Ways to Cut Your AC Electricity Bill Without Sacrificing Comfort',
+        sub: 'Smart thermostat settings, maintenance habits, and positioning tips that actually work.',
+        prose: '\
+<p>Your AC is almost certainly the biggest consumer of electricity in your home during summer. Yet most households pay far more than they need to — not because their unit is faulty, but because of a handful of habits that are easy to fix.</p>\
+<p>Here are ten proven ways to cut your bill, ranked by how much they actually save.</p>\
+<div class="callout"><span style="font-size:1.5rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><div><strong>Quick Tip:</strong> Every 1°C you raise the set temperature saves roughly 6% of your AC\'s electricity consumption. 24°C instead of 18°C is the single biggest lever you have.</div></div>\
+<h2>The 10 Money-Saving Habits</h2>\
+<div class="sign-card"><div class="sign-num">01</div><div><h3 style="margin:0 0 var(--sp-2);">Set 24°C, Not Arctic-Freezing</h3><p style="color:var(--text-muted); margin:0;">Each degree lower adds about 6% consumption. Most people feel perfectly comfortable at 24–25°C, especially with ceiling fans running.</p></div></div>\
+<div class="sign-card"><div class="sign-num">02</div><div><h3 style="margin:0 0 var(--sp-2);">Clean Filters Monthly</h3><p style="color:var(--text-muted); margin:0;">A clogged filter can raise consumption by 5–15%. Pop the filter out, wash it under a tap, let it dry and slide it back — takes five minutes.</p></div></div>\
+<div class="sign-card"><div class="sign-num">03</div><div><h3 style="margin:0 0 var(--sp-2);">Use the Timer / Sleep Mode</h3><p style="color:var(--text-muted); margin:0;">Don\'t let the AC run all night at full tilt. Timer off in the early morning hours and sleep mode save a lot once the room is cool.</p></div></div>\
+<div class="sign-card"><div class="sign-num">04</div><div><h3 style="margin:0 0 var(--sp-2);">Seal Gaps Around Doors & Windows</h3><p style="color:var(--text-muted); margin:0;">Cool air leaking out makes the compressor run longer. Weather-stripping is cheap and pays for itself in one summer.</p></div></div>\
+<div class="sign-card"><div class="sign-num">05</div><div><h3 style="margin:0 0 var(--sp-2);">Use Ceiling Fans to Circulate</h3><p style="color:var(--text-muted); margin:0;">Fans cost a fraction of AC power and let you keep the thermostat higher without noticing the difference.</p></div></div>\
+<div class="sign-card"><div class="sign-num">06</div><div><h3 style="margin:0 0 var(--sp-2);">Close Curtains During the Day</h3><p style="color:var(--text-muted); margin:0;">Direct sunlight through a window heats a room fast. Blackout or thermal curtains cut that heat load dramatically.</p></div></div>\
+<div class="sign-card"><div class="sign-num">07</div><div><h3 style="margin:0 0 var(--sp-2);">Keep the Outdoor Unit Clear</h3><p style="color:var(--text-muted); margin:0;">A condenser choked with dust, leaves or a too-close wall overheats and works harder. Give it at least a foot of free space.</p></div></div>\
+<div class="sign-card"><div class="sign-num">08</div><div><h3 style="margin:0 0 var(--sp-2);">Service Before Peak Summer</h3><p style="color:var(--text-muted); margin:0;">An annual deep service — coil cleaning, gas top-up, electrical check — keeps the unit running at rated efficiency instead of slowly degrading.</p></div></div>\
+<div class="sign-card"><div class="sign-num">09</div><div><h3 style="margin:0 0 var(--sp-2);">Right-Size the Room\'s Capacity</h3><p style="color:var(--text-muted); margin:0;">An undersized AC runs forever; an oversized one short-cycles and cools unevenly. Both waste power. Use ArcticCool\'s sizing calculator to check.</p></div></div>\
+<div class="sign-card"><div class="sign-num">10</div><div><h3 style="margin:0 0 var(--sp-2);">Book an Energy Audit</h3><p style="color:var(--text-muted); margin:0;">Our technicians measure actual power draw and find the hidden culprits — often we recover the audit fee in savings within two months.</p></div></div>\
+<blockquote>"Households that follow this list typically see a 20–30% drop in summer AC bills within the first season." — ArcticCool Service Data, 2025</blockquote>\
+<h2>Start With the Free Steps</h2>\
+<p>Steps 1–7 cost nothing but a little habit change. Do those this week, then book a seasonal service before the next heatwave. Small changes compound fast.</p>\
+<p>Book your pre-season service online and get a free filter cleaning with any service package. Call +91 98200 12345 or book from the contact page.</p>'
+      },
+      4: {
+        img: 'https://images.unsplash.com/photo-1693741535032-4c87dd35b191?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzh8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D',
+        alt: 'Commercial HVAC',
+        badge: 'Commercial', badgeClass: 'badge--arctic',
+        read: '8 min read', date: 'July 20, 2025',
+        title: 'Choosing the Right HVAC System for Commercial Spaces: A Manager\'s Guide',
+        sub: 'From small offices to sprawling malls — HVAC selection for commercial environments.',
+        prose: '\
+<p>Choosing HVAC for a commercial space is a completely different game from buying a home AC. The unit runs for far longer, serves many people, carries higher energy bills and — most importantly — a failure can shut your business down.</p>\
+<p>This guide helps facility managers and business owners make the right call without falling for over-specced systems.</p>\
+<div class="callout"><span style="font-size:1.5rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><div><strong>Quick Tip:</strong> Load calculations matter more than brand. An accurately sized system for your square footage and occupancy beats an oversized premium unit every time on running cost.</div></div>\
+<h2>The Main System Types</h2>\
+<div class="sign-card"><div class="sign-num">01</div><div><h3 style="margin:0 0 var(--sp-2);">Split & Multi-Split</h3><p style="color:var(--text-muted); margin:0;">Best for small offices, clinics and cafés up to ~2,000 sq ft. Easy to install, individual zone control, and low upfront cost. Multi-split lets one outdoor unit feed several indoor units.</p></div></div>\
+<div class="sign-card"><div class="sign-num">02</div><div><h3 style="margin:0 0 var(--sp-2);">Vrf / VRV Systems</h3><p style="color:var(--text-muted); margin:0;">Variable refrigerant flow systems are the modern choice for mid-to-large buildings. They modulate power per zone, so half-empty floors don\'t waste energy cooling empty rooms.</p></div></div>\
+<div class="sign-card"><div class="sign-num">03</div><div><h3 style="margin:0 0 var(--sp-2);">Ducted / Central Systems</h3><p style="color:var(--text-muted); margin:0;">For large offices, malls and showrooms, ducted systems deliver even cooling through hidden ducts. Best when ceilings already allow duct routing and aesthetics matter.</p></div></div>\
+<h2>What Determines the Right Size</h2>\
+<ol>\
+<li><strong>Floor area and ceiling height</strong> — the basic volume you need to cool.</li>\
+<li><strong>Occupancy</strong> — each person adds roughly 500 BTUs of heat. A conference room fills fast.</li>\
+<li><strong>Equipment heat</strong> — server rooms, kitchen equipment and large windows add significant load.</li>\
+<li><strong>Sunlight and orientation</strong> — glass-heavy south facades need extra capacity.</li>\
+<li><strong>Operating hours</strong> — a 24-hour facility justifies higher-efficiency equipment than a 9-to-5 office.</li>\
+</ol>\
+<blockquote>"Poorly sized commercial systems waste 15–30% of their energy over their lifetime — money that is pure recurring loss, every single month." — ArcticCool Commercial Team</blockquote>\
+<h2>Service & AMC Considerations</h2>\
+<p>Commercial units run harder and longer, so preventive maintenance is not optional. A proper AMC with scheduled filter changes, coil cleaning and quarterly refrigerant checks prevents the downtime that costs far more than the contract.</p>\
+<p>Ask any vendor for a clear uptime guarantee and response time in your contract — in commercial HVAC, minutes of downtime are money.</p>\
+<h2>How ArcticCool Helps Businesses</h2>\
+<p>ArcticCool designs, supplies, installs and maintains commercial systems across 40+ cities. We do free load calculations, provide transparent quotes, and offer priority AMC contracts with 4-hour response guarantees.</p>\
+<p>Talk to our commercial team at +91 98200 12345 for a free on-site assessment.</p>'
+      },
+      5: {
+        img: 'https://plus.unsplash.com/premium_photo-1661963078581-a4f091315692?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D',
+        alt: 'Air quality',
+        badge: 'Health', badgeClass: 'badge--teal',
+        read: '8 min read', date: 'July 12, 2025',
+        title: 'How Your AC Affects Indoor Air Quality: What You Must Know',
+        sub: 'Filters, coils and drainage — the hidden factors affecting the air you breathe at home.',
+        prose: '\
+<p>We spend most of our lives indoors, and in a sealed, air-conditioned room your AC is effectively your home\'s lungs. It pulls in air, filters it, cools it and recirculates it — and whatever is trapped inside your unit ends up in your breathing air.</p>\
+<p>This article explains exactly how an AC affects indoor air quality and what you can do to keep your air healthy.</p>\
+<div class="callout"><span style="font-size:1.5rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><div><strong>Quick Tip:</strong> If your AC smells musty, the evaporator coil or drainage tray is growing mould — and you are breathing it. Clean the coil and drain annually, minimum.</div></div>\
+<h2>The Four Air-Quality Culprits Inside Your AC</h2>\
+<div class="sign-card"><div class="sign-num">01</div><div><h3 style="margin:0 0 var(--sp-2);">Dust-Clogged Filters</h3><p style="color:var(--text-muted); margin:0;">Filters trap dust and pollen, but a full filter stops working and lets fine particulates blow straight into the room. Wash it monthly during heavy use.</p></div></div>\
+<div class="sign-card"><div class="sign-num">02</div><div><h3 style="margin:0 0 var(--sp-2);">Mould on the Evaporator Coil</h3><p style="color:var(--text-muted); margin:0;">The cold, damp coil is the perfect breeding ground for mould and bacteria. This is the classic cause of that sour, musty smell — and a real respiratory irritant.</p></div></div>\
+<div class="sign-card"><div class="sign-num">03</div><div><h3 style="margin:0 0 var(--sp-2);">Blocked Drainage Tray</h3><p style="color:var(--text-muted); margin:0;">A clogged drain lets water stagnate and breed bacteria and even mosquitoes. It also leaks into your ceiling and walls, inviting dampness and more mould.</p></div></div>\
+<div class="sign-card"><div class="sign-num">04</div><div><h3 style="margin:0 0 var(--sp-2);">Stale, Recirculated Air</h3><p style="color:var(--text-muted); margin:0;">Running on recirculate all day without ventilation builds up CO₂, VOCs and pollutants. Open windows briefly each morning and let the AC pull in fresh air.</p></div></div>\
+<blockquote>"Indoor air is typically 2–5 times more polluted than outdoor air — and a neglected AC makes it worse, not better." — WHO / Indoor Air Quality studies</blockquote>\
+<h2>Who Is Most At Risk</h2>\
+<p>Children, elderly family members, allergy sufferers and anyone with asthma or respiratory conditions are the most affected by a dirty AC. For them, air quality is not a comfort issue — it is a health issue.</p>\
+<h2>Keep Your Air Clean</h2>\
+<ol>\
+<li><strong>Wash filters monthly</strong> during peak season.</li>\
+<li><strong>Book a deep clean annually</strong> — coil cleaning, anti-bacterial treatment and drainage flush.</li>\
+<li><strong>Ventilate daily</strong> — 10 minutes of fresh air in the morning.</li>\
+<li><strong>Monitor humidity</strong> — a well-draining AC keeps indoor humidity between 40–60%.</li>\
+</ol>\
+<h2>How ArcticCool Can Help</h2>\
+<p>Our deep-cleaning package includes jet-stream coil cleaning, anti-bacterial treatment, drainage flush and filter servicing — everything that keeps your air healthy.</p>\
+<p>Book it online and our certified technicians will have your AC hygienically clean and odour-free. Call +91 98200 12345 today.</p>'
+      },
+      6: {
+        img: 'https://images.unsplash.com/photo-1667983453881-4992fe86ab1b?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTl8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D',
+        alt: 'Smart AC',
+        badge: 'Technology', badgeClass: 'badge--copper',
+        read: '6 min read', date: 'July 5, 2025',
+        title: 'Smart ACs in 2025: Wi-Fi, AI and IoT Features Worth Paying For',
+        sub: 'A practical buyer\'s look at which connected features deliver real value vs. marketing hype.',
+        prose: '\
+<p>Every major brand now sells "smart" ACs, and the price premium is significant. But not every connected feature is worth your money — some genuinely save electricity and add convenience, while others are gimmicks that rarely get used.</p>\
+<p>Here is our honest breakdown of which smart AC features matter in 2025.</p>\
+<div class="callout"><span style="font-size:1.5rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><div><strong>Quick Tip:</strong> The features that actually pay for themselves are app control, scheduling and energy monitoring. Voice assistants and fancy modes are conveniences, not savings.</div></div>\
+<h2>Worth Paying For</h2>\
+<div class="sign-card"><div class="sign-num">01</div><div><h3 style="margin:0 0 var(--sp-2);">App Control + Scheduling</h3><p style="color:var(--text-muted); margin:0;">Turn the AC on 20 minutes before you reach home, or off after you leave — from anywhere. Scheduling alone often cuts wasted cooling by hours a week.</p></div></div>\
+<div class="sign-card"><div class="sign-num">02</div><div><h3 style="margin:0 0 var(--sp-2);">Energy Monitoring</h3><p style="color:var(--text-muted); margin:0;">See exactly how many units the AC consumed. It makes you aware, which alone changes behaviour and cuts usage by 10–15% for most households.</p></div></div>\
+<div class="sign-card"><div class="sign-num">03</div><div><h3 style="margin:0 0 var(--sp-2);">Smart Scheduling with Presence</h3><p style="color:var(--text-muted); margin:0;">Some units use geofencing or occupancy sensors to cool only when the room is occupied — genuinely useful for families.</p></div></div>\
+<h2>Nice-To-Have, Not Essential</h2>\
+<ol>\
+<li><strong>Voice assistant control</strong> — fun, but how often do you talk to your AC?</li>\
+<li><strong>Built-in filters / ionisers</strong> — verify actual filter efficiency before paying.</li>\
+<li><strong>Fancy AI eco modes</strong> — often just repackaged scheduling.</li>\
+<li><strong>Colour screens and animations</strong> — pure aesthetics.</li>\
+</ol>\
+<blockquote>"Buy smart for the energy data and scheduling. Everything else is bonus — don\'t let it drive the purchase." — ArcticCool Technology Desk, 2025</blockquote>\
+<h2>Before You Buy</h2>\
+<p>Check the app ecosystem and Wi-Fi reliability — a smart AC is only as good as its app. Confirm firmware updates are supported, and make sure the Wi-Fi module doesn\'t void your annual warranty.</p>\
+<h2>How ArcticCool Can Help</h2>\
+<p>We install and configure smart ACs of all major brands, connect them to your home network and walk you through the app. We can also retrofit smart controllers to many existing non-smart units.</p>\
+<p>Call +91 98200 12345 or book online for smart AC installation and setup.</p>'
+      },
+      7: {
+        img: 'https://plus.unsplash.com/premium_photo-1663127242379-8b564954bb08?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA0fHxBQyUyMHNlcnZpY2V8ZW58MHx8MHx8fDA%3D',
+        alt: 'AC maintenance checklist',
+        badge: 'Maintenance', badgeClass: 'badge--arctic',
+        read: '7 min read', date: 'June 28, 2025',
+        title: 'The Complete Seasonal AC Maintenance Checklist Every Homeowner Needs',
+        sub: 'Filter changes, coil cleaning and refrigerant checks — a simple routine that prevents expensive breakdowns.',
+        prose: '\
+<p>The single best investment you can make in your AC is a seasonal maintenance routine. A well-maintained unit cools faster, uses less power, lasts years longer and breaks down far less often — usually at the exact moment you need it most.</p>\
+<p>This checklist walks you through everything, from the DIY tasks you can do yourself to the professional services you should book each year.</p>\
+<div class="callout"><span style="font-size:1.5rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><div><strong>Quick Tip:</strong> The best time to service your AC is 4–6 weeks before peak summer — technicians are available, and you avoid the emergency rush.</div></div>\
+<h2>Monthly DIY Tasks (5 minutes)</h2>\
+<div class="sign-card"><div class="sign-num">01</div><div><h3 style="margin:0 0 var(--sp-2);">Wash the Filters</h3><p style="color:var(--text-muted); margin:0;">Remove the front panel, take out the filters, wash with plain water, dry fully and reinstall. Monthly during heavy use, quarterly otherwise.</p></div></div>\
+<div class="sign-card"><div class="sign-num">02</div><div><h3 style="margin:0 0 var(--sp-2);">Check the Outdoor Unit</h3><p style="color:var(--text-muted); margin:0;">Clear away leaves, dust and any blockages. Keep at least a foot of clearance on every side for airflow.</p></div></div>\
+<div class="sign-card"><div class="sign-num">03</div><div><h3 style="margin:0 0 var(--sp-2);">Check the Drain</h3><p style="color:var(--text-muted); margin:0;">Ensure water is draining freely. A clogged drain causes leaks and musty smells — a bottle of water poured through the drain pipe confirms flow.</p></div></div>\
+<h2>Annual Professional Service</h2>\
+<ol>\
+<li><strong>Deep coil cleaning</strong> — jet-stream cleaning of the evaporator and condenser coils.</li>\
+<li><strong>Refrigerant check & top-up</strong> — verify gas levels and fix any leaks.</li>\
+<li><strong>Electrical inspection</strong> — wiring, capacitors and connections checked for safety.</li>\
+<li><strong>PCB / sensor check</strong> — thermostat and control board function test.</li>\
+<li><strong>Drainage flush & anti-bacterial treatment</strong> — keeps air and system hygienic.</li>\
+</ol>\
+<blockquote>"An AC serviced annually runs 35% more efficiently and lasts 4–6 years longer than an identical unmaintained unit." — ArcticCool Service Data, 2024</blockquote>\
+<h2>When to Call a Professional</h2>\
+<p>If you notice warm air, strange noises, leaks, foul smells or a climbing power bill, don\'t wait for the annual service. Book a diagnostic immediately — early fixes cost a fraction of late ones.</p>\
+<h2>How ArcticCool Can Help</h2>\
+<p>Our seasonal service package covers every item on this checklist in a single visit, with certified technicians and transparent pricing. Pre-season slots fill fast — book early.</p>\
+<p>Call +91 98200 12345 or book online, and get a free filter cleaning with any service package.</p>'
+      }
+    };
+
+    var params = new URLSearchParams(location.search);
+    var postId = parseInt(params.get('post') || '1', 10);
+    var post = POSTS[postId];
+    if (!post) post = POSTS[1];
+
+    var heroImg = document.getElementById('articleHeroImg');
+    if (heroImg && post.img) { heroImg.src = post.img; heroImg.alt = post.alt || ''; }
+    document.title = post.title + ' | ArcticCool Blog';
+
+    var titleEl = document.getElementById('articleHeroTitle');
+    if (titleEl) titleEl.textContent = post.title;
+    var subEl = document.getElementById('articleHeroSub');
+    if (subEl) subEl.textContent = post.sub;
+
+    var badges = document.getElementById('articleBadges');
+    if (badges) {
+      badges.innerHTML = '<span class="badge ' + post.badgeClass + '">' + post.badge + '</span>' +
+        '<span class="badge" style="background:rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);">' +
+        '<svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + post.read + '</span>';
+    }
+    var dateEl = document.getElementById('articleDate');
+    if (dateEl) dateEl.textContent = dateEl.textContent.replace(/[A-Z][a-z]+ \d{1,2}, \d{4}/, post.date);
+
+    var prose = document.getElementById('articleProse');
+    if (prose && post.prose) prose.innerHTML = post.prose;
+  })();
+</script>
+</body>
+</html>

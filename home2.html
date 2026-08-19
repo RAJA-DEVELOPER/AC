@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ArcticCool Home 2 — Explore our AC product showroom, AMC plans, installation process and meet our expert technician team.">
+  <title>ArcticCool — Cooling Redefined | Home 2</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    /* Video Hero */
+    .video-hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; overflow: hidden;
+      background: var(--midnight);
+    }
+    .video-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(23,33,43,0.82) 0%, rgba(23,33,43,0.65) 60%, rgba(15,116,143,0.45) 100%), url('https://plus.unsplash.com/premium_photo-1661963078581-a4f091315692?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fGFjJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D') center/cover no-repeat;
+    }
+    .video-grid-overlay {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(78,168,222,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(78,168,222,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .video-content {
+      position: relative; z-index: 2;
+      width: 100%;
+      padding-top: 8rem;
+    }
+    .video-hero-inner { max-width: var(--container-xl); margin: 0 auto; padding: 0 var(--container-pad); }
+    .video-eyebrow {
+      display: flex; align-items: center; gap: var(--sp-3);
+      margin-bottom: var(--sp-6);
+    }
+    .video-line { height: 1px; width: 48px; background: var(--arctic); }
+    .video-eyebrow-text {
+      font-size: var(--fs-xs); font-weight: var(--fw-semibold);
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--arctic);
+    }
+    .video-title {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: var(--fw-extrabold);
+      color: white; line-height: 0.95;
+      letter-spacing: -0.04em; margin-bottom: var(--sp-8);
+    }
+    .video-title .outline {
+      background: linear-gradient(135deg, var(--arctic) 0%, var(--teal-light) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .video-cards {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-4); margin-top: var(--sp-16);
+    }
+    .video-feat-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-5);
+      color: white;
+      margin-bottom: var(--sp-6);
+    }
+    .video-feat-icon { font-size: 1.8rem; margin-bottom: var(--sp-3); }
+    .video-feat-title { font-weight: var(--fw-bold); font-size: var(--fs-md); margin-bottom: var(--sp-1); }
+    .video-feat-desc { font-size: var(--fs-xs); opacity: 0.6; line-height: 1.6; }
+    /* Product Showcase */
+    .showcase-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--sp-6); align-items: center;
+    }
+    .showcase-img { border-radius: var(--radius-2xl); overflow: hidden; aspect-ratio: 4/3; }
+    .showcase-img img { width: 100%; height: 100%; object-fit: cover; }
+    .showcase-specs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4);
+      margin: var(--sp-6) 0;
+    }
+    .showcase-spec-item {
+      padding: var(--sp-4);
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+    .showcase-spec-val {
+      font-family: var(--font-heading); font-size: var(--fs-xl);
+      font-weight: var(--fw-bold); color: var(--arctic);
+    }
+    .showcase-spec-label { font-size: var(--fs-xs); color: var(--text-muted); }
+    /* Installation Timeline */
+    .timeline-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: var(--sp-4); position: relative;
+    }
+    .timeline-grid::before {
+      content: '';
+      position: absolute; top: 24px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--arctic), var(--teal), var(--arctic));
+      opacity: 0.3;
+    }
+    .timeline-item { text-align: center; }
+    .timeline-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--arctic), var(--teal));
+      color: white; font-weight: var(--fw-bold); font-size: var(--fs-md);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto var(--sp-4);
+      box-shadow: 0 4px 16px rgba(78,168,222,0.35);
+      position: relative; z-index: 1;
+    }
+    .timeline-title { font-weight: var(--fw-bold); font-size: var(--fs-sm); margin-bottom: var(--sp-2); }
+    .timeline-desc { font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.6; }
+    /* Blog Preview */
+    .blog-featured {
+      display: grid; grid-template-columns: 1.5fr 1fr;
+      gap: var(--sp-6); align-items: stretch;
+    }
+    .blog-featured-main {
+      border-radius: var(--radius-2xl); overflow: hidden;
+      position: relative; min-height: 400px;
+    }
+    .blog-featured-img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .blog-featured-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(23,33,43,0.95) 0%, rgba(23,33,43,0.2) 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: var(--sp-8);
+    }
+    .blog-side-list { display: flex; flex-direction: column; gap: var(--sp-4); }
+    .blog-side-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      overflow: hidden; display: flex;
+      transition: all var(--t-normal);
+    }
+    .blog-side-item:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+    .blog-side-img { width: 100px; object-fit: cover; flex-shrink: 0; }
+    .blog-side-body { padding: var(--sp-4); }
+    .blog-side-cat { font-size: var(--fs-xs); color: var(--arctic); font-weight: var(--fw-semibold); margin-bottom: 4px; }
+    .blog-side-title { font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text-primary); line-height: 1.4; }
+    .blog-side-meta { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 4px; }
+    @media (max-width: 1024px) {
+      .video-cards { grid-template-columns: repeat(2, 1fr); margin-top: var(--sp-10); }
+      .showcase-grid { grid-template-columns: 1fr; }
+      .timeline-grid { grid-template-columns: repeat(3, 1fr); }
+      .timeline-grid::before { display: none; }
+      .blog-featured { grid-template-columns: 1fr; }
+      .blog-featured-main { min-height: 300px; }
+    }
+    @media (max-width: 768px) {
+      .video-cards { grid-template-columns: 1fr; margin-top: var(--sp-8); }
+      .timeline-grid { grid-template-columns: repeat(2, 1fr); }
+      .showcase-specs { grid-template-columns: 1fr 1fr; }
+      .video-title { font-size: clamp(2.25rem, 6vw, 3.5rem); margin-bottom: var(--sp-5); }
+      .video-content { padding-top: calc(72px + 2.5rem); padding-bottom: var(--sp-8); }
+      .video-hero-inner > div[style*="display:flex"] { flex-direction: column; width: 100%; gap: var(--sp-3); }
+      .video-hero-inner > div[style*="display:flex"] .btn { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .timeline-grid { grid-template-columns: 1fr; }
+      .showcase-specs { grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+      .video-eyebrow { flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-4); }
+      .video-line { width: 32px; }
+      .video-card-tag { font-size: var(--fs-xs); }
+      .blog-side-img { width: 80px; }
+      .video-title { font-size: clamp(1.85rem, 7vw, 2.5rem); margin-bottom: var(--sp-4); }
+      .video-content { padding-top: calc(60px + 2rem); padding-bottom: var(--sp-6); }
+    }
+    @media (max-width: 360px) {
+      .showcase-specs { grid-template-columns: 1fr; }
+      .video-stat-row { flex-wrap: wrap; }
+      .video-card-meta { flex-wrap: wrap; }
+      .video-title { font-size: 1.85rem; }
+      .video-content { padding-top: calc(56px + 1.5rem); }
+      .timeline-num { width: 40px; height: 40px; font-size: var(--fs-sm); }
+    }
+    @media (max-width: 320px) {
+      .video-title { font-size: 1.55rem; line-height: 1.05; }
+      .video-content { padding-top: calc(54px + 1.25rem); padding-bottom: var(--sp-4); }
+      .video-cards { margin-top: var(--sp-4); }
+      .video-feat-card { padding: var(--sp-3); }
+      .video-feat-icon { font-size: 1.3rem; margin-bottom: var(--sp-2); }
+      .timeline-num { width: 34px; height: 34px; font-size: 12px; }
+      .showcase-spec-item { padding: var(--sp-3); }
+      .showcase-spec-val { font-size: var(--fs-md); }
+      .blog-side-item { flex-direction: column; }
+      .blog-side-img { width: 100%; height: 110px; }
+      .blog-side-body { padding: var(--sp-3); }
+      .blog-featured-overlay { padding: var(--sp-4); }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader">
+  <div class="loader-logo">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Arctic<span>Cool</span></div>
+  </div>
+</div>
+<!-- Navbar (same as index) -->
+<header class="navbar">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+        <span class="nav-logo-text">Arctic<span>Cool</span></span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="home2.html" class="nav-link active">Home 2</a>
+        </li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button class="rtl-toggle" aria-label="Toggle RTL">RTL</button>
+        <div class="profile-wrap">
+          <button class="profile-toggle" aria-label="Account menu" aria-expanded="false" title="Account"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+          <div class="profile-menu">
+            <a href="login.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Login / Signup</a>
+            <a href="dashboard.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span> User Dashboard</a>
+            <a href="admin.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Admin Dashboard</a>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn--primary btn--sm">Book Service</a>
+        <button class="nav-burger" aria-expanded="false" aria-label="Toggle menu">
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <nav class="nav-mobile">
+    <a href="index.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
+    <a href="home2.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg> Home 2</a>
+    <a href="about.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
+    <a href="services.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Services</a>
+    <a href="blog.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Blog</a>
+    <a href="contact.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Contact</a>
+    <div style="padding: var(--sp-6) var(--sp-2); display:flex; gap: var(--sp-3);">
+      <a href="contact.html" class="btn btn--primary btn--full">Book Service</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- SECTION 1 — VIDEO HERO -->
+<section class="video-hero" aria-label="Hero">
+  <div class="video-bg"></div>
+  <div class="video-grid-overlay"></div>
+  <div class="video-content">
+    <div class="video-hero-inner">
+      <div class="video-eyebrow reveal-up">
+        <div class="video-line"></div>
+        <span class="video-eyebrow-text">Premium HVAC Solutions</span>
+        <div class="video-line"></div>
+      </div>
+      <h1 class="video-title reveal-up reveal-delay-1">
+        Cooling<br>
+        <span class="outline">Redefined</span><br>
+        Forever.
+      </h1>
+      <div style="display:flex; gap: var(--sp-4); flex-wrap: wrap;" class="reveal-up reveal-delay-2">
+        <a href="contact.html" class="btn btn--primary btn--lg">Start Your Journey</a>
+        <a href="services.html" class="btn btn--outline-white btn--lg">Explore Solutions</a>
+      </div>
+      <div class="video-cards" style="margin-top: var(--sp-16);">
+        <div class="video-feat-card">
+          <div class="video-feat-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4a4 4 0 0 0-8 0v9.17a5 5 0 1 0 8 0z"/><circle cx="10" cy="19" r="2"/></svg></div>
+          <div class="video-feat-title">Precision Cooling</div>
+          <div class="video-feat-desc">±0.5°C temperature accuracy with AI-driven climate control</div>
+        </div>
+        <div class="video-feat-card">
+          <div class="video-feat-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
+          <div class="video-feat-title">Green Technology</div>
+          <div class="video-feat-desc">R32 eco-refrigerant. Up to 70% lower carbon footprint</div>
+        </div>
+        <div class="video-feat-card">
+          <div class="video-feat-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+          <div class="video-feat-title">Smart Alerts</div>
+          <div class="video-feat-desc">Real-time service notifications and predictive maintenance</div>
+        </div>
+        <div class="video-feat-card">
+          <div class="video-feat-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="video-feat-title">40+ Cities</div>
+          <div class="video-feat-desc">Nationwide network with same-day service guarantee</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2 — PRODUCT SHOWCASE (Split AC) -->
+<section class="section" aria-labelledby="showcase-heading">
+  <div class="container">
+    <div class="showcase-grid">
+      <div class="showcase-img reveal-left">
+        <img src="https://plus.unsplash.com/premium_photo-1682148175448-8e418fcfbaa7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8SW52ZXJ0ZXJ8ZW58MHx8MHx8fDA%3D" alt="Premium split AC in contemporary living room" loading="lazy">
+      </div>
+      <div class="reveal-right">
+        <span class="section-tag">Spotlight Model</span>
+        <h2 class="section-title" id="showcase-heading">Daikin <span>FTK50U</span><br>Inverter Split</h2>
+        <p style="color:var(--text-muted); margin-bottom: var(--sp-6); line-height: var(--lh-relaxed);">
+          The pinnacle of Japanese engineering. Ultra-quiet operation at just 19dB, intelligent humidity control, and 5-star BEE rating that saves ₹8,000+ annually on electricity.
+        </p>
+        <div class="showcase-specs">
+          <div class="showcase-spec-item">
+            <div class="showcase-spec-val">19 dB</div>
+            <div class="showcase-spec-label">Noise Level</div>
+          </div>
+          <div class="showcase-spec-item">
+            <div class="showcase-spec-val">5 ★</div>
+            <div class="showcase-spec-label">BEE Rating</div>
+          </div>
+          <div class="showcase-spec-item">
+            <div class="showcase-spec-val">1.5 T</div>
+            <div class="showcase-spec-label">Capacity</div>
+          </div>
+          <div class="showcase-spec-item">
+            <div class="showcase-spec-val">60%</div>
+            <div class="showcase-spec-label">Energy Saving</div>
+          </div>
+        </div>
+        <div style="display:flex; gap: var(--sp-4); align-items: center; flex-wrap: wrap;">
+          <div>
+            <span style="font-size: var(--fs-3xl); font-weight: var(--fw-extrabold); color: var(--arctic); font-family: var(--font-heading);">₹47,990</span>
+            <span style="color: var(--text-muted); text-decoration: line-through; margin-left: var(--sp-2);">₹55,000</span>
+          </div>
+          <a href="contact.html" class="btn btn--primary">Buy & Install Now</a>
+        </div>
+      </div>
+    </div>
+    <!-- Window & Inverter showcase below -->
+    <div class="grid grid-2" style="margin-top: var(--sp-12);">
+      <div class="showcase-grid" style="background: var(--bg-tertiary); border-radius: var(--radius-2xl); padding: var(--sp-6); gap: var(--sp-5);">
+        <img src="https://images.unsplash.com/photo-1745745593296-28fd43a6ebba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTR8fGFjJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" alt="Window AC" style="border-radius: var(--radius-xl); aspect-ratio: 1; object-fit: cover;" loading="lazy">
+        <div>
+          <span class="badge badge--teal" style="margin-bottom: var(--sp-3);">Window AC</span>
+          <h3 style="margin-bottom: var(--sp-2);">Voltas 185V DZA</h3>
+          <p style="font-size: var(--fs-sm); color: var(--text-muted); margin-bottom: var(--sp-4);">1.5 Ton | 5 Star | Auto-Adjustable Compressor</p>
+          <p style="font-size: var(--fs-xl); font-weight: var(--fw-extrabold); color: var(--arctic); font-family: var(--font-heading);">₹26,490</p>
+          <a href="contact.html" class="btn btn--outline btn--sm" style="margin-top: var(--sp-3);">Buy Now</a>
+        </div>
+      </div>
+      <div class="showcase-grid" style="background: var(--bg-tertiary); border-radius: var(--radius-2xl); padding: var(--sp-6); gap: var(--sp-5);">
+        <img src="https://images.unsplash.com/photo-1762341123870-d706f257a12e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8SW52ZXJ0ZXIlMjBhY3xlbnwwfHwwfHx8MA%3D%3D" alt="Inverter AC" style="border-radius: var(--radius-xl); aspect-ratio: 1; object-fit: cover;" loading="lazy">
+        <div>
+          <span class="badge badge--copper" style="margin-bottom: var(--sp-3);">Inverter AC</span>
+          <h3 style="margin-bottom: var(--sp-2);">LG LS-Q18GWZA</h3>
+          <p style="font-size: var(--fs-sm); color: var(--text-muted); margin-bottom: var(--sp-4);">1.5 Ton | Dual Inverter | Ocean Black Protection</p>
+          <p style="font-size: var(--fs-xl); font-weight: var(--fw-extrabold); color: var(--arctic); font-family: var(--font-heading);">₹43,990</p>
+          <a href="contact.html" class="btn btn--outline btn--sm" style="margin-top: var(--sp-3);">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 3 — AMC PLANS -->
+<section class="section section--dark" aria-labelledby="amc-heading" id="amc">
+  <div class="container">
+    <div class="section-header section-header--center reveal-up">
+      <span class="section-tag" style="background: rgba(78,168,222,0.15); border-color: rgba(78,168,222,0.3);">Annual Maintenance</span>
+      <h2 class="section-title" id="amc-heading" style="color: white;">Choose Your <span>Protection Plan</span></h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.88);">Comprehensive AMC coverage that keeps your AC running perfectly, every day of the year.</p>
+    </div>
+    <div class="grid grid-3 stagger">
+      <!-- Silver -->
+      <div class="plan-card">
+        <div class="plan-name">Silver</div>
+        <div class="plan-price-wrap">
+          <span class="plan-currency">₹</span>
+          <span class="plan-price">2,999</span>
+        </div>
+        <div class="plan-period">per year / unit</div>
+        <p class="plan-desc">Essential coverage for single-unit homes.</p>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 2 free service visits</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Annual deep cleaning</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 10% off repairs</li>
+          <li class="plan-feature plan-feature--no"><span class="plan-feature-icon">✗</span> Emergency support</li>
+          <li class="plan-feature plan-feature--no"><span class="plan-feature-icon">✗</span> Free gas refill</li>
+          <li class="plan-feature plan-feature--no"><span class="plan-feature-icon">✗</span> Parts warranty</li>
+        </ul>
+        <a href="contact.html" class="btn btn--primary btn--full">Get Silver</a>
+      </div>
+      <!-- Gold (Featured) -->
+      <div class="plan-card">
+        <div class="plan-name">Gold</div>
+        <div class="plan-price-wrap">
+          <span class="plan-currency">₹</span>
+          <span class="plan-price">5,499</span>
+        </div>
+        <div class="plan-period">per year / unit</div>
+        <p class="plan-desc">Complete protection for families and professionals.</p>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 4 free service visits</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 2× deep cleaning</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 25% off all repairs</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 24/7 emergency support</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 1 free gas refill</li>
+          <li class="plan-feature plan-feature--no"><span class="plan-feature-icon">✗</span> Parts warranty</li>
+        </ul>
+        <a href="contact.html" class="btn btn--primary btn--full">Get Gold</a>
+      </div>
+      <!-- Platinum -->
+      <div class="plan-card">
+        <div class="plan-name">Platinum</div>
+        <div class="plan-price-wrap">
+          <span class="plan-currency">₹</span>
+          <span class="plan-price">9,999</span>
+        </div>
+        <div class="plan-period">per year / unit</div>
+        <p class="plan-desc">All-inclusive plan for premium peace of mind.</p>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Unlimited service visits</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Quarterly deep cleaning</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> 50% off all repairs</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Priority 2-hr emergency</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Free gas refills</li>
+          <li class="plan-feature"><span class="plan-feature-icon">✓</span> Full parts warranty</li>
+        </ul>
+        <a href="contact.html" class="btn btn--primary btn--full">Get Platinum</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 4 — INSTALLATION PROCESS -->
+<section class="section" aria-labelledby="install-heading">
+  <div class="container">
+    <div class="section-header section-header--center reveal-up">
+      <span class="section-tag">How It Works</span>
+      <h2 class="section-title" id="install-heading">AC Installation in <span>5 Simple Steps</span></h2>
+      <p class="section-subtitle">From booking to enjoying cool air — the entire process completed in one day.</p>
+    </div>
+    <div class="timeline-grid stagger" style="margin-top: var(--sp-10);">
+      <div class="timeline-item">
+        <div class="timeline-num">1</div>
+        <h4 class="timeline-title">Book Online</h4>
+        <p class="timeline-desc">Schedule via app, website or call. Choose your preferred time slot.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">2</div>
+        <h4 class="timeline-title">Site Survey</h4>
+        <p class="timeline-desc">Our technician visits to assess the ideal placement and wiring needs.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">3</div>
+        <h4 class="timeline-title">Professional Install</h4>
+        <p class="timeline-desc">Expert mounting, copper piping, and electrical connections done cleanly.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">4</div>
+        <h4 class="timeline-title">Testing & Demo</h4>
+        <p class="timeline-desc">Full system testing with demo of all features and remote settings.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">5</div>
+        <h4 class="timeline-title">Enjoy Cool Air</h4>
+        <p class="timeline-desc">Digital warranty registration + 30-day post-install support included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 5 — TECHNICIAN TEAM -->
+<section class="section section--ice" aria-labelledby="team-heading">
+  <div class="container">
+    <div class="section-header section-header--center reveal-up">
+      <span class="section-tag">Our Experts</span>
+      <h2 class="section-title" id="team-heading">Meet Our <span>Certified</span> Technicians</h2>
+      <p class="section-subtitle">500+ trained professionals across India, ready to serve you.</p>
+    </div>
+    <div class="grid grid-4 stagger">
+      <div class="tech-card">
+        <div class="tech-img-wrap">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Arjun Kumar - Senior HVAC Technician" class="tech-img" loading="lazy">
+          <div class="tech-status"><span class="tech-status-dot tech-status-dot--online"></span>Available</div>
+        </div>
+        <div class="tech-card-body">
+          <div class="tech-name">Arjun Kumar</div>
+          <div class="tech-role">Senior HVAC Specialist</div>
+          <div class="tech-rating">
+            <span class="tech-rating-stars">★★★★★</span>
+            <span class="tech-rating-val">4.9 (387 reviews)</span>
+          </div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-img-wrap">
+          <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80" alt="Ravi Shankar - Installation Expert" class="tech-img" loading="lazy">
+          <div class="tech-status"><span class="tech-status-dot tech-status-dot--busy"></span>On Job</div>
+        </div>
+        <div class="tech-card-body">
+          <div class="tech-name">Ravi Shankar</div>
+          <div class="tech-role">Installation Expert</div>
+          <div class="tech-rating">
+            <span class="tech-rating-stars">★★★★★</span>
+            <span class="tech-rating-val">4.8 (241 reviews)</span>
+          </div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-img-wrap">
+          <img src="https://images.unsplash.com/photo-1618077360395-f3068be8e001?w=400&q=80" alt="Deepak Verma - Commercial HVAC" class="tech-img" loading="lazy">
+          <div class="tech-status"><span class="tech-status-dot tech-status-dot--online"></span>Available</div>
+        </div>
+        <div class="tech-card-body">
+          <div class="tech-name">Deepak Verma</div>
+          <div class="tech-role">Commercial HVAC Expert</div>
+          <div class="tech-rating">
+            <span class="tech-rating-stars">★★★★★</span>
+            <span class="tech-rating-val">4.9 (512 reviews)</span>
+          </div>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-img-wrap">
+          <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm91bmRlcnxlbnwwfHwwfHx8MA%3D%3D" alt="Suresh Pillai - AMC Specialist" class="tech-img" loading="lazy">
+          <div class="tech-status"><span class="tech-status-dot tech-status-dot--online"></span>Available</div>
+        </div>
+        <div class="tech-card-body">
+          <div class="tech-name">Suresh Pillai</div>
+          <div class="tech-role">AMC & Service Specialist</div>
+          <div class="tech-rating">
+            <span class="tech-rating-stars">★★★★☆</span>
+            <span class="tech-rating-val">4.7 (198 reviews)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 6 — BLOG PREVIEW + NEWSLETTER -->
+<section class="section" aria-labelledby="blog-preview-heading">
+  <div class="container">
+    <div class="section-header reveal-up" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap: var(--sp-4);">
+      <div>
+        <span class="section-tag">Knowledge Hub</span>
+        <h2 class="section-title" id="blog-preview-heading">Latest <span>HVAC</span> Insights</h2>
+      </div>
+      <a href="blog.html" class="btn btn--outline">View All Articles →</a>
+    </div>
+    <div class="blog-featured stagger">
+      <!-- Featured post -->
+      <div class="blog-featured-main">
+        <img src="https://plus.unsplash.com/premium_photo-1661963753278-af66c671bbe7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTZ8fGFjJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" alt="5 signs your AC needs servicing" class="blog-featured-img" loading="lazy">
+        <div class="blog-featured-overlay">
+          <span class="badge badge--arctic" style="margin-bottom: var(--sp-3);">Maintenance</span>
+          <h3 style="color:white; font-size: var(--fs-2xl); margin-bottom: var(--sp-3); letter-spacing: -0.02em;">
+            <a href="blog-details.html" style="color:inherit;">5 Warning Signs Your AC Needs Immediate Servicing</a>
+          </h3>
+          <p style="color:rgba(255,255,255,0.88); font-size: var(--fs-sm); margin-bottom: var(--sp-4);">Don't wait for a breakdown. These early indicators can save you thousands in repair costs...</p>
+          <div style="display:flex; align-items:center; gap: var(--sp-4); font-size: var(--fs-xs); color: rgba(255,255,255,0.75);">
+            <span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Vikram Singh</span>
+            <span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Aug 15, 2025</span>
+            <span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 5 min read</span>
+          </div>
+        </div>
+      </div>
+      <!-- Blog sidebar -->
+      <div class="blog-side-list">
+        <a href="blog-details.html" class="blog-side-item">
+          <img src="https://plus.unsplash.com/premium_photo-1664299069577-11579b487e6c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTEyfHxhYyUyMHNlcnZpY2V8ZW58MHx8MHx8fDA%3D" alt="Inverter AC guide" class="blog-side-img" loading="lazy">
+          <div class="blog-side-body">
+            <div class="blog-side-cat">Buying Guide</div>
+            <div class="blog-side-title">Inverter vs Non-Inverter AC: Which Saves More?</div>
+            <div class="blog-side-meta">Aug 10 · 7 min read</div>
+          </div>
+        </a>
+        <a href="blog-details.html" class="blog-side-item">
+          <img src="https://images.unsplash.com/photo-1617103996702-96ff29b1c467?w=200&q=80" alt="Commercial HVAC" class="blog-side-img" loading="lazy">
+          <div class="blog-side-body">
+            <div class="blog-side-cat">Commercial</div>
+            <div class="blog-side-title">Choosing the Right HVAC for Your Office Space</div>
+            <div class="blog-side-meta">Aug 5 · 9 min read</div>
+          </div>
+        </a>
+        <a href="blog-details.html" class="blog-side-item">
+          <img src="https://images.unsplash.com/photo-1674471361334-327ba42efd82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE1fHxhYyUyMHNlcnZpY2V8ZW58MHx8MHx8fDA%3D" alt="Energy saving tips" class="blog-side-img" loading="lazy">
+          <div class="blog-side-body">
+            <div class="blog-side-cat">Energy Tips</div>
+            <div class="blog-side-title">10 Proven Ways to Cut Your AC Electricity Bill</div>
+            <div class="blog-side-meta">Jul 28 · 6 min read</div>
+          </div>
+        </a>
+        <!-- Newsletter mini -->
+        <div style="background: linear-gradient(135deg, var(--arctic) 0%, var(--teal) 100%); border-radius: var(--radius-xl); padding: var(--sp-5); color: white;">
+          <div style="font-weight: var(--fw-bold); margin-bottom: var(--sp-2);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Stay Updated</div>
+          <p style="font-size: var(--fs-sm); color: rgba(255,255,255,0.95); margin-bottom: var(--sp-3);">Get HVAC tips, offers and updates delivered weekly.</p>
+          <form style="display:flex; gap: var(--sp-2);" onsubmit="event.preventDefault(); window.ArcticCool?.ToastManager.show('Subscribed successfully!','success');">
+            <input type="email" placeholder="Your email" class="form-input" style="flex:1; font-size:var(--fs-xs); padding: 0.5rem 0.75rem; background:#FFFFFF; border-color:transparent; color:var(--text-primary);" required>
+            <button class="btn btn--sm" style="background:white; color:var(--teal); flex-shrink:0;">→</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo nav-logo" style="margin-bottom: var(--sp-4);">
+          <div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+          <span class="nav-logo-text">Arctic<span>Cool</span></span>
+        </a>
+        <p class="footer-desc">India's most trusted premium HVAC brand. Delivering world-class air conditioning solutions for homes and businesses since 2009.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-link" aria-label="YouTube"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
+        </div>
+      </div>
+      <!-- Services -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">AC Installation</a></li>
+          <li><a href="services.html">Repair & Service</a></li>
+          <li><a href="services.html">Deep Cleaning</a></li>
+          <li><a href="services.html">Gas Charging</a></li>
+          <li><a href="services.html">AMC Plans</a></li>
+          <li><a href="services.html">Commercial HVAC</a></li>
+        </ul>
+      </div>
+      <!-- Company & Portals -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="home2.html">Home 2</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog & Insights</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="dashboard.html">Customer Portal</a></li>
+          <li><a href="admin.html">Ops Command Center</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span>42, HVAC Tower, Andheri West, Mumbai 400053</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>+91 98200 12345</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <span>hello@arcticcool.in</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span>Mon–Sat 8am–8pm | Sun 9am–5pm</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ArcticCool Pvt Ltd. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">↑</button>
+<div class="toast-container" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script src="js/animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ArcticCool Customer Dashboard — Manage bookings, track technicians, view service history and AMC plans.">
+  <title>Customer Dashboard — ArcticCool</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<div id="page-loader"><div class="loader-logo"><div class="loader-ring"></div><div class="loader-text">Arctic<span>Cool</span></div></div></div>
+
+<header class="dash-topbar">
+  <div class="dash-topbar-inner">
+    <div class="dash-topbar-left">
+      <button class="dash-sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+        <span class="nav-logo-text">Arctic<span>Cool</span></span>
+      </a>
+      <span class="dash-topbar-tag">Customer Portal</span>
+    </div>
+    <div class="dash-topbar-right">
+      <a href="index.html" class="btn btn--ghost btn--sm">← Back to Site</a>
+    </div>
+  </div>
+</header>
+
+<div class="dashboard-layout">
+  <!-- ── SIDEBAR ── -->
+  <aside class="dash-sidebar" role="navigation" aria-label="Dashboard navigation">
+    <div class="dash-user-card">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&q=80" alt="Rahul Mehta" class="dash-avatar">
+      <div>
+        <div class="dash-user-name">Rahul Mehta</div>
+        <div class="dash-user-role">Gold AMC Member</div>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">Main</div>
+      <a class="dash-nav-item active" data-page="overview" role="button">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span> Overview
+      </a>
+    </div>
+
+    <!-- Bookings -->
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">Bookings</div>
+      <a class="dash-nav-item" data-page="install-booking" role="button">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span> AC Installation
+      </a>
+      <a class="dash-nav-item" data-page="service-booking" role="button">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h4L20.5 7.5a2.12 2.12 0 0 0-3-3L4 18v3z"/><path d="M15 5l4 4"/></svg></span> Service Visit
+      </a>
+    </div>
+
+    <!-- Plans & History -->
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">Account</div>
+      <a class="dash-nav-item" data-page="amc" role="button">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span> AMC Plans
+      </a>
+      <a class="dash-nav-item" data-page="service-history" role="button">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Service History
+      </a>
+      <a class="dash-nav-item" data-page="payments" role="button">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span> Payments
+      </a>
+      <a class="dash-nav-item" data-page="notifications" role="button" style="position:relative;">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span> Notifications
+        <span class="dash-nav-badge notif-count">3</span>
+      </a>
+    </div>
+
+    <!-- Settings -->
+    <div class="dash-nav-section">
+      <div class="dash-nav-label">Profile</div>
+      <a class="dash-nav-item" data-page="profile" role="button">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Profile
+      </a>
+      <a class="dash-nav-item" data-page="settings" role="button">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings
+      </a>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="dash-main">
+
+    <!-- ────────────────────────────────── OVERVIEW ── -->
+    <div class="dash-page active" id="overview">
+      <div class="dash-header">
+        <div>
+          <div class="dash-title">Good morning, Rahul <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></div>
+          <div class="dash-subtitle">Here's a summary of your ArcticCool account</div>
+        </div>
+        <a href="#" onclick="document.querySelector('[data-page=service-booking]').click()" class="btn btn--primary">+ Book Service</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="dash-stats">
+        <div class="dash-stat-card">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon dash-stat-icon--blue"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <span class="dash-stat-change dash-stat-change--up">+2 this month</span>
+          </div>
+          <div class="dash-stat-num">12</div>
+          <div class="dash-stat-label">Total Services</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon dash-stat-icon--teal"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
+            <span class="dash-stat-change dash-stat-change--up">Active</span>
+          </div>
+          <div class="dash-stat-num">Gold</div>
+          <div class="dash-stat-label">AMC Plan</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon dash-stat-icon--copper"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+            <span class="dash-stat-change dash-stat-change--down">Pending</span>
+          </div>
+          <div class="dash-stat-num">₹2,400</div>
+          <div class="dash-stat-label">Outstanding</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dash-stat-top">
+            <div class="dash-stat-icon dash-stat-icon--green"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <span class="dash-stat-change dash-stat-change--up">+0.2</span>
+          </div>
+          <div class="dash-stat-num">4.8</div>
+          <div class="dash-stat-label">Avg Rating Given</div>
+        </div>
+      </div>
+
+      <!-- Next Service + Quick Actions -->
+      <div class="grid grid-2" style="margin-bottom: var(--sp-8);">
+        <!-- Upcoming Service -->
+        <div style="background: linear-gradient(135deg, var(--arctic) 0%, var(--teal) 100%); border-radius: var(--radius-xl); padding: var(--sp-6); color:white;">
+          <div style="font-size:var(--fs-xs); opacity:0.75; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:var(--sp-2);">Next Scheduled Visit</div>
+          <div style="font-size:var(--fs-xl); font-weight:var(--fw-bold); margin-bottom:var(--sp-1);">AC Deep Cleaning</div>
+          <div style="font-size:var(--fs-sm); opacity:0.85; margin-bottom:var(--sp-4);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> August 22, 2025 · 10:00–12:00 AM</div>
+          <div style="display:flex; align-items:center; gap:var(--sp-3); margin-bottom:var(--sp-4);">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=48&q=80" alt="Tech" style="width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.4);">
+            <div>
+              <div style="font-size:var(--fs-sm); font-weight:var(--fw-semibold);">Arjun Kumar</div>
+              <div style="font-size:var(--fs-xs); opacity:0.7;">Senior Technician · <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.9</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); padding:var(--sp-6);">
+          <div style="font-weight:var(--fw-bold); margin-bottom:var(--sp-5); font-size:var(--fs-md);">Quick Actions</div>
+          <div style="display:flex; flex-direction:column; gap:var(--sp-3);">
+            <button onclick="document.querySelector('[data-page=install-booking]').click()" class="btn btn--outline btn--full" style="justify-content:flex-start; gap:var(--sp-3);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Book New Installation</button>
+            <button onclick="document.querySelector('[data-page=service-booking]').click()" class="btn btn--outline btn--full" style="justify-content:flex-start; gap:var(--sp-3);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h4L20.5 7.5a2.12 2.12 0 0 0-3-3L4 18v3z"/><path d="M15 5l4 4"/></svg> Request Repair Service</button>
+            <button onclick="document.querySelector('[data-page=amc]').click()" class="btn btn--outline btn--full" style="justify-content:flex-start; gap:var(--sp-3);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Upgrade AMC Plan</button>
+            <button onclick="document.querySelector('[data-page=payments]').click()" class="btn btn--outline btn--full" style="justify-content:flex-start; gap:var(--sp-3);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Pay Invoice</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Service History -->
+      <div class="dash-table-wrap">
+        <div class="dash-table-header">
+          <div class="dash-table-title">Recent Service History</div>
+          <a href="#" onclick="document.querySelector('[data-page=service-history]').click()" class="btn btn--ghost btn--sm">View All →</a>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="dash-table" style="display:table; width:100%;">
+            <thead><tr><th>Date</th><th>Service</th><th>Technician</th><th>Status</th><th>Amount</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr class="service-history-row"><td>Aug 10, 2025</td><td>Gas Refill — LG 1.5T</td><td>Arjun Kumar</td><td><span class="badge badge--success">Completed</span></td><td>₹1,200</td><td><button class="btn btn--ghost btn--sm">Invoice</button></td></tr>
+              <tr class="service-history-row"><td>Jul 22, 2025</td><td>Deep Cleaning — 2 Units</td><td>Ravi Shankar</td><td><span class="badge badge--success">Completed</span></td><td>₹1,198</td><td><button class="btn btn--ghost btn--sm">Invoice</button></td></tr>
+              <tr class="service-history-row"><td>Jun 5, 2025</td><td>PCB Repair — Daikin</td><td>Deepak Verma</td><td><span class="badge badge--success">Completed</span></td><td>₹2,400</td><td><button class="btn btn--ghost btn--sm">Invoice</button></td></tr>
+              <tr class="service-history-row"><td>May 18, 2025</td><td>Annual Service Visit</td><td>Suresh Pillai</td><td><span class="badge badge--success">Completed</span></td><td>Free (AMC)</td><td><button class="btn btn--ghost btn--sm">Invoice</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── INSTALL BOOKING ── -->
+    <div class="dash-page" id="install-booking">
+      <div class="dash-header">
+        <div><div class="dash-title">AC Installation Booking</div><div class="dash-subtitle">Schedule a new AC installation</div></div>
+      </div>
+      <div class="booking-panel" id="installBookingForm">
+        <!-- Progress -->
+        <div class="booking-progress" style="margin-bottom:var(--sp-8);">
+          <div class="booking-step active"><div class="booking-step-num">1</div><div class="booking-step-label">AC Details</div></div>
+          <div class="booking-step"><div class="booking-step-num">2</div><div class="booking-step-label">Location</div></div>
+          <div class="booking-step"><div class="booking-step-num">3</div><div class="booking-step-label">Schedule</div></div>
+          <div class="booking-step"><div class="booking-step-num">4</div><div class="booking-step-label">Confirm</div></div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="booking-form-step active">
+          <h3 class="step-title" style="margin-bottom:var(--sp-2);">AC Details</h3>
+          <p class="step-subtitle">Tell us about the AC unit to be installed</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ibBrand">AC Brand *</label>
+              <select id="ibBrand" class="form-select" required>
+                <option value="">Select brand</option>
+                <option>Daikin</option><option>LG</option><option>Samsung</option>
+                <option>Hitachi</option><option>Voltas</option><option>Blue Star</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ibCapacity">Capacity *</label>
+              <select id="ibCapacity" class="form-select" required>
+                <option value="">Select capacity</option>
+                <option>0.75 Ton</option><option>1 Ton</option><option>1.5 Ton</option>
+                <option>2 Ton</option><option>2.5 Ton</option><option>3+ Ton</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ibType">AC Type *</label>
+              <select id="ibType" class="form-select" required>
+                <option value="">Select type</option>
+                <option>Split AC</option><option>Window AC</option><option>Cassette AC</option><option>Tower AC</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ibUnits">Number of Units</label>
+              <select id="ibUnits" class="form-select">
+                <option>1 unit</option><option>2 units</option><option>3 units</option><option>4+ units</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ibModel">Model Number (optional)</label>
+            <input type="text" id="ibModel" class="form-input" placeholder="e.g., FTK35TV16U">
+          </div>
+          <div style="display:flex; justify-content:flex-end;">
+            <button class="btn btn--primary" data-next>Next: Location →</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="booking-form-step">
+          <h3 class="step-title" style="margin-bottom:var(--sp-2);">Installation Location</h3>
+          <p class="step-subtitle">Where should we install the AC?</p>
+          <div class="form-group">
+            <label class="form-label" for="ibRoom">Room Type *</label>
+            <select id="ibRoom" class="form-select" required>
+              <option value="">Select room</option>
+              <option>Bedroom</option><option>Living Room</option><option>Kitchen</option>
+              <option>Office Cabin</option><option>Hall</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ibAddress">Full Address *</label>
+            <textarea id="ibAddress" class="form-textarea" style="min-height:80px;" placeholder="Flat no, building, street, area, city, PIN" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ibNotes">Special Instructions</label>
+            <textarea id="ibNotes" class="form-textarea" style="min-height:70px;" placeholder="e.g., 3rd floor, no lift, specific wall preference..."></textarea>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <button class="btn btn--ghost" data-prev>← Back</button>
+            <button class="btn btn--primary" data-next>Next: Schedule →</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="booking-form-step">
+          <h3 class="step-title" style="margin-bottom:var(--sp-2);">Schedule Installation</h3>
+          <p class="step-subtitle">Choose your preferred date and time</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ibDate">Preferred Date *</label>
+              <input type="date" id="ibDate" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ibTime">Time Slot *</label>
+              <select id="ibTime" class="form-select" required>
+                <option value="">Select slot</option>
+                <option>8 AM – 10 AM</option><option>10 AM – 12 PM</option>
+                <option>12 PM – 2 PM</option><option>2 PM – 4 PM</option><option>4 PM – 6 PM</option>
+              </select>
+            </div>
+          </div>
+          <div style="background:rgba(78,168,222,0.06); border:1px solid rgba(78,168,222,0.2); border-radius:var(--radius-xl); padding:var(--sp-5); margin-bottom:var(--sp-6);">
+            <div style="font-weight:var(--fw-bold); margin-bottom:var(--sp-3); color:var(--arctic);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg> Estimated Cost</div>
+            <div style="display:flex; justify-content:space-between; font-size:var(--fs-sm); color:var(--text-muted); margin-bottom:var(--sp-2);"><span>Installation Labour</span><span>₹1,499</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:var(--fs-sm); color:var(--text-muted); margin-bottom:var(--sp-2);"><span>Copper Pipe (15ft)</span><span>Included</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:var(--fs-sm); color:var(--text-muted); margin-bottom:var(--sp-3);"><span>AMC Gold Discount</span><span style="color:#16a34a;">-₹200</span></div>
+            <div style="display:flex; justify-content:space-between; font-weight:var(--fw-bold); color:var(--text-primary); border-top:1px solid var(--border-color); padding-top:var(--sp-3);"><span>Total</span><span>₹1,299</span></div>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <button class="btn btn--ghost" data-prev>← Back</button>
+            <button class="btn btn--primary" data-next>Review & Confirm →</button>
+          </div>
+        </div>
+
+        <!-- Step 4 — Confirm -->
+        <div class="booking-form-step">
+          <h3 class="step-title" style="margin-bottom:var(--sp-2);">Confirm Booking</h3>
+          <p class="step-subtitle">Review your installation booking details</p>
+          <div style="background:var(--bg-tertiary); border-radius:var(--radius-xl); padding:var(--sp-6); margin-bottom:var(--sp-6);">
+            <div class="booking-confirm-grid">
+              <div><div style="font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted);">Service</div><div style="font-weight:var(--fw-semibold); margin-top:4px;">AC Installation</div></div>
+              <div><div style="font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted);">Date & Time</div><div style="font-weight:var(--fw-semibold); margin-top:4px;">As Selected</div></div>
+              <div><div style="font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted);">Total Amount</div><div style="font-weight:var(--fw-bold); color:var(--arctic); font-size:var(--fs-xl); margin-top:4px;">₹1,299</div></div>
+              <div><div style="font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted);">Warranty</div><div style="font-weight:var(--fw-semibold); margin-top:4px;">90 Days on Workmanship</div></div>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <button class="btn btn--ghost" data-prev>← Back</button>
+            <button class="btn btn--primary btn--lg" onclick="window.ArcticCool?.ToastManager.show('Installation booking confirmed! Reference: AC-2025-0839','success',5000)">✓ Confirm Booking</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── SERVICE BOOKING ── -->
+    <div class="dash-page" id="service-booking">
+      <div class="dash-header">
+        <div><div class="dash-title">Service Visit Booking</div><div class="dash-subtitle">Schedule repair, cleaning or maintenance</div></div>
+      </div>
+      <div class="booking-panel" id="serviceBookingForm">
+        <div class="booking-progress">
+          <div class="booking-step active"><div class="booking-step-num">1</div><div class="booking-step-label">Issue</div></div>
+          <div class="booking-step"><div class="booking-step-num">2</div><div class="booking-step-label">Schedule</div></div>
+          <div class="booking-step"><div class="booking-step-num">3</div><div class="booking-step-label">Confirm</div></div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="booking-form-step active">
+          <h3 class="step-title" style="margin-bottom:var(--sp-2);">Describe the Issue</h3>
+          <p class="step-subtitle">What problem are you experiencing?</p>
+          <div class="form-group">
+            <label class="form-label" for="svType">Service Type *</label>
+            <select id="svType" class="form-select" required>
+              <option value="">Select service type</option>
+              <option>Repair — AC not cooling</option>
+              <option>Repair — Strange noise</option>
+              <option>Repair — Water leakage</option>
+              <option>Repair — Remote not working</option>
+              <option>Deep Cleaning</option>
+              <option>Gas Refill</option>
+              <option>PCB Repair</option>
+              <option>General Maintenance</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="svBrand">AC Brand</label>
+              <select id="svBrand" class="form-select">
+                <option>LG</option><option>Daikin</option><option>Samsung</option><option>Hitachi</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="svCapacity">Capacity</label>
+              <select id="svCapacity" class="form-select">
+                <option>1.5 Ton</option><option>1 Ton</option><option>2 Ton</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="svDesc">Describe the Problem</label>
+            <textarea id="svDesc" class="form-textarea" placeholder="e.g., AC runs but room stays warm, heard a loud banging sound this morning..."></textarea>
+          </div>
+          <div style="display:flex; justify-content:flex-end;">
+            <button class="btn btn--primary" data-next>Next: Schedule →</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="booking-form-step">
+          <h3 class="step-title" style="margin-bottom:var(--sp-2);">Schedule Visit</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="svDate">Date *</label>
+              <input type="date" id="svDate" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="svTime">Time Slot *</label>
+              <select id="svTime" class="form-select" required>
+                <option value="">Select slot</option>
+                <option>8 AM – 10 AM</option><option>10 AM – 12 PM</option>
+                <option>12 PM – 2 PM</option><option>2 PM – 4 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Priority Level</label>
+            <div style="display:flex; gap:var(--sp-3); flex-wrap:wrap;">
+              <label style="display:flex; align-items:center; gap:var(--sp-2); font-size:var(--fs-sm); cursor:pointer;"><input type="radio" name="priority" value="normal" checked> Normal (Next available)</label>
+              <label style="display:flex; align-items:center; gap:var(--sp-2); font-size:var(--fs-sm); cursor:pointer;"><input type="radio" name="priority" value="urgent"> Urgent (+₹200)</label>
+              <label style="display:flex; align-items:center; gap:var(--sp-2); font-size:var(--fs-sm); cursor:pointer;"><input type="radio" name="priority" value="emergency"> Emergency AMC (Included)</label>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <button class="btn btn--ghost" data-prev>← Back</button>
+            <button class="btn btn--primary" data-next>Review & Confirm →</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="booking-form-step">
+          <h3 class="step-title" style="margin-bottom:var(--sp-2);">Confirm Service Booking</h3>
+          <div style="background:var(--bg-tertiary); border-radius:var(--radius-xl); padding:var(--sp-6); margin-bottom:var(--sp-6);">
+            <div class="booking-confirm-grid">
+              <div><div style="font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted);">Service</div><div style="font-weight:var(--fw-semibold); margin-top:4px;">As Selected</div></div>
+              <div><div style="font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted);">Visit Charge</div><div style="font-weight:var(--fw-bold); color:var(--arctic); font-size:var(--fs-xl); margin-top:4px;">₹299</div></div>
+            </div>
+            <div style="margin-top:var(--sp-4); font-size:var(--fs-xs); color:var(--text-muted);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg> Visit charge waived if repair/service is ₹500+. AMC Gold members get 25% off all repairs.</div>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <button class="btn btn--ghost" data-prev>← Back</button>
+            <button class="btn btn--primary btn--lg" onclick="window.ArcticCool?.ToastManager.show('Service booking confirmed! We\'ll call to confirm technician details.','success',5000)">✓ Confirm Booking</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── AMC PLANS ── -->
+    <div class="dash-page" id="amc">
+      <div class="dash-header">
+        <div><div class="dash-title">AMC Plan Management</div><div class="dash-subtitle">Manage your annual maintenance contract</div></div>
+      </div>
+
+      <!-- Current Plan -->
+      <div class="amc-current-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:var(--sp-4);">
+          <div>
+            <div style="font-size:var(--fs-xs); opacity:0.7; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:var(--sp-2);">Current Plan</div>
+            <div class="amc-plan-name">Gold AMC <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+            <div class="amc-expires">Active until December 31, 2025</div>
+          </div>
+          <span class="badge badge--success" style="font-size:var(--fs-sm);">Active</span>
+        </div>
+        <div class="amc-bar-label"><span>Plan Usage — 60% utilized</span><span>8/12 months</span></div>
+        <div class="amc-bar-wrap"><div class="amc-bar" data-progress="60" style="width:60%;"></div></div>
+        <div style="display:flex; gap:var(--sp-8); margin-top:var(--sp-6); flex-wrap:wrap;">
+          <div><div style="font-size:var(--fs-2xl); font-weight:var(--fw-extrabold);">4</div><div style="font-size:var(--fs-xs); opacity:0.7;">Service Visits Left</div></div>
+          <div><div style="font-size:var(--fs-2xl); font-weight:var(--fw-extrabold);">1</div><div style="font-size:var(--fs-xs); opacity:0.7;">Gas Refills Left</div></div>
+          <div><div style="font-size:var(--fs-2xl); font-weight:var(--fw-extrabold);">25%</div><div style="font-size:var(--fs-xs); opacity:0.7;">Repair Discount</div></div>
+        </div>
+      </div>
+
+      <!-- Available Plans -->
+      <div style="font-weight:var(--fw-bold); font-size:var(--fs-lg); margin-bottom:var(--sp-5);">Upgrade Your Plan</div>
+      <div class="grid grid-3" style="margin-bottom:var(--sp-8);">
+        <div class="plan-card" style="opacity:0.6;">
+          <div class="plan-name">Silver</div>
+          <div class="plan-price-wrap"><span class="plan-currency">₹</span><span class="plan-price">2,999</span></div>
+          <div class="plan-period">/year/unit</div>
+          <ul class="plan-features" style="margin:var(--sp-4) 0;">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>2 visits · 1 cleaning</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>10% repair discount</li>
+          </ul>
+          <button class="btn btn--ghost btn--full" disabled>Current is Better</button>
+        </div>
+        <div class="plan-card" style="border-color:rgba(78,168,222,0.4);">
+          <div class="plan-badge" style="top:0;left:50%;transform:translateX(-50%);position:absolute;background:linear-gradient(90deg,var(--arctic),var(--teal));color:white;font-size:10px;font-weight:700;padding:2px 16px;border-radius:0 0 8px 8px;white-space:nowrap;">Current Plan</div>
+          <div class="plan-name">Gold</div>
+          <div class="plan-price-wrap"><span class="plan-currency">₹</span><span class="plan-price">5,499</span></div>
+          <div class="plan-period">/year/unit</div>
+          <ul class="plan-features" style="margin:var(--sp-4) 0;">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>4 visits · 2 cleanings</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>24/7 emergency</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>1 free gas refill</li>
+          </ul>
+          <button class="btn btn--outline btn--full" disabled>Active</button>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Platinum</div>
+          <div class="plan-price-wrap"><span class="plan-currency">₹</span><span class="plan-price">9,999</span></div>
+          <div class="plan-period">/year/unit</div>
+          <ul class="plan-features" style="margin:var(--sp-4) 0;">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>Unlimited visits</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>2-hr emergency priority</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>Free gas refills + parts</li>
+          </ul>
+          <button class="btn btn--copper btn--full" onclick="window.ArcticCool?.ToastManager.show('Upgrade request sent! Our team will contact you.','success')">Upgrade to Platinum</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── SERVICE HISTORY ── -->
+    <div class="dash-page" id="service-history">
+      <div class="dash-header">
+        <div><div class="dash-title">Service History</div><div class="dash-subtitle">All your past service visits and records</div></div>
+        <button class="btn btn--ghost btn--sm" onclick="window.ArcticCool?.ToastManager.show('Downloading history PDF...','info')"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Export PDF</button>
+      </div>
+      <div class="dash-table-wrap">
+        <div class="dash-table-header">
+          <div class="dash-table-title">All Service Records</div>
+          <div class="dash-table-search"><span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="search" placeholder="Search by date, service..." aria-label="Search service history"></div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="dash-table" style="display:table; width:100%; min-width:700px;">
+            <thead><tr><th>#</th><th>Date</th><th>Service Type</th><th>AC Unit</th><th>Technician</th><th>Status</th><th>Amount</th><th>Rating</th></tr></thead>
+            <tbody>
+              <tr class="service-history-row"><td>SRV-012</td><td>Aug 10, 2025</td><td>Gas Refill</td><td>LG 1.5T</td><td>Arjun Kumar</td><td><span class="badge badge--success">Done</span></td><td>₹1,200</td><td><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 5.0</td></tr>
+              <tr class="service-history-row"><td>SRV-011</td><td>Jul 22, 2025</td><td>Deep Cleaning</td><td>2 Units</td><td>Ravi Shankar</td><td><span class="badge badge--success">Done</span></td><td>₹1,198</td><td><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.8</td></tr>
+              <tr class="service-history-row"><td>SRV-010</td><td>Jun 5, 2025</td><td>PCB Repair</td><td>Daikin 2T</td><td>Deepak Verma</td><td><span class="badge badge--success">Done</span></td><td>₹2,400</td><td><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 5.0</td></tr>
+              <tr class="service-history-row"><td>SRV-009</td><td>May 18, 2025</td><td>Annual Service</td><td>All Units</td><td>Suresh Pillai</td><td><span class="badge badge--success">Done</span></td><td>Free (AMC)</td><td><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.7</td></tr>
+              <tr class="service-history-row"><td>SRV-008</td><td>Mar 3, 2025</td><td>Installation</td><td>Samsung 1.5T</td><td>Arjun Kumar</td><td><span class="badge badge--success">Done</span></td><td>₹1,499</td><td><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 5.0</td></tr>
+              <tr class="service-history-row"><td>SRV-007</td><td>Jan 15, 2025</td><td>Deep Cleaning</td><td>LG 1.5T</td><td>Ravi Shankar</td><td><span class="badge badge--success">Done</span></td><td>Free (AMC)</td><td><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.9</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── PAYMENTS ── -->
+    <div class="dash-page" id="payments">
+      <div class="dash-header">
+        <div><div class="dash-title">Payment History</div><div class="dash-subtitle">All transactions and invoices</div></div>
+        <button class="btn btn--ghost btn--sm" onclick="window.ArcticCool?.ToastManager.show('Downloading statements...','info')"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Download Statement</button>
+      </div>
+
+      <!-- Payment Chart -->
+      <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); padding:var(--sp-6); margin-bottom:var(--sp-6);">
+        <div style="font-weight:var(--fw-bold); margin-bottom:var(--sp-4);">Spending Overview (2025)</div>
+        <div id="paymentChart"></div>
+      </div>
+
+      <!-- Payment Table -->
+      <div class="dash-table-wrap">
+        <div class="dash-table-header">
+          <div class="dash-table-title">All Invoices</div>
+          <div class="dash-table-search"><span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="search" placeholder="Search invoices..." aria-label="Search invoices"></div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="dash-table" style="display:table; width:100%; min-width:600px;">
+            <thead><tr><th>Invoice</th><th>Date</th><th>Description</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>INV-2025-0012</td><td>Aug 10</td><td>Gas Refill Service</td><td>₹1,200</td><td><span class="badge badge--success">Paid</span></td><td><button class="btn btn--ghost btn--sm">Download</button></td></tr>
+              <tr><td>INV-2025-0011</td><td>Jul 22</td><td>Deep Cleaning × 2</td><td>₹1,198</td><td><span class="badge badge--success">Paid</span></td><td><button class="btn btn--ghost btn--sm">Download</button></td></tr>
+              <tr><td>INV-2025-0010</td><td>Jun 5</td><td>PCB Repair — Daikin</td><td>₹2,400</td><td><span class="badge badge--warning">Pending</span></td><td><button class="btn btn--primary btn--sm" onclick="window.ArcticCool?.ToastManager.show('Redirecting to payment gateway...','info')">Pay Now</button></td></tr>
+              <tr><td>INV-2025-0001</td><td>Jan 1</td><td>Gold AMC — Annual</td><td>₹5,499</td><td><span class="badge badge--success">Paid</span></td><td><button class="btn btn--ghost btn--sm">Download</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── NOTIFICATIONS ── -->
+    <div class="dash-page" id="notifications">
+      <div class="dash-header">
+        <div><div class="dash-title">Notifications</div><div class="dash-subtitle">3 unread messages</div></div>
+        <button class="btn btn--ghost btn--sm mark-all-read">Mark All Read</button>
+      </div>
+      <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); overflow:hidden;">
+        <div class="notif-item unread" style="position:relative;">
+          <div class="notif-icon-wrap notif-icon--info"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+          <div class="notif-content">
+            <div class="notif-title">Technician Assigned for Aug 22</div>
+            <div class="notif-text">Arjun Kumar (<svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.9) has been assigned to your deep cleaning visit. He'll arrive between 10 AM – 12 PM.</div>
+            <div class="notif-time">2 hours ago</div>
+          </div>
+        </div>
+        <div class="notif-item unread" style="position:relative;">
+          <div class="notif-icon-wrap notif-icon--warning"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="notif-content">
+            <div class="notif-title">Payment Pending — INV-2025-0010</div>
+            <div class="notif-text">Your invoice of ₹2,400 for PCB repair is pending payment. Please pay by Aug 30 to avoid late fees.</div>
+            <div class="notif-time">1 day ago</div>
+          </div>
+        </div>
+        <div class="notif-item unread" style="position:relative;">
+          <div class="notif-icon-wrap notif-icon--success"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"/><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2z"/></svg></div>
+          <div class="notif-content">
+            <div class="notif-title">AMC Renewal Offer — Save ₹1,000</div>
+            <div class="notif-text">Your Gold AMC expires in 4 months. Renew now and get ₹1,000 off on the next year's subscription. Limited time offer!</div>
+            <div class="notif-time">3 days ago</div>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon-wrap notif-icon--success"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div class="notif-content">
+            <div class="notif-title">Service Completed — Aug 10</div>
+            <div class="notif-text">Your gas refill service was completed successfully. Invoice INV-2025-0012 is now available for download.</div>
+            <div class="notif-time">9 days ago</div>
+          </div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon-wrap notif-icon--info"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+          <div class="notif-content">
+            <div class="notif-title">Summer Maintenance Reminder</div>
+            <div class="notif-text">Clean your AC filters monthly during summer for optimal performance and energy efficiency.</div>
+            <div class="notif-time">2 weeks ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── PROFILE ── -->
+    <div class="dash-page" id="profile">
+      <div class="dash-header">
+        <div><div class="dash-title">My Profile</div><div class="dash-subtitle">Manage your personal information</div></div>
+        <button class="btn btn--primary btn--sm" onclick="window.ArcticCool?.ToastManager.show('Profile saved successfully!','success')">Save Changes</button>
+      </div>
+
+      <!-- Avatar Section -->
+      <div class="profile-avatar-section">
+        <div class="profile-avatar-wrap">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=176&q=80" alt="Rahul Mehta" class="profile-avatar">
+          <div class="profile-avatar-edit" title="Change photo"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>
+          <input type="file" id="avatarInput" accept="image/*" style="display:none;">
+        </div>
+        <div>
+          <h2 style="margin-bottom:var(--sp-1);">Rahul Mehta</h2>
+          <p style="color:var(--text-muted); font-size:var(--fs-sm); margin-bottom:var(--sp-4);">Gold AMC Member · Customer since 2022</p>
+          <div style="display:flex; gap:var(--sp-3); flex-wrap:wrap;">
+            <span class="badge badge--arctic">Gold Member</span>
+            <span class="badge badge--success">Verified ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Form -->
+      <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-2xl); padding:var(--sp-8);">
+        <h3 style="margin-bottom:var(--sp-6);">Personal Information</h3>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label" for="pFirstName">First Name</label><input type="text" id="pFirstName" class="form-input" value="Rahul"></div>
+          <div class="form-group"><label class="form-label" for="pLastName">Last Name</label><input type="text" id="pLastName" class="form-input" value="Mehta"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label" for="pEmail">Email</label><input type="email" id="pEmail" class="form-input" value="rahul.mehta@gmail.com"></div>
+          <div class="form-group"><label class="form-label" for="pPhone">Phone</label><input type="tel" id="pPhone" class="form-input" value="+91 98765 43210"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="pAddress">Default Address</label>
+          <textarea id="pAddress" class="form-textarea" style="min-height:80px;">Flat 4B, Sunrise Apartments, Andheri West, Mumbai 400053</textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="pCity">City</label>
+            <select id="pCity" class="form-select">
+              <option selected>Mumbai</option><option>Pune</option><option>Bengaluru</option><option>Delhi</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label" for="pPIN">PIN Code</label><input type="text" id="pPIN" class="form-input" value="400053"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── SETTINGS ── -->
+    <div class="dash-page" id="settings">
+      <div class="dash-header">
+        <div><div class="dash-title">Settings</div><div class="dash-subtitle">Preferences and account settings</div></div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:var(--sp-5);">
+        <!-- Appearance -->
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-2xl); padding:var(--sp-6);">
+          <h3 style="margin-bottom:var(--sp-5);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg> Appearance</h3>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-label">Dark Mode</div><div class="setting-desc">Switch to dark interface for comfortable viewing at night</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="darkModeSetting"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-label">RTL Layout</div><div class="setting-desc">Switch to right-to-left text direction</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="rtlSetting"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-2xl); padding:var(--sp-6);">
+          <h3 style="margin-bottom:var(--sp-5);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Notifications</h3>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-label">Email Notifications</div><div class="setting-desc">Booking confirmations, invoices and service updates via email</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="emailNotif" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-label">SMS Alerts</div><div class="setting-desc">Technician arrival alerts and booking reminders via SMS</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="smsNotif" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-label">Marketing Emails</div><div class="setting-desc">Seasonal offers, new services and promotions</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="marketingNotif"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-2xl); padding:var(--sp-6);">
+          <h3 style="margin-bottom:var(--sp-5);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Security</h3>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-label">Change Password</div><div class="setting-desc">Last changed 3 months ago</div></div>
+            <button class="btn btn--outline btn--sm" onclick="window.ArcticCool?.ToastManager.show('Password reset email sent!','success')">Change</button>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-label">Two-Factor Authentication</div><div class="setting-desc">Add an extra layer of security to your account</div></div>
+            <button class="btn btn--outline btn--sm">Enable</button>
+          </div>
+          <div class="setting-row" style="border-bottom:none;">
+            <div class="setting-info"><div class="setting-label" style="color:#dc2626;">Delete Account</div><div class="setting-desc">Permanently delete your account and all data</div></div>
+            <button class="btn btn--sm" style="background:rgba(220,38,38,0.1);color:#dc2626;border:1px solid rgba(220,38,38,0.2);" onclick="window.ArcticCool?.ToastManager.show('Please contact support to delete your account','info')">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast-container" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact ArcticCool — Book AC installation, repair, or get a quote. We cover 40+ cities with same-day service.">
+  <title>Contact Us — ArcticCool HVAC</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    .page-hero { background: linear-gradient(135deg, rgba(23,33,43,0.82) 0%, rgba(23,33,43,0.65) 60%, rgba(15,116,143,0.45) 100%), url('https://plus.unsplash.com/premium_photo-1661921394349-9e3f394d80da?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTc2fHxhYyUyMHNlcnZpY2V8ZW58MHx8MHx8fDA%3D') center/cover no-repeat; padding: calc(72px + 6rem) 0 6rem; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(78,168,222,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(78,168,222,0.05) 1px, transparent 1px); background-size: 50px 50px; }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-hero-title { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: var(--fw-extrabold); color: white; letter-spacing: -0.03em; margin-bottom: var(--sp-4); }
+    .page-hero-title span { color: var(--arctic); }
+    /* Contact info cards */
+    .contact-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); margin-bottom: var(--sp-12); }
+    .contact-info-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-2xl); padding: var(--sp-8); text-align: center;
+      transition: all var(--t-normal);
+    }
+    .contact-info-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .contact-info-icon { font-size: 2.5rem; margin-bottom: var(--sp-4); }
+    .contact-info-label { font-size: var(--fs-xs); font-weight: var(--fw-semibold); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-2); }
+    .contact-info-val { font-weight: var(--fw-bold); font-size: var(--fs-lg); color: var(--text-primary); }
+    .contact-info-sub { font-size: var(--fs-xs); color: var(--text-muted); margin-top: var(--sp-1); }
+    /* Booking Form */
+    .booking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-10); align-items: start; }
+    .booking-steps { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-2xl); padding: var(--sp-8); }
+    .booking-form-step { display: none; }
+    .booking-form-step.active { display: block; }
+    .step-title { font-family: var(--font-heading); font-size: var(--fs-xl); font-weight: var(--fw-bold); margin-bottom: var(--sp-2); }
+    .step-subtitle { font-size: var(--fs-sm); color: var(--text-muted); margin-bottom: var(--sp-6); }
+    /* Service type selector */
+    .service-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); margin-bottom: var(--sp-6); }
+    .service-type-btn {
+      padding: var(--sp-4); border-radius: var(--radius-xl);
+      border: 2px solid var(--border-color); background: var(--bg-primary);
+      cursor: pointer; text-align: center; transition: all var(--t-fast);
+      font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--text-secondary);
+    }
+    .service-type-btn .type-icon { font-size: 1.8rem; display: block; margin-bottom: var(--sp-2); }
+    .service-type-btn:hover, .service-type-btn.selected {
+      border-color: var(--arctic); background: rgba(78,168,222,0.06); color: var(--arctic);
+    }
+    /* Info Sidebar */
+    .booking-info { display: flex; flex-direction: column; gap: var(--sp-6); }
+    .info-feature { display: flex; gap: var(--sp-4); align-items: flex-start; }
+    .info-feature-icon { width: 48px; height: 48px; border-radius: var(--radius-xl); flex-shrink: 0; background: linear-gradient(135deg, rgba(78,168,222,0.1), rgba(15,91,99,0.08)); border: 1px solid rgba(78,168,222,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+    /* Map Embed */
+    .map-embed { border-radius: var(--radius-2xl); overflow: hidden; border: 1px solid var(--border-color); height: 400px; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; position: relative; }
+    .map-placeholder { text-align: center; color: var(--text-muted); }
+    .map-pin-animated { font-size: 3rem; animation: float 3s ease-in-out infinite; display: block; margin-bottom: var(--sp-4); }
+    /* Live Chat Widget */
+    .chat-widget {
+      position: fixed; bottom: 6rem; right: 2rem;
+      z-index: var(--z-sticky);
+    }
+    .chat-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--arctic), var(--teal));
+      box-shadow: 0 4px 20px rgba(78,168,222,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; cursor: pointer; border: none;
+      transition: all var(--t-normal) var(--ease-spring);
+    }
+    .chat-btn:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(78,168,222,0.5); }
+    .chat-panel {
+      position: absolute; bottom: 70px; right: 0;
+      width: 300px; background: var(--bg-card);
+      border: 1px solid var(--border-color); border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-2xl);
+      display: none; overflow: hidden;
+    }
+    .chat-panel.open { display: flex; flex-direction: column; }
+    .chat-header { background: linear-gradient(135deg, var(--arctic), var(--teal)); padding: var(--sp-4); display: flex; align-items: center; gap: var(--sp-3); }
+    .chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .chat-messages { padding: var(--sp-4); min-height: 180px; max-height: 250px; overflow-y: auto; display: flex; flex-direction: column; gap: var(--sp-3); }
+    .chat-msg { background: var(--bg-tertiary); border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 0; padding: var(--sp-3); font-size: var(--fs-xs); max-width: 85%; }
+    .chat-msg--user { background: var(--arctic); color: white; border-radius: var(--radius-lg) var(--radius-lg) 0 var(--radius-lg); align-self: flex-end; }
+    .chat-input-row { padding: var(--sp-3); border-top: 1px solid var(--border-color); display: flex; gap: var(--sp-2); }
+    .chat-input { flex: 1; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: var(--sp-2) var(--sp-3); font-size: var(--fs-xs); outline: none; background: var(--bg-primary); color: var(--text-primary); }
+    [dir="rtl"] .chat-widget { right: auto; left: 2rem; }
+    [dir="rtl"] .chat-panel { right: auto; left: 0; }
+    @media (max-width: 1024px) {
+      .contact-info-grid { grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+      .booking-layout { grid-template-columns: 1fr; gap: var(--sp-8); }
+    }
+    @media (max-width: 768px) {
+      .contact-info-grid { grid-template-columns: 1fr; }
+      .service-type-grid { grid-template-columns: 1fr 1fr; }
+      .page-hero { padding: calc(72px + 4rem) 0 4rem; }
+    }
+    @media (max-width: 480px) {
+      .booking-layout { gap: var(--sp-6); }
+      .booking-steps { padding: var(--sp-6) var(--sp-4); }
+      .service-type-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-2); }
+      .contact-info-grid { gap: var(--sp-4); }
+      .map-embed { height: 300px; }
+      .chat-panel { width: 100%; bottom: 64px; right: 0; }
+      .chat-widget { right: 1rem; bottom: 1rem; }
+    }
+    @media (max-width: 360px) {
+      .service-type-grid { grid-template-columns: 1fr; }
+      .contact-info-card { padding: var(--sp-5) var(--sp-4); }
+      .contact-info-val { font-size: var(--fs-md); }
+      .chat-widget { right: 0.75rem; bottom: 0.75rem; }
+      .page-hero-title { font-size: 1.75rem; }
+    }
+    @media (max-width: 320px) {
+      .contact-info-card { padding: var(--sp-4) var(--sp-3); }
+      .contact-info-icon { font-size: 1.8rem; margin-bottom: var(--sp-2); }
+      .contact-info-val { font-size: var(--fs-sm); }
+      .contact-info-label { font-size: 10px; }
+      .booking-steps { padding: var(--sp-4) var(--sp-3); }
+      .step-title { font-size: var(--fs-lg); }
+      .step-subtitle { font-size: var(--fs-xs); }
+      .service-type-btn { padding: var(--sp-3) var(--sp-2); font-size: 12px; }
+      .service-type-btn .type-icon { font-size: 1.3rem; margin-bottom: 4px; }
+      .map-embed { height: 230px; }
+      .chat-btn { width: 44px; height: 44px; font-size: 1.2rem; }
+      .chat-panel { width: calc(100vw - 20px); left: 10px; right: 10px; bottom: 56px; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-logo"><div class="loader-ring"></div><div class="loader-text">Arctic<span>Cool</span></div></div></div>
+<header class="navbar">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div><span class="nav-logo-text">Arctic<span>Cool</span></span></a>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="home2.html" class="nav-link">Home 2</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button class="rtl-toggle" aria-label="Toggle RTL">RTL</button>
+        <div class="profile-wrap">
+          <button class="profile-toggle" aria-label="Account menu" aria-expanded="false" title="Account"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+          <div class="profile-menu">
+            <a href="login.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Login / Signup</a>
+            <a href="dashboard.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span> User Dashboard</a>
+            <a href="admin.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Admin Dashboard</a>
+          </div>
+        </div>
+        <button class="nav-burger" aria-expanded="false" aria-label="Toggle menu"><span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span></button>
+      </div>
+    </nav>
+  </div>
+  <nav class="nav-mobile">
+    <a href="index.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
+    <a href="home2.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg> Home 2</a>
+    <a href="about.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
+    <a href="services.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Services</a>
+    <a href="blog.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Blog</a>
+    <a href="contact.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Contact</a>
+    <div style="padding: var(--sp-6) var(--sp-2); display:flex; gap: var(--sp-3);"><a href="contact.html" class="btn btn--primary btn--full">Book Service</a></div>
+  </nav>
+</header>
+
+<main>
+
+<!-- SECTION 1 — PAGE HERO -->
+<section class="page-hero" aria-label="Contact hero">
+  <div class="container">
+    <div class="page-hero-content reveal-up">
+      <h1 class="page-hero-title">Book a Service or<br><span>Get in Touch</span></h1>
+      <p style="color:rgba(255,255,255,0.65); font-size:var(--fs-md); max-width: 55ch;">Same-day service in 40+ cities. We'll get back to every enquiry within 2 hours during business hours.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2 — CONTACT INFO CARDS -->
+<section class="section" aria-labelledby="contact-info-heading">
+  <div class="container">
+    <div class="contact-info-grid stagger">
+      <div class="contact-info-card">
+        <div class="contact-info-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="contact-info-label">Call Us</div>
+        <div class="contact-info-val">+91 98200 12345</div>
+        <div class="contact-info-sub">Mon–Sat 8am–8pm | Sun 9am–5pm</div>
+        <a href="tel:+919820012345" class="btn btn--outline btn--sm" style="margin-top:var(--sp-4);">Call Now</a>
+      </div>
+      <div class="contact-info-card">
+        <div class="contact-info-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="contact-info-label">Email Us</div>
+        <div class="contact-info-val">hello@arcticcool.in</div>
+        <div class="contact-info-sub">Response within 2 hours during business hours</div>
+        <a href="mailto:hello@arcticcool.in" class="btn btn--outline btn--sm" style="margin-top:var(--sp-4);">Send Email</a>
+      </div>
+      <div class="contact-info-card">
+        <div class="contact-info-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="contact-info-label">Visit Us</div>
+        <div class="contact-info-val" style="font-size: var(--fs-md);">42, HVAC Tower, Andheri West</div>
+        <div class="contact-info-sub">Mumbai 400053, Maharashtra</div>
+        <a href="#map" class="btn btn--outline btn--sm" style="margin-top:var(--sp-4);">Get Directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 3 — BOOKING FORM (Multi-step) -->
+<section class="section section--ice" aria-labelledby="booking-heading">
+  <div class="container">
+    <div class="section-header section-header--center reveal-up">
+      <span class="section-tag">Quick Booking</span>
+      <h2 class="section-title" id="booking-heading">Book a <span>Service</span> in 3 Steps</h2>
+      <p class="section-subtitle">Tell us what you need and we'll confirm your booking within 2 hours.</p>
+    </div>
+    <div class="booking-layout">
+      <div class="booking-steps reveal-left" id="contactBookingForm">
+        <!-- Progress -->
+        <div class="booking-progress" style="margin-bottom: var(--sp-8);">
+          <div class="booking-step active">
+            <div class="booking-step-num">1</div>
+            <div class="booking-step-label">Service</div>
+          </div>
+          <div class="booking-step">
+            <div class="booking-step-num">2</div>
+            <div class="booking-step-label">Details</div>
+          </div>
+          <div class="booking-step">
+            <div class="booking-step-num">3</div>
+            <div class="booking-step-label">Schedule</div>
+          </div>
+        </div>
+        <!-- Step 1 -->
+        <div class="booking-form-step active" id="cStep1">
+          <div class="step-title">What service do you need?</div>
+          <div class="step-subtitle">Select the type of service to get an accurate quote.</div>
+          <div class="service-type-grid">
+            <button class="service-type-btn" onclick="selectService(this)"><span class="type-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>AC Installation</button>
+            <button class="service-type-btn" onclick="selectService(this)"><span class="type-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h4L20.5 7.5a2.12 2.12 0 0 0-3-3L4 18v3z"/><path d="M15 5l4 4"/></svg></span>Repair / Service</button>
+            <button class="service-type-btn" onclick="selectService(this)"><span class="type-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg></span>Deep Cleaning</button>
+            <button class="service-type-btn" onclick="selectService(this)"><span class="type-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span>AMC Plan</button>
+            <button class="service-type-btn" onclick="selectService(this)"><span class="type-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></span>Gas Refill</button>
+            <button class="service-type-btn" onclick="selectService(this)"><span class="type-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></span>Commercial</button>
+          </div>
+          <button class="btn btn--primary btn--full" onclick="contactNextStep(1)">Next: Your Details →</button>
+        </div>
+        <!-- Step 2 -->
+        <div class="booking-form-step" id="cStep2">
+          <div class="step-title">Your Contact Details</div>
+          <div class="step-subtitle">We need a few details to confirm your booking.</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="cName">Full Name *</label>
+              <input type="text" id="cName" class="form-input" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cPhone">Phone *</label>
+              <input type="tel" id="cPhone" class="form-input" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cEmail">Email</label>
+            <input type="email" id="cEmail" class="form-input" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cCity">Your City *</label>
+            <select id="cCity" class="form-select" required>
+              <option value="">Select your city</option>
+              <option>Mumbai</option><option>Delhi</option><option>Bengaluru</option>
+              <option>Chennai</option><option>Hyderabad</option><option>Pune</option>
+              <option>Ahmedabad</option><option>Kolkata</option><option>Jaipur</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cDetails">Additional Details</label>
+            <textarea id="cDetails" class="form-textarea" style="min-height:80px;" placeholder="AC brand, model, specific issue..."></textarea>
+          </div>
+          <div style="display:flex; gap: var(--sp-3);">
+            <button class="btn btn--ghost" onclick="contactPrevStep(2)">← Back</button>
+            <button class="btn btn--primary" style="flex:1;" onclick="contactNextStep(2)">Next: Schedule →</button>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="booking-form-step" id="cStep3">
+          <div class="step-title">Choose Your Date & Time</div>
+          <div class="step-subtitle">We'll confirm availability within 2 hours of your booking.</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="cDate">Preferred Date *</label>
+              <input type="date" id="cDate" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cTime">Preferred Time *</label>
+              <select id="cTime" class="form-select" required>
+                <option value="">Select time slot</option>
+                <option>8:00 AM – 10:00 AM</option>
+                <option>10:00 AM – 12:00 PM</option>
+                <option>12:00 PM – 2:00 PM</option>
+                <option>2:00 PM – 4:00 PM</option>
+                <option>4:00 PM – 6:00 PM</option>
+                <option>6:00 PM – 8:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cAddress">Full Address *</label>
+            <textarea id="cAddress" class="form-textarea" style="min-height:80px;" placeholder="Flat/House no, Street, Area, City, PIN" required></textarea>
+          </div>
+          <div style="display:flex; gap: var(--sp-3);">
+            <button class="btn btn--ghost" onclick="contactPrevStep(3)">← Back</button>
+            <button class="btn btn--primary" style="flex:1;" onclick="submitContactBooking()">Confirm Booking ✓</button>
+          </div>
+        </div>
+      </div>
+      <!-- Info Sidebar -->
+      <div class="booking-info reveal-right">
+        <div style="background: linear-gradient(135deg, var(--midnight), var(--teal)); border-radius: var(--radius-2xl); padding: var(--sp-8); color: white;">
+          <h3 style="color:white; margin-bottom: var(--sp-5);">Why Book with ArcticCool?</h3>
+          <div class="info-feature">
+            <div class="info-feature-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <div><div style="font-weight:var(--fw-semibold); margin-bottom:4px;">Same-Day Service</div><div style="font-size:var(--fs-xs); opacity:0.7;">Guaranteed within 4 hours in major cities</div></div>
+          </div>
+          <div style="height:1px; background:rgba(255,255,255,0.1); margin: var(--sp-4) 0;"></div>
+          <div class="info-feature">
+            <div class="info-feature-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div><div style="font-weight:var(--fw-semibold); margin-bottom:4px;">Transparent Pricing</div><div style="font-size:var(--fs-xs); opacity:0.7;">Fixed rates, no hidden charges, itemized invoices</div></div>
+          </div>
+          <div style="height:1px; background:rgba(255,255,255,0.1); margin: var(--sp-4) 0;"></div>
+          <div class="info-feature">
+            <div class="info-feature-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21 1.18.54 2.03 2.03 2.03 3.79"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+            <div><div style="font-weight:var(--fw-semibold); margin-bottom:4px;">ISO Certified</div><div style="font-size:var(--fs-xs); opacity:0.7;">All technicians are ISO 9001 certified professionals</div></div>
+          </div>
+          <div style="height:1px; background:rgba(255,255,255,0.1); margin: var(--sp-4) 0;"></div>
+          <div class="info-feature">
+            <div class="info-feature-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <div><div style="font-weight:var(--fw-semibold); margin-bottom:4px;">Satisfaction Guarantee</div><div style="font-size:var(--fs-xs); opacity:0.7;">100% money-back if not satisfied with service quality</div></div>
+          </div>
+        </div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-2xl); padding: var(--sp-6);">
+          <h4 style="margin-bottom: var(--sp-4);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Emergency Helpline</h4>
+          <p style="font-size: var(--fs-sm); color: var(--text-muted); margin-bottom: var(--sp-4);">AC breakdown? Call our emergency line for priority same-day service.</p>
+          <a href="tel:+919820012345" class="btn btn--teal btn--full">+91 98200 12345</a>
+          <p style="font-size:var(--fs-xs); color:var(--text-muted); text-align:center; margin-top:var(--sp-2);">Available 7 days, 8am–8pm</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 4 — MAP -->
+<section class="section" id="map" aria-labelledby="map-heading">
+  <div class="container">
+    <div class="section-header reveal-up">
+      <span class="section-tag">Find Us</span>
+      <h2 class="section-title" id="map-heading">Our <span>Service Areas</span></h2>
+    </div>
+    <div class="map-embed reveal-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770680.780839747!2d72.7411012!3d19.0821978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d0c3f4e!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1610000000000!5m2!1sen!2sin"
+        width="100%" height="100%" style="border:0; position:absolute; inset:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="ArcticCool Service Areas Map"
+        aria-label="Google map showing ArcticCool service areas across India"></iframe>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 5 — FAQ -->
+<section class="section section--ice" aria-labelledby="contact-faq-heading">
+  <div class="container">
+    <div class="section-header section-header--center reveal-up">
+      <span class="section-tag">Quick Answers</span>
+      <h2 class="section-title" id="contact-faq-heading">Common <span>Questions</span></h2>
+    </div>
+    <div class="faq-list" style="max-width: 800px; margin: 0 auto;">
+      <div class="faq-item"><div class="faq-question" role="button" tabindex="0">How quickly can you send a technician?<span class="faq-icon">+</span></div><div class="faq-answer"><div class="faq-answer-inner">In major cities, we guarantee a technician within 4 hours of booking. Most bookings are fulfilled same-day. AMC Platinum customers have 2-hour priority response.</div></div></div>
+      <div class="faq-item"><div class="faq-question" role="button" tabindex="0">What are the service charges?<span class="faq-icon">+</span></div><div class="faq-answer"><div class="faq-answer-inner">Service visit starts at ₹299 (waived if you proceed with repair). Installation from ₹1,499. Deep cleaning from ₹599. Gas refill from ₹900. All prices are transparent — no surprises.</div></div></div>
+      <div class="faq-item"><div class="faq-question" role="button" tabindex="0">Do you offer weekend service?<span class="faq-icon">+</span></div><div class="faq-answer"><div class="faq-answer-inner">Yes! We operate Monday–Saturday 8am–8pm and Sunday 9am–5pm. Platinum AMC subscribers have 24/7 emergency support.</div></div></div>
+      <div class="faq-item"><div class="faq-question" role="button" tabindex="0">Can I track my technician in real-time?<span class="faq-icon">+</span></div><div class="faq-answer"><div class="faq-answer-inner">Yes! Once your booking is confirmed, you'll receive a tracking link via SMS/email. You can also track via your Customer Dashboard at dashboard.html.</div></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 6 — GENERAL ENQUIRY FORM -->
+<section class="section" aria-labelledby="enquiry-heading">
+  <div class="container">
+    <div class="section-header section-header--center reveal-up">
+      <span class="section-tag">Get in Touch</span>
+      <h2 class="section-title" id="enquiry-heading">Send Us a <span>Message</span></h2>
+    </div>
+    <div style="max-width: 640px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-2xl); padding: var(--sp-10);" class="reveal-up">
+      <form data-validate onsubmit="">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="msgName">Full Name *</label>
+            <input type="text" id="msgName" class="form-input" placeholder="Your name" required minlength="2">
+            <span class="form-error"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="msgPhone">Phone *</label>
+            <input type="tel" id="msgPhone" class="form-input" placeholder="+91 98765 43210" required>
+            <span class="form-error"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="msgEmail">Email *</label>
+          <input type="email" id="msgEmail" class="form-input" placeholder="your@email.com" required>
+          <span class="form-error"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="msgSubject">Subject</label>
+          <select id="msgSubject" class="form-select">
+            <option value="">Select a topic</option>
+            <option>AC Installation</option>
+            <option>Repair & Service</option>
+            <option>AMC Enquiry</option>
+            <option>Commercial Project</option>
+            <option>Complaint</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="msgText">Message *</label>
+          <textarea id="msgText" class="form-textarea" placeholder="Tell us how we can help..." required minlength="10"></textarea>
+          <span class="form-error"></span>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full btn--lg" data-label="Send Message">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo nav-logo" style="margin-bottom: var(--sp-4);">
+          <div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+          <span class="nav-logo-text">Arctic<span>Cool</span></span>
+        </a>
+        <p class="footer-desc">India's most trusted premium HVAC brand. Delivering world-class air conditioning solutions for homes and businesses since 2009.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-link" aria-label="YouTube"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
+        </div>
+      </div>
+      <!-- Services -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">AC Installation</a></li>
+          <li><a href="services.html">Repair & Service</a></li>
+          <li><a href="services.html">Deep Cleaning</a></li>
+          <li><a href="services.html">Gas Charging</a></li>
+          <li><a href="services.html">AMC Plans</a></li>
+          <li><a href="services.html">Commercial HVAC</a></li>
+        </ul>
+      </div>
+      <!-- Company & Portals -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="home2.html">Home 2</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog & Insights</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="dashboard.html">Customer Portal</a></li>
+          <li><a href="admin.html">Ops Command Center</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span>42, HVAC Tower, Andheri West, Mumbai 400053</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>+91 98200 12345</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <span>hello@arcticcool.in</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span>Mon–Sat 8am–8pm | Sun 9am–5pm</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ArcticCool Pvt Ltd. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Live Chat Widget -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-avatar"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></div>
+      <div>
+        <div style="font-weight:var(--fw-bold); font-size:var(--fs-sm); color:white;">ArcticCool Support</div>
+        <div style="font-size:10px; color:rgba(255,255,255,0.75);">● Online — typical reply in 2 min</div>
+      </div>
+      <button onclick="document.getElementById('chatPanel').classList.remove('open')" style="margin-left:auto; background:none; border:none; color:white; cursor:pointer; font-size:1.2rem;">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg> Hi there! How can we help you today?</div>
+      <div class="chat-msg">You can ask about services, pricing, or book an appointment!</div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="btn btn--primary btn--sm" onclick="sendChat()">→</button>
+    </div>
+  </div>
+  <button class="chat-btn" onclick="document.getElementById('chatPanel').classList.toggle('open')" aria-label="Open live chat"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+</div>
+<button id="back-to-top" aria-label="Back to top">↑</button>
+<div class="toast-container" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script src="js/animations.js"></script>
+<script>
+// Booking Form
+let currentStep = 1;
+let selectedService = '';
+function selectService(btn) {
+  document.querySelectorAll('.service-type-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedService = btn.textContent.trim();
+}
+function updateContactProgress(step) {
+  document.querySelectorAll('.booking-step').forEach((s, i) => {
+    s.classList.toggle('active', i === step - 1);
+    s.classList.toggle('done', i < step - 1);
+  });
+}
+function contactNextStep(step) {
+  if (step === 1 && !selectedService) {
+    window.ArcticCool?.ToastManager.show('Please select a service type', 'error');
+    return;
+  }
+  document.getElementById('cStep' + step).classList.remove('active');
+  document.getElementById('cStep' + (step + 1)).classList.add('active');
+  currentStep = step + 1;
+  updateContactProgress(currentStep);
+}
+function contactPrevStep(step) {
+  document.getElementById('cStep' + step).classList.remove('active');
+  document.getElementById('cStep' + (step - 1)).classList.add('active');
+  currentStep = step - 1;
+  updateContactProgress(currentStep);
+}
+function submitContactBooking() {
+  const date = document.getElementById('cDate').value;
+  const time = document.getElementById('cTime').value;
+  if (!date || !time) {
+    window.ArcticCool?.ToastManager.show('Please select date and time', 'error');
+    return;
+  }
+  window.ArcticCool?.ToastManager.show('Booking confirmed! We\'ll call you within 2 hours.', 'success', 5000);
+  setTimeout(() => location.reload(), 3000);
+}
+// Chat
+const responses = ['Got it! A service expert will contact you shortly.','Great question! Our service starts at ₹299. Book now for today!','We cover 40+ cities. What city are you in?','Same-day service is available. Shall I book a technician for you?'];
+let rIdx = 0;
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const messages = document.getElementById('chatMessages');
+  const val = input.value.trim();
+  if (!val) return;
+  const userMsg = document.createElement('div');
+  userMsg.className = 'chat-msg chat-msg--user';
+  userMsg.textContent = val;
+  messages.appendChild(userMsg);
+  input.value = '';
+  messages.scrollTop = messages.scrollHeight;
+  setTimeout(() => {
+    const reply = document.createElement('div');
+    reply.className = 'chat-msg';
+    reply.textContent = responses[rIdx % responses.length];
+    rIdx++;
+    messages.appendChild(reply);
+    messages.scrollTop = messages.scrollHeight;
+  }, 800);
+}
+</script>
+</body>
+</html>

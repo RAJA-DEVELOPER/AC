@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ArcticCool HVAC Operations Command Center & Admin Dashboard. Live fleet dispatching, work order management, inventory tracking, and revenue analytics.">
+  <title>Operations Command Center — ArcticCool Enterprise</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div id="page-loader">
+  <div class="loader-logo">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Arctic<span>Control</span></div>
+  </div>
+</div>
+
+<div class="admin-shell">
+  <!-- ── 1. Top Command Bar ── -->
+  <header class="admin-topbar">
+    <div class="admin-topbar-left">
+      <button class="admin-sidebar-toggle" id="adminSidebarToggle" aria-label="Toggle Navigation Sidebar">
+        <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="index.html" class="admin-brand">
+        <div class="nav-logo-icon" style="width:32px;height:32px;font-size:1rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+        <span class="nav-logo-text" style="font-size:1.1rem;color:white;">Arctic<span>Cool</span></span>
+        <span class="admin-brand-tag">Ops Center</span>
+      </a>
+
+      <!-- System Pulse -->
+      <div class="system-status-indicator hide-mobile">
+        <span class="status-pulse-dot"></span>
+        <span>Telemetry Online · 40 Cities Active</span>
+      </div>
+    </div>
+
+    <!-- Search Command Palette -->
+    <div class="admin-command-search">
+      <span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      <input type="search" id="adminGlobalSearch" placeholder="Search work orders, techs, parts..." aria-label="Global Search">
+      <span class="admin-kbd-badge">Ctrl+K</span>
+    </div>
+
+    <div class="admin-topbar-right">
+      <!-- Quick Action Dispatch -->
+      <button class="btn btn--sm btn--primary hide-mobile" onclick="openDispatchModal()">
+        <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Quick Dispatch
+      </button>
+
+      <!-- Theme & RTL Controls -->
+      <button class="admin-icon-btn theme-toggle" aria-label="Toggle Dark / Light Theme" title="Toggle Theme">
+        <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="admin-icon-btn rtl-toggle" aria-label="Toggle RTL Direction" title="Toggle RTL">
+        RTL
+      </button>
+
+      <!-- Notifications -->
+      <button class="admin-icon-btn" onclick="window.ArcticCool?.ToastManager.show('3 high-priority dispatch alerts active', 'info')" aria-label="Notifications" title="Notifications">
+        <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="admin-notif-dot">3</span>
+      </button>
+
+      <!-- User Profile Pill -->
+      <div class="admin-user-pill">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" alt="Super Admin Priya" class="admin-user-avatar">
+        <div class="admin-user-meta hide-mobile">
+          <div class="admin-user-name">Priya Nair</div>
+          <div class="admin-user-role">Operations Director</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── 2. Operations Navigation Sidebar ── -->
+  <aside class="admin-sidebar" role="navigation" aria-label="Operations Navigation">
+    <div class="admin-sidebar-nav">
+      <div class="admin-nav-group-label">Mission Control</div>
+      <a href="#overview" class="admin-nav-link active" data-view="overview">
+        <span class="admin-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span>
+        <span class="admin-nav-text">Executive Overview</span>
+      </a>
+      <a href="#work-orders" class="admin-nav-link" data-view="work-orders">
+        <span class="admin-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span>
+        <span class="admin-nav-text">Work Orders & Tickets</span>
+        <span class="admin-nav-pill admin-nav-pill--info">48</span>
+      </a>
+
+      <div class="admin-nav-group-label">Fleet & Resources</div>
+      <a href="#technicians" class="admin-nav-link" data-view="technicians">
+        <span class="admin-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V6a2 2 0 0 1 4 0v4"/><path d="M10 10v3a2 2 0 0 0 4 0v-3"/></svg></span>
+        <span class="admin-nav-text">Technician Fleet</span>
+      </a>
+      <a href="#inventory" class="admin-nav-link" data-view="inventory">
+        <span class="admin-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
+        <span class="admin-nav-text">Inventory & Spares</span>
+        <span class="admin-nav-pill admin-nav-pill--warn">Low</span>
+      </a>
+      <a href="#amc-contracts" class="admin-nav-link" data-view="amc-contracts">
+        <span class="admin-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+        <span class="admin-nav-text">AMC Contracts</span>
+      </a>
+
+      <div class="admin-nav-group-label">Intelligence</div>
+      <a href="#financials" class="admin-nav-link" data-view="financials">
+        <span class="admin-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+        <span class="admin-nav-text">Revenue Analytics</span>
+      </a>
+      <a href="#settings" class="admin-nav-link" data-view="settings">
+        <span class="admin-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+        <span class="admin-nav-text">Settings & Audit Log</span>
+      </a>
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="admin-sidebar-footer">
+      <a href="dashboard.html" class="btn btn--outline btn--sm btn--full" style="font-size:11px;">
+        <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Customer Portal
+      </a>
+      <a href="index.html" class="btn btn--ghost btn--sm btn--full" style="font-size:11px;">
+        <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> ArcticCool Home
+      </a>
+    </div>
+  </aside>
+
+  <!-- ── 3. Operations Viewport ── -->
+  <main class="admin-viewport">
+
+    <!-- ──────────────────────────────────────────────
+         VIEW 1: EXECUTIVE OVERVIEW
+         ────────────────────────────────────────────── -->
+    <section class="admin-view-panel active" id="view-overview">
+      <!-- Live Operations Ticker -->
+      <div class="admin-live-ticker">
+        <span class="ticker-badge"><span class="status-pulse-dot" style="background:#ef4444;box-shadow:0 0 6px #ef4444;"></span> Live Ops Feed</span>
+        <div class="ticker-content" id="liveOperationsTicker">
+          Technician Arjun Kumar reached Prestige Heights (Job #WO-9842) · ETA 25m
+        </div>
+      </div>
+
+      <!-- Page Header -->
+      <div class="admin-page-header">
+        <div class="admin-page-title-wrap">
+          <h1 class="admin-page-title">Executive <span>Operations Cockpit</span></h1>
+          <p class="admin-page-desc">Real-time telemetry across nationwide service dispatch, active work orders, and technical fleet.</p>
+        </div>
+        <div class="admin-page-actions">
+          <button class="btn btn--outline btn--sm" onclick="window.ArcticCool?.ToastManager.show('Syncing nationwide telemetry hubs...', 'info')">
+            <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Refresh Data
+          </button>
+          <button class="btn btn--primary btn--sm" onclick="openDispatchModal()">
+            + New Work Order
+          </button>
+        </div>
+      </div>
+
+      <!-- Telemetry Strip -->
+      <div class="telemetry-grid">
+        <div class="telemetry-card">
+          <div class="telemetry-head">
+            <span class="telemetry-label">Monthly Gross Revenue</span>
+            <div class="telemetry-icon-box" style="background:rgba(78,168,222,0.12); color:var(--arctic);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
+          </div>
+          <div class="telemetry-val">₹38.42L</div>
+          <div class="telemetry-footer">
+            <span class="telemetry-trend-up">↑ 14.8%</span>
+            <span class="telemetry-subtext">vs last month</span>
+          </div>
+        </div>
+
+        <div class="telemetry-card telemetry-card--copper">
+          <div class="telemetry-head">
+            <span class="telemetry-label">Active Work Orders</span>
+            <div class="telemetry-icon-box" style="background:rgba(183,121,75,0.12); color:var(--copper);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          </div>
+          <div class="telemetry-val">48 <span style="font-size:var(--fs-sm); font-weight:normal; color:var(--text-muted);">Jobs</span></div>
+          <div class="telemetry-footer">
+            <span style="color:#ef4444; font-weight:bold;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> 6 Urgent Triage</span>
+            <span class="telemetry-subtext">· 42 on schedule</span>
+          </div>
+        </div>
+
+        <div class="telemetry-card telemetry-card--green">
+          <div class="telemetry-head">
+            <span class="telemetry-label">Deployed Field Fleet</span>
+            <div class="telemetry-icon-box" style="background:rgba(16,185,129,0.12); color:#10b981;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V6a2 2 0 0 1 4 0v4"/><path d="M10 10v3a2 2 0 0 0 4 0v-3"/></svg></div>
+          </div>
+          <div class="telemetry-val">36 / 42</div>
+          <div class="telemetry-footer">
+            <span class="telemetry-trend-up">85.7%</span>
+            <span class="telemetry-subtext">Fleet Utilization Rate</span>
+          </div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-head">
+            <span class="telemetry-label">First-Time Fix Rate</span>
+            <div class="telemetry-icon-box" style="background:rgba(15,91,99,0.12); color:var(--teal-light);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          </div>
+          <div class="telemetry-val">94.2%</div>
+          <div class="telemetry-footer">
+            <span class="telemetry-trend-up">↑ 2.1%</span>
+            <span class="telemetry-subtext">CSAT: 4.88 / 5.0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics Charts Strip -->
+      <div class="analytics-chart-grid">
+        <!-- SVG Trajectory Chart -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div style="font-weight:var(--fw-bold); font-size:var(--fs-md);">Revenue Trajectory (Past 7 Days)</div>
+              <div style="font-size:var(--fs-xs); color:var(--text-muted);">Daily billed invoices across residential and commercial HVAC services</div>
+            </div>
+            <span class="badge badge--arctic">Weekly Total: ₹2.45 Cr</span>
+          </div>
+          <div class="svg-chart-container" id="svgRevenueChart">
+            <!-- Rendered by js/admin.js -->
+          </div>
+        </div>
+
+        <!-- Category Breakdown -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div style="font-weight:var(--fw-bold); font-size:var(--fs-md);">Revenue Mix</div>
+            <span style="font-size:var(--fs-xs); color:var(--text-muted);">By Category</span>
+          </div>
+
+          <div class="cat-breakdown-list">
+            <div class="cat-breakdown-item">
+              <div class="cat-breakdown-header">
+                <span>Annual Maintenance Contracts (AMC)</span>
+                <strong>42%</strong>
+              </div>
+              <div class="cat-progress-track">
+                <div class="cat-progress-fill" style="width:42%; background:var(--arctic);"></div>
+              </div>
+            </div>
+
+            <div class="cat-breakdown-item">
+              <div class="cat-breakdown-header">
+                <span>Commercial Chillers & VRV</span>
+                <strong>28%</strong>
+              </div>
+              <div class="cat-progress-track">
+                <div class="cat-progress-fill" style="width:28%; background:var(--teal);"></div>
+              </div>
+            </div>
+
+            <div class="cat-breakdown-item">
+              <div class="cat-breakdown-header">
+                <span>Split/Window AC Installations</span>
+                <strong>18%</strong>
+              </div>
+              <div class="cat-progress-track">
+                <div class="cat-progress-fill" style="width:18%; background:var(--copper);"></div>
+              </div>
+            </div>
+
+            <div class="cat-breakdown-item">
+              <div class="cat-breakdown-header">
+                <span>Gas Refills & Spare Parts</span>
+                <strong>12%</strong>
+              </div>
+              <div class="cat-progress-track">
+                <div class="cat-progress-fill" style="width:12%; background:#10b981;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         VIEW 3: WORK ORDERS & TICKETS
+         ────────────────────────────────────────────── -->
+    <section class="admin-view-panel" id="view-work-orders">
+      <div class="admin-page-header">
+        <div class="admin-page-title-wrap">
+          <h2 class="admin-page-title">Work Orders & <span>Service Queue</span></h2>
+          <p class="admin-page-desc">Complete end-to-end ticket lifecycle management and technician dispatch audit trail.</p>
+        </div>
+        <div class="admin-page-actions">
+          <button class="btn btn--outline btn--sm" onclick="window.ArcticCool?.ToastManager.show('Work Orders exported to CSV spreadsheet', 'success')">
+            <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Export CSV
+          </button>
+          <button class="btn btn--primary btn--sm" onclick="openDispatchModal()">
+            + Create Work Order
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-card-container">
+        <!-- Table Toolbar -->
+        <div class="table-toolbar">
+          <div class="table-filter-group">
+            <button class="filter-chip active" data-filter="all">All Work Orders (48)</button>
+            <button class="filter-chip" data-filter="urgent"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> Urgent Triage (6)</button>
+            <button class="filter-chip" data-filter="In Progress">In Progress (18)</button>
+            <button class="filter-chip" data-filter="Assigned">Assigned (12)</button>
+            <button class="filter-chip" data-filter="Completed">Completed (12)</button>
+          </div>
+
+          <input type="search" id="woTableSearch" class="table-search-input" placeholder="Filter by ID, client, city, tech...">
+        </div>
+
+        <!-- Data Table -->
+        <div class="dense-table-wrapper">
+          <table class="dense-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Client / Account</th>
+                <th>Service Scope</th>
+                <th>Territory</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Field Technician</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="workOrdersTableBody">
+              <!-- Dynamically populated by js/admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         VIEW 4: TECHNICIAN FLEET
+         ────────────────────────────────────────────── -->
+    <section class="admin-view-panel" id="view-technicians">
+      <div class="admin-page-header">
+        <div class="admin-page-title-wrap">
+          <h2 class="admin-page-title">Technician Fleet & <span>Field Roster</span></h2>
+          <p class="admin-page-desc">Certified HVAC specialists, diagnostic ratings, active territory assignments and live workload.</p>
+        </div>
+        <div class="admin-page-actions">
+          <button class="btn btn--primary btn--sm" onclick="openAddTechModal()">
+            + Onboard Field Engineer
+          </button>
+        </div>
+      </div>
+
+      <div class="technician-fleet-grid" id="techniciansFleetGrid">
+        <!-- Dynamically rendered by js/admin.js -->
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         VIEW 5: INVENTORY & SPARE PARTS
+         ────────────────────────────────────────────── -->
+    <section class="admin-view-panel" id="view-inventory">
+      <div class="admin-page-header">
+        <div class="admin-page-title-wrap">
+          <h2 class="admin-page-title">Inventory & <span>OEM Spare Parts</span></h2>
+          <p class="admin-page-desc">Central warehouse stock control, refrigerant gas tanks, rotary compressors, and auto-reorder triggers.</p>
+        </div>
+        <div class="admin-page-actions">
+          <button class="btn btn--primary btn--sm" onclick="openRestockModal()">
+            + Create Purchase Order
+          </button>
+        </div>
+      </div>
+
+      <div class="inventory-stock-grid" id="inventoryStockGrid">
+        <!-- Rendered by js/admin.js -->
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         VIEW 6: AMC SUBSCRIPTIONS
+         ────────────────────────────────────────────── -->
+    <section class="admin-view-panel" id="view-amc-contracts">
+      <div class="admin-page-header">
+        <div class="admin-page-title-wrap">
+          <h2 class="admin-page-title">Annual Maintenance <span>(AMC) Contracts</span></h2>
+          <p class="admin-page-desc">Corporate B2B SLAs, residential Gold/Platinum packages, and renewal pipelines.</p>
+        </div>
+        <div class="admin-page-actions">
+          <button class="btn btn--primary btn--sm" onclick="window.ArcticCool?.ToastManager.show('Automated renewal notices dispatched to 14 expiring accounts', 'success')">
+            <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Broadcast Renewal Reminders
+          </button>
+        </div>
+      </div>
+
+      <div class="telemetry-grid">
+        <div class="telemetry-card">
+          <div class="telemetry-head"><span class="telemetry-label">Active AMC Contracts</span><span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></span></div>
+          <div class="telemetry-val">1,480 <span style="font-size:var(--fs-xs);color:var(--text-muted);">Accounts</span></div>
+          <div class="telemetry-footer"><span class="telemetry-trend-up">96.4%</span><span class="telemetry-subtext">Annual Retention</span></div>
+        </div>
+
+        <div class="telemetry-card telemetry-card--copper">
+          <div class="telemetry-head"><span class="telemetry-label">Contract ARR Runrate</span><span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3L8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></span></div>
+          <div class="telemetry-val">₹1.24 Cr</div>
+          <div class="telemetry-footer"><span class="telemetry-trend-up">↑ 18.2%</span><span class="telemetry-subtext">YoY Growth</span></div>
+        </div>
+
+        <div class="telemetry-card telemetry-card--green">
+          <div class="telemetry-head"><span class="telemetry-label">Upcoming Renewals (30d)</span><span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span></div>
+          <div class="telemetry-val">142</div>
+          <div class="telemetry-footer"><span class="telemetry-subtext">Projected: ₹16.8 Lakhs</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-head"><span class="telemetry-label">SLA Resolution Rate</span><span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span></div>
+          <div class="telemetry-val">99.1%</div>
+          <div class="telemetry-footer"><span class="telemetry-trend-up">2.4h Avg</span><span class="telemetry-subtext">Emergency Response</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         VIEW 7: FINANCIAL ANALYTICS
+         ────────────────────────────────────────────── -->
+    <section class="admin-view-panel" id="view-financials">
+      <div class="admin-page-header">
+        <div class="admin-page-title-wrap">
+          <h2 class="admin-page-title">Financial Performance & <span>Yield Analytics</span></h2>
+          <p class="admin-page-desc">Comprehensive ledger analytics, invoice collection cycles, and regional territory profitability.</p>
+        </div>
+        <div class="admin-page-actions">
+          <button class="btn btn--outline btn--sm" onclick="window.ArcticCool?.ToastManager.show('Generating FY25 Financial Statement PDF...', 'info')">
+            <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Download P&L Statement
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-card-container">
+        <h3 style="margin-bottom:var(--sp-4);">City Revenue Yield Comparison</h3>
+        <div class="dense-table-wrapper">
+          <table class="dense-table">
+            <thead>
+              <tr>
+                <th>Region / City Hub</th>
+                <th>Billed Work Orders</th>
+                <th>Gross Invoicing</th>
+                <th>Parts Margin</th>
+                <th>SLA Compliance</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Mumbai Metropolitan (MMR)</strong></td>
+                <td>342</td>
+                <td>₹18,40,000</td>
+                <td>34.2%</td>
+                <td>98.8%</td>
+                <td><span class="badge badge--success">High Yield</span></td>
+              </tr>
+              <tr>
+                <td><strong>Bengaluru Tech Corridor</strong></td>
+                <td>210</td>
+                <td>₹11,20,000</td>
+                <td>31.8%</td>
+                <td>97.5%</td>
+                <td><span class="badge badge--success">High Yield</span></td>
+              </tr>
+              <tr>
+                <td><strong>Delhi NCR & Gurgaon</strong></td>
+                <td>185</td>
+                <td>₹9,60,000</td>
+                <td>29.4%</td>
+                <td>95.2%</td>
+                <td><span class="badge badge--teal">Stable</span></td>
+              </tr>
+              <tr>
+                <td><strong>Pune & PCMC Area</strong></td>
+                <td>124</td>
+                <td>₹6,15,000</td>
+                <td>32.0%</td>
+                <td>98.1%</td>
+                <td><span class="badge badge--teal">Growing</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         VIEW 8: SETTINGS & AUDIT LOGS
+         ────────────────────────────────────────────── -->
+    <section class="admin-view-panel" id="view-settings">
+      <div class="admin-page-header">
+        <div class="admin-page-title-wrap">
+          <h2 class="admin-page-title">Enterprise System <span>Configuration & Audit</span></h2>
+          <p class="admin-page-desc">Automated dispatch parameters, technician permissions, and security event log.</p>
+        </div>
+        <div class="admin-page-actions">
+          <button class="btn btn--primary btn--sm" onclick="window.ArcticCool?.ToastManager.show('System settings saved successfully', 'success')">
+            Save Settings
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-card-container">
+        <h3 style="margin-bottom:var(--sp-4);">Automated Dispatch Rules</h3>
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-label">AI Proximity Routing</div>
+            <div class="setting-desc">Automatically suggest the closest certified field technician based on real-time GPS telemetry</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-label">Auto-Trigger Spare Part Reorders</div>
+            <div class="setting-desc">Generate purchase order to OEM supplier when R32 refrigerant or compressor stock drops below threshold</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-label">Emergency SMS Broadcast to Fleet</div>
+            <div class="setting-desc">Broadcast high-severity commercial HVAC breakdowns to all standby engineers simultaneously</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="admin-card-container">
+        <h3 style="margin-bottom:var(--sp-4);">Security & Audit Trail</h3>
+        <div class="dense-table-wrapper">
+          <table class="dense-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Operator</th>
+                <th>Event Type</th>
+                <th>Details</th>
+                <th>Security IP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Today, 11:42 AM</td>
+                <td>Priya Nair (Admin)</td>
+                <td>Dispatch Assigned</td>
+                <td>Assigned WO-9842 to Arjun Kumar</td>
+                <td>103.21.54.12</td>
+              </tr>
+              <tr>
+                <td>Today, 10:15 AM</td>
+                <td>System Auto-Job</td>
+                <td>Low Stock Alert</td>
+                <td>R32 Refrigerant below safety threshold (14 units)</td>
+                <td>127.0.0.1</td>
+              </tr>
+              <tr>
+                <td>Yesterday, 04:30 PM</td>
+                <td>Rahul Sharma (Lead)</td>
+                <td>AMC SLA Update</td>
+                <td>Renewed Taj Lands End Suites Contract #AMC-2025</td>
+                <td>103.21.54.88</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── MODAL 1: DISPATCH / REASSIGN JOB ── -->
+<div class="admin-modal-backdrop" id="dispatchJobModal">
+  <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="dispatchModalTitle">
+    <div class="admin-modal-header">
+      <h3 class="admin-modal-title" id="dispatchModalTitle"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Dispatch Work Order</h3>
+      <button style="background:none;border:none;color:var(--text-muted);font-size:1.4rem;cursor:pointer;" data-close-modal>✕</button>
+    </div>
+    <form id="dispatchJobForm">
+      <div class="admin-modal-body">
+        <div class="form-group">
+          <label class="form-label" for="dispOrderId">Work Order Reference</label>
+          <input type="text" id="dispOrderId" class="form-input" value="WO-9839" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="dispTechSelect">Assign Field Engineer</label>
+          <select id="dispTechSelect" class="form-select" required>
+            <option value="Arjun Kumar">Arjun Kumar (<svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.9 · Mumbai Lead · Available)</option>
+            <option value="Ravi Shankar">Ravi Shankar (<svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.8 · Installation Expert · Available)</option>
+            <option value="Deepak Verma">Deepak Verma (<svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.9 · Commercial Chillers · Standby)</option>
+            <option value="Suresh Pillai">Suresh Pillai (<svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.7 · Diagnostics & PCB · Available)</option>
+            <option value="Manoj Deshmukh">Manoj Deshmukh (<svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.8 · Gas Charging · Pune Hub)</option>
+            <option value="Amitabh Sen">Amitabh Sen (<svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.9 · Ductwork Lead · Delhi NCR)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="dispPriority">Priority Override</label>
+          <select id="dispPriority" class="form-select">
+            <option value="high"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> High / Urgent Triage (30m SLA)</option>
+            <option value="normal" selected>Normal Scheduled Visit (2h SLA)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="dispNotes">Special Instructions for Technician</label>
+          <textarea id="dispNotes" class="form-textarea" placeholder="Carry 1.5T copper piping and R32 charging kit..."></textarea>
+        </div>
+      </div>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Confirm & Send GPS Alert</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ── MODAL 2: ONBOARD TECHNICIAN ── -->
+<div class="admin-modal-backdrop" id="addTechModal">
+  <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="addTechModalTitle">
+    <div class="admin-modal-header">
+      <h3 class="admin-modal-title" id="addTechModalTitle"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V6a2 2 0 0 1 4 0v4"/><path d="M10 10v3a2 2 0 0 0 4 0v-3"/></svg> Onboard Field Engineer</h3>
+      <button style="background:none;border:none;color:var(--text-muted);font-size:1.4rem;cursor:pointer;" data-close-modal>✕</button>
+    </div>
+    <form id="addTechForm">
+      <div class="admin-modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="newTechName">Full Name *</label>
+            <input type="text" id="newTechName" class="form-input" placeholder="e.g. Rajesh Patil" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="newTechPhone">Phone Number *</label>
+            <input type="tel" id="newTechPhone" class="form-input" placeholder="+91 98200 00000" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="newTechCity">Territory Hub *</label>
+            <select id="newTechCity" class="form-select" required>
+              <option value="Mumbai">Mumbai MMR</option>
+              <option value="Bengaluru">Bengaluru</option>
+              <option value="Delhi NCR">Delhi NCR</option>
+              <option value="Pune">Pune</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Hyderabad">Hyderabad</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="newTechRole">Specialization *</label>
+            <select id="newTechRole" class="form-select" required>
+              <option value="HVAC Installation Specialist">HVAC Installation Specialist</option>
+              <option value="Inverter PCB Diagnostics">Inverter PCB Diagnostics</option>
+              <option value="Commercial Chiller Expert">Commercial Chiller Expert</option>
+              <option value="Gas Refilling & Leakage">Gas Refilling & Leakage</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Create Engineer Profile</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ── MODAL 3: INVENTORY RESTOCK ── -->
+<div class="admin-modal-backdrop" id="restockModal">
+  <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="restockModalTitle">
+    <div class="admin-modal-header">
+      <h3 class="admin-modal-title" id="restockModalTitle"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Restock Purchase Order</h3>
+      <button style="background:none;border:none;color:var(--text-muted);font-size:1.4rem;cursor:pointer;" data-close-modal>✕</button>
+    </div>
+    <form id="restockForm">
+      <div class="admin-modal-body">
+        <div class="form-group">
+          <label class="form-label" for="restockSku">Select Inventory SKU</label>
+          <select id="restockSku" class="form-select" required>
+            <option value="GAS-R32-10KG">Daikin R32 Eco Refrigerant (10kg) [Critical Low]</option>
+            <option value="COMP-DK-15T">Daikin 1.5T Inverter Rotary Compressor [Low Stock]</option>
+            <option value="MOT-BLOW-VOLT">Voltas Indoor Blower Motor [Low Stock]</option>
+            <option value="PCB-LG-DUAL-INV">LG Dual Inverter Main PCB Motherboard</option>
+            <option value="COP-PIPE-05IN">Seamless Copper Tubing 1/2" (50m Coil)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="restockQty">Order Quantity *</label>
+            <input type="number" id="restockQty" class="form-input" value="20" min="1" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="restockSupplier">OEM Supplier</label>
+            <select id="restockSupplier" class="form-select">
+              <option>Daikin India Central Distribution</option>
+              <option>Honeywell Chemicals & Refrigerants</option>
+              <option>LG Electronics Parts Division</option>
+              <option>Blue Star Genuine Spares</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Issue Purchase Order</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast-container" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

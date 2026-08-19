@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>We'll Be Back Soon — ArcticCool Maintenance</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body); min-height: 100vh;
+      background: var(--midnight); color: white;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: var(--sp-8); overflow: hidden;
+    }
+
+    /* Animated bg */
+    .maint-bg {
+      position: fixed; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse at 20% 20%, rgba(78,168,222,0.18) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(15,91,99,0.2) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(183,121,75,0.06) 0%, transparent 60%), var(--midnight);
+    }
+    .maint-grid { position: fixed; inset: 0; background-image: linear-gradient(rgba(78,168,222,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(78,168,222,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+
+    .maint-content { position: relative; z-index: 1; max-width: 600px; width: 100%; }
+
+    /* Logo */
+    .maint-logo { display: flex; align-items: center; gap: var(--sp-3); justify-content: center; margin-bottom: clamp(3rem, 8vh, 6rem); }
+
+    /* Main illustration */
+    .maint-illustration { font-size: clamp(5rem, 12vw, 9rem); margin-bottom: var(--sp-6); display: block; animation: gearSpin 4s linear infinite; filter: drop-shadow(0 0 30px rgba(78,168,222,0.3)); }
+    @keyframes gearSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .maint-title { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: var(--fw-extrabold); letter-spacing: -0.04em; margin-bottom: var(--sp-4); }
+    .maint-title span { color: var(--arctic); }
+
+    .maint-subtitle { font-size: var(--fs-md); color: rgba(255,255,255,0.88); line-height: var(--lh-relaxed); margin-bottom: var(--sp-8); max-width: 44ch; margin-left: auto; margin-right: auto; }
+
+    /* Countdown */
+    .countdown-section { margin-bottom: var(--sp-10); }
+    .countdown-label { font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: var(--sp-5); font-weight: var(--fw-bold); }
+    .countdown-grid { display: flex; gap: var(--sp-4); justify-content: center; flex-wrap: wrap; }
+    .countdown-item { background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-xl); padding: var(--sp-4) var(--sp-6); min-width: 100px; }
+    .countdown-num { font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: var(--fw-extrabold); color: var(--arctic-light); letter-spacing: -0.06em; line-height: 1; }
+    .countdown-unit { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-top: var(--sp-1); font-weight: var(--fw-semibold); }
+
+    /* Progress bar */
+    .maint-progress-wrap { background: rgba(255,255,255,0.12); border-radius: var(--radius-full); height: 6px; max-width: 400px; margin: 0 auto var(--sp-4); overflow: hidden; }
+    .maint-progress { height: 100%; background: linear-gradient(90deg, var(--arctic), var(--teal-light)); border-radius: var(--radius-full); animation: progressAnim 4s ease-in-out infinite alternate; }
+    @keyframes progressAnim { 0% { width: 35%; } 100% { width: 75%; } }
+    .maint-progress-label { font-size: var(--fs-xs); opacity: 0.75; }
+
+    /* Email form */
+    .maint-form { display: flex; gap: var(--sp-2); max-width: 380px; margin: 0 auto var(--sp-8); }
+    .maint-input { flex: 1; padding: var(--sp-3) var(--sp-4); background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.25); border-radius: var(--radius-lg); color: white; font-size: var(--fs-sm); outline: none; transition: border-color var(--t-fast); }
+    .maint-input:focus { border-color: var(--arctic-light); }
+    .maint-input::placeholder { color: rgba(255,255,255,0.7); }
+
+    /* Contact info */
+    .maint-contact { display: flex; gap: var(--sp-6); justify-content: center; flex-wrap: wrap; font-size: var(--fs-sm); color: rgba(255,255,255,0.85); }
+    .maint-contact a { color: var(--arctic); text-decoration: none; }
+    @media (max-width: 1024px) {
+      .maint-content { max-width: 540px; }
+    }
+    @media (max-width: 768px) {
+      body { padding: var(--sp-6) var(--sp-4); }
+      .maint-title { font-size: clamp(2rem, 5vw, 2.75rem); }
+      .maint-illustration { font-size: clamp(4rem, 10vw, 6rem); }
+      .maint-logo { margin-bottom: clamp(2rem, 5vh, 4rem); }
+    }
+    @media (max-width: 480px) {
+      .countdown-item { padding: var(--sp-3) var(--sp-4); min-width: 76px; }
+      .countdown-grid { gap: var(--sp-2); }
+      .maint-form { flex-direction: column; width: 100%; }
+      .maint-input { width: 100%; }
+      .maint-form .btn { width: 100%; }
+      .maint-contact { gap: var(--sp-3); flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 360px) {
+      .countdown-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); max-width: 220px; margin: 0 auto; }
+      .countdown-item { min-width: unset; padding: var(--sp-2); }
+      .countdown-num { font-size: 1.75rem; }
+      .maint-logo { font-size: 1.4rem; }
+      .maint-title { font-size: 1.65rem; }
+    }
+    @media (max-width: 320px) {
+      body { padding: var(--sp-4) var(--sp-2); }
+      .maint-illustration { font-size: 3.25rem; margin-bottom: var(--sp-3); }
+      .maint-title { font-size: 1.35rem; }
+      .maint-subtitle { font-size: 12px; margin-bottom: var(--sp-4); }
+      .countdown-grid { gap: 6px; max-width: 190px; }
+      .countdown-item { padding: 6px; }
+      .countdown-num { font-size: 1.4rem; }
+      .countdown-unit { font-size: 9px; }
+      .countdown-section { margin-bottom: var(--sp-6); }
+      .maint-contact { font-size: 11px; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+<div class="maint-bg" aria-hidden="true"></div>
+<div class="maint-grid" aria-hidden="true"></div>
+
+<div class="maint-content" role="main">
+  <!-- Logo -->
+  <div class="maint-logo">
+    <div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+    <span class="nav-logo-text" style="font-size:var(--fs-xl);">Arctic<span>Cool</span></span>
+  </div>
+
+  <!-- Illustration -->
+  <span class="maint-illustration" role="img" aria-label="Maintenance gear icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+
+  <!-- Title -->
+  <h1 class="maint-title">Upgrading to<br><span>Something Better</span></h1>
+  <p class="maint-subtitle">We're performing scheduled maintenance to bring you an even better experience. Our HVAC experts are working fast — we'll be back cool and fresh very soon.</p>
+
+  <!-- Countdown -->
+  <div class="countdown-section">
+    <div class="countdown-label">Estimated time remaining</div>
+    <div class="countdown-grid">
+      <div class="countdown-item"><div class="countdown-num" id="cdHours">02</div><div class="countdown-unit">Hours</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="cdMinutes">30</div><div class="countdown-unit">Minutes</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="cdSeconds">00</div><div class="countdown-unit">Seconds</div></div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="maint-progress-wrap">
+    <div class="maint-progress"></div>
+  </div>
+  <p class="maint-progress-label" id="progressLabel">Estimated 65% complete</p>
+
+  <!-- Email form -->
+  <div style="margin-bottom: var(--sp-4);">
+    <div style="font-size:var(--fs-sm); color:rgba(255,255,255,0.55); margin-bottom:var(--sp-4);">Get notified when we're back online</div>
+    <form class="maint-form" onsubmit="event.preventDefault(); notifyMe();" aria-label="Notify when site is back">
+      <input type="email" class="maint-input" placeholder="your@email.com" required id="maintEmail" aria-label="Email address">
+      <button type="submit" class="btn btn--primary" style="white-space:nowrap;">Notify Me</button>
+    </form>
+  </div>
+
+  <!-- Contact -->
+  <div class="maint-contact">
+    <span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:+919820012345">+91 98200 12345</a></span>
+    <span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> <a href="mailto:hello@arcticcool.in">hello@arcticcool.in</a></span>
+  </div>
+
+  <div style="margin-top: var(--sp-10); font-size: var(--fs-xs); opacity: 0.3;">© 2025 ArcticCool Pvt Ltd</div>
+</div>
+
+<div class="toast-container" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script>
+  // Countdown timer — target: 2.5 hours from now
+  const target = new Date().getTime() + (2 * 60 * 60 + 30 * 60) * 1000;
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cdHours').textContent = '00';
+      document.getElementById('cdMinutes').textContent = '00';
+      document.getElementById('cdSeconds').textContent = '00';
+      document.getElementById('progressLabel').textContent = 'Finalizing — almost there!';
+      return;
+    }
+    const h = Math.floor(diff / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('cdHours').textContent = String(h).padStart(2, '0');
+    document.getElementById('cdMinutes').textContent = String(m).padStart(2, '0');
+    document.getElementById('cdSeconds').textContent = String(s).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  function notifyMe() {
+    const email = document.getElementById('maintEmail').value;
+    if (!email) return;
+    if (window.ArcticCool?.ToastManager) {
+      window.ArcticCool.ToastManager.show(`✓ We'll email ${email} when we're live!`, 'success', 5000);
+    } else {
+      alert(`✓ We'll notify you at ${email} when the site is back!`);
+    }
+    document.getElementById('maintEmail').value = '';
+  }
+</script>
+</body>
+</html>

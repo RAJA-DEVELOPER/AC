@@ -1,0 +1,190 @@
+/* ========================================
+   ArcticCool HVAC — Animations
+   ======================================== */
+
+/* ── Keyframes ── */
+@keyframes fadeIn     { from { opacity:0 } to { opacity:1 } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(24px) } to { opacity:1; transform:translateY(0) } }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-24px) } to { opacity:1; transform:translateY(0) } }
+@keyframes fadeInLeft { from { opacity:0; transform:translateX(-24px) } to { opacity:1; transform:translateX(0) } }
+@keyframes fadeInRight{ from { opacity:0; transform:translateX(24px) } to { opacity:1; transform:translateX(0) } }
+@keyframes scaleIn    { from { opacity:0; transform:scale(0.9) } to { opacity:1; transform:scale(1) } }
+@keyframes slideInUp  { from { transform:translateY(100%) } to { transform:translateY(0) } }
+
+/* Floating elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(1deg); }
+  66%       { transform: translateY(-6px) rotate(-1deg); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-16px); }
+}
+
+/* Shimmer loading */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer {
+  background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--border-color) 50%, var(--bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* Pulse ring */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(78,168,222,0.4); }
+  70%  { box-shadow: 0 0 0 20px rgba(78,168,222,0); }
+  100% { box-shadow: 0 0 0 0 rgba(78,168,222,0); }
+}
+.pulse { animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
+
+/* Rotate */
+@keyframes rotate { to { transform: rotate(360deg); } }
+
+/* Gradient shift */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* Counter bounce */
+@keyframes counter-bounce {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Snow particles */
+@keyframes snow {
+  0%   { transform: translateY(-100px) translateX(0) rotate(0deg); opacity:1; }
+  100% { transform: translateY(100vh) translateX(60px) rotate(360deg); opacity:0; }
+}
+
+/* Typing cursor */
+@keyframes blink { 0%,100% { opacity:1 } 50% { opacity:0 } }
+.cursor::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+  color: var(--arctic);
+}
+
+/* ── Particle Snow ── */
+.particle-bg {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: rgba(78,168,222,0.3);
+  border-radius: 50%;
+  animation: snow linear infinite;
+}
+
+/* ── Counter Animation ── */
+.count-up { display: inline-block; }
+.count-up.animated { animation: counter-bounce 0.3s ease; }
+
+/* ── Progress Bar ── */
+.progress-bar-wrap {
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  height: 6px; overflow: hidden;
+  margin-top: var(--sp-2);
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--arctic), var(--teal-light));
+  border-radius: var(--radius-full);
+  width: 0%;
+  transition: width 1.2s var(--ease-out);
+}
+
+/* ── Gradient Background ── */
+.gradient-bg {
+  background: linear-gradient(-45deg, var(--midnight), var(--midnight-700), #0a3a40, var(--midnight-600));
+  background-size: 400% 400%;
+  animation: gradient-shift 12s ease infinite;
+}
+
+/* ── Glowing CTA ── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(78,168,222,0.3), 0 4px 16px rgba(78,168,222,0.2); }
+  50%       { box-shadow: 0 0 40px rgba(78,168,222,0.5), 0 8px 24px rgba(78,168,222,0.35); }
+}
+.glow { animation: glow-pulse 3s ease-in-out infinite; }
+
+/* ── Reveal Presets ── */
+.reveal-up    { opacity:0; transform:translateY(40px); }
+.reveal-down  { opacity:0; transform:translateY(-40px); }
+.reveal-left  { opacity:0; transform:translateX(-40px); }
+.reveal-right { opacity:0; transform:translateX(40px); }
+.reveal-zoom  { opacity:0; transform:scale(0.85); }
+.in-view {
+  opacity:1 !important;
+  transform:none !important;
+  transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+}
+
+/* ── Stagger animations ── */
+.stagger > * { opacity:0; transform:translateY(30px); }
+.stagger.in-view > * {
+  opacity:1; transform:none;
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.stagger.in-view > *:nth-child(1)  { transition-delay: 0ms; }
+.stagger.in-view > *:nth-child(2)  { transition-delay: 100ms; }
+.stagger.in-view > *:nth-child(3)  { transition-delay: 200ms; }
+.stagger.in-view > *:nth-child(4)  { transition-delay: 300ms; }
+.stagger.in-view > *:nth-child(5)  { transition-delay: 400ms; }
+.stagger.in-view > *:nth-child(6)  { transition-delay: 500ms; }
+
+/* ── Map Pin bounce ── */
+@keyframes pin-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40%  { transform: translateY(-20px); }
+  60%  { transform: translateY(-10px); }
+}
+.pin-bounce { animation: pin-bounce 2s infinite; }
+
+/* ── Hover Lift ── */
+.hover-lift { transition: transform var(--t-normal) var(--ease-out), box-shadow var(--t-normal); }
+.hover-lift:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
+
+/* ── Tilt effect (applied via JS) ── */
+.tilt { transform-style: preserve-3d; }
+.tilt-inner { transform: translateZ(20px); }
+
+/* ── Loading dots ── */
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity:1; }
+  50%       { transform: scale(0.5); opacity:0.4; }
+}
+.loading-dots { display: flex; gap: 6px; align-items: center; }
+.loading-dots span {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--arctic);
+  animation: dot-pulse 1.4s ease-in-out infinite;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* ── Notification badge ── */
+@keyframes notification-pop {
+  0%   { transform: scale(0); }
+  80%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.notif-badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 18px; height: 18px;
+  background: #dc2626; color: white;
+  border-radius: 50%; font-size: 10px;
+  font-weight: var(--fw-bold);
+  display: flex; align-items: center; justify-content: center;
+  animation: notification-pop 0.3s var(--ease-spring);
+  border: 2px solid var(--nav-bg);
+}

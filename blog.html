@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ArcticCool Blog — Expert HVAC tips, buying guides, maintenance advice, energy saving tips and industry news.">
+  <title>Blog — ArcticCool HVAC Knowledge Hub</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    .page-hero { background: linear-gradient(135deg, rgba(23,33,43,0.82) 0%, rgba(23,33,43,0.65) 60%, rgba(15,116,143,0.45) 100%), url('https://plus.unsplash.com/premium_photo-1664910507863-1787ab023a71?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDl8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D') center/cover no-repeat; padding: calc(72px + 6rem) 0 6rem; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(78,168,222,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(78,168,222,0.05) 1px, transparent 1px); background-size: 50px 50px; }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-hero-title { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: var(--fw-extrabold); color: white; letter-spacing: -0.03em; margin-bottom: var(--sp-4); }
+    .page-hero-title span { color: var(--arctic); }
+    /* Blog Layout */
+    .blog-layout {
+      display: grid; grid-template-columns: 1fr 340px;
+      gap: var(--sp-10); align-items: start;
+    }
+    /* Category Filter */
+    .category-filter {
+      display: flex; flex-wrap: wrap; gap: var(--sp-2);
+      margin-bottom: var(--sp-8);
+    }
+    .cat-btn {
+      padding: var(--sp-2) var(--sp-5);
+      border-radius: var(--radius-full);
+      font-size: var(--fs-sm); font-weight: var(--fw-semibold);
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card); color: var(--text-muted);
+      cursor: pointer; transition: all var(--t-fast);
+    }
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--arctic); color: white; border-color: var(--arctic);
+    }
+    /* Blog Grid (Masonry feel) */
+    .blog-main-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-6);
+    }
+    .blog-card-featured {
+      grid-column: 1 / -1;
+    }
+    .blog-card-featured .blog-card-img { aspect-ratio: 21/9; }
+    /* Sidebar */
+    .blog-sidebar { position: sticky; top: calc(72px + 2rem); align-self: stretch; display: flex; flex-direction: column; }
+    .sidebar-widget {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-2xl); padding: var(--sp-6);
+      margin-bottom: var(--sp-5);
+    }
+    .sidebar-widget:last-child { margin-bottom: 0; }
+    .sidebar-title {
+      font-family: var(--font-heading); font-weight: var(--fw-bold);
+      font-size: var(--fs-md); margin-bottom: var(--sp-5);
+      padding-bottom: var(--sp-3);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .sidebar-post {
+      display: flex; gap: var(--sp-3);
+      margin-bottom: var(--sp-4); text-decoration: none;
+    }
+    .sidebar-post:last-child { margin-bottom: 0; }
+    .sidebar-post-img { width: 64px; height: 64px; border-radius: var(--radius-lg); object-fit: cover; flex-shrink: 0; }
+    .sidebar-post-title { font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text-primary); line-height: 1.35; margin-bottom: 4px; }
+    .sidebar-post-title:hover { color: var(--arctic); }
+    .sidebar-post-meta { font-size: var(--fs-xs); color: var(--text-muted); }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+    .tag {
+      padding: 4px 14px; border-radius: var(--radius-full);
+      background: var(--bg-tertiary); border: 1px solid var(--border-color);
+      font-size: var(--fs-xs); font-weight: var(--fw-medium); color: var(--text-muted);
+      cursor: pointer; transition: all var(--t-fast);
+    }
+    .tag:hover { background: rgba(78,168,222,0.1); color: var(--arctic); border-color: rgba(78,168,222,0.3); }
+    .sidebar-links { display: flex; flex-direction: column; }
+    .sidebar-link {
+      display: flex; align-items: center; gap: var(--sp-2);
+      padding: var(--sp-2) 0; font-size: var(--fs-sm);
+      color: var(--text-secondary); text-decoration: none;
+      border-bottom: 1px solid var(--border-light);
+      transition: all var(--t-fast);
+    }
+    .sidebar-link:last-child { border-bottom: none; }
+    .sidebar-link:hover { color: var(--arctic); transform: translateX(4px); }
+    .sidebar-link-arrow { color: var(--arctic); font-weight: var(--fw-bold); }
+    /* Newsletter section */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--midnight) 0%, var(--teal) 100%);
+      border-radius: var(--radius-2xl); padding: clamp(3rem, 5vw, 5rem);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .newsletter-form {
+      display: flex; gap: var(--sp-3); max-width: 480px; margin: 0 auto;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .newsletter-input {
+      flex: 1; min-width: 200px; padding: 0.85rem 1.25rem;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-lg); color: white; font-size: var(--fs-base);
+    }
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.5); }
+    .newsletter-input:focus { outline: none; border-color: white; }
+    @media (max-width: 1024px) {
+      .blog-layout { grid-template-columns: 1fr; gap: var(--sp-8); }
+      .blog-sidebar { position: static; }
+    }
+    @media (max-width: 768px) {
+      .blog-main-grid { grid-template-columns: 1fr; }
+      .blog-card-featured { grid-column: 1; }
+      .page-hero { padding: calc(72px + 4rem) 0 4rem; }
+    }
+    @media (max-width: 480px) {
+      .blog-sidebar { padding: 0; }
+      .newsletter-section { padding: var(--sp-8) var(--sp-4); }
+      .newsletter-input { flex-basis: 100%; min-width: 0; }
+      .category-filter { gap: var(--sp-2); }
+      .cat-btn { padding: 0.45rem 0.85rem; font-size: var(--fs-xs); }
+    }
+    @media (max-width: 360px) {
+      .blog-card-meta { flex-wrap: wrap; }
+      .sidebar-widget { padding: var(--sp-4); }
+      .page-hero-title { font-size: 1.75rem; }
+    }
+    @media (max-width: 320px) {
+      .category-filter { gap: 4px; }
+      .cat-btn { padding: 4px 8px; font-size: 11px; }
+      .sidebar-widget { padding: var(--sp-3); }
+      .sidebar-title { font-size: var(--fs-sm); margin-bottom: var(--sp-3); }
+      .sidebar-post-img { width: 48px; height: 48px; }
+      .sidebar-post-title { font-size: 12px; }
+      .tag { padding: 2px 8px; font-size: 10px; }
+      .page-hero-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-logo"><div class="loader-ring"></div><div class="loader-text">Arctic<span>Cool</span></div></div></div>
+<header class="navbar">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div><span class="nav-logo-text">Arctic<span>Cool</span></span></a>
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="home2.html" class="nav-link">Home 2</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle theme"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button class="rtl-toggle" aria-label="Toggle RTL">RTL</button>
+        <div class="profile-wrap">
+          <button class="profile-toggle" aria-label="Account menu" aria-expanded="false" title="Account"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+          <div class="profile-menu">
+            <a href="login.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Login / Signup</a>
+            <a href="dashboard.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span> User Dashboard</a>
+            <a href="admin.html"><span class="icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> Admin Dashboard</a>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn--primary btn--sm">Book Service</a>
+        <button class="nav-burger" aria-expanded="false" aria-label="Toggle menu"><span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span></button>
+      </div>
+    </nav>
+  </div>
+  <nav class="nav-mobile">
+    <a href="index.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
+    <a href="home2.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg> Home 2</a>
+    <a href="about.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
+    <a href="services.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Services</a>
+    <a href="blog.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Blog</a>
+    <a href="contact.html" class="nav-mobile-link"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Contact</a>
+    <div style="padding: var(--sp-6) var(--sp-2); display:flex; gap: var(--sp-3);"><a href="contact.html" class="btn btn--primary btn--full">Book Service</a></div>
+  </nav>
+</header>
+
+<main>
+
+<!-- SECTION 1 — PAGE HERO -->
+<section class="page-hero" aria-label="Blog hero">
+  <div class="container">
+    <div class="page-hero-content reveal-up">
+      <h1 class="page-hero-title">HVAC <span>Knowledge Hub</span></h1>
+      <p style="color:rgba(255,255,255,0.65); font-size: var(--fs-md); max-width: 55ch;">Expert tips, buying guides, maintenance advice and industry insights to help you make the best cooling decisions.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2 — CATEGORY FILTER -->
+<section class="section" aria-label="Blog posts">
+  <div class="container">
+    <!-- Filter -->
+    <div class="category-filter reveal-up" role="group" aria-label="Filter by category">
+      <button class="cat-btn active" data-cat="all">All Posts</button>
+      <button class="cat-btn" data-cat="guide">Buying Guide</button>
+      <button class="cat-btn" data-cat="maintenance">Maintenance</button>
+      <button class="cat-btn" data-cat="energy">Energy Tips</button>
+      <button class="cat-btn" data-cat="commercial">Commercial</button>
+      <button class="cat-btn" data-cat="technology">Technology</button>
+      <button class="cat-btn" data-cat="health">Health</button>
+    </div>
+    <div class="blog-layout">
+      <!-- Main Content -->
+      <div>
+        <div class="blog-main-grid stagger" id="blogGrid">
+          <!-- Featured -->
+          <div class="blog-card blog-card-featured" data-cat="maintenance" data-post="1">
+            <div style="overflow:hidden; border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;">
+              <img src="https://plus.unsplash.com/premium_photo-1682145344450-34d8323dec84?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" alt="5 Warning Signs article" class="blog-card-img" style="aspect-ratio:21/9;" loading="lazy">
+            </div>
+            <div class="blog-card-body" style="border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);">
+              <div class="blog-card-meta">
+                <span class="badge badge--arctic">Maintenance</span>
+                <span>Aug 15, 2025</span>
+                <span>5 min read</span>
+              </div>
+              <h2 class="blog-card-title" style="font-size: var(--fs-2xl);"><a href="blog-details.html?post=1">5 Warning Signs Your AC Needs Immediate Servicing This Summer</a></h2>
+              <p class="card-text" style="margin-top: var(--sp-3);">Don't wait for a complete breakdown. These early indicators can save you thousands in repair costs and keep your family comfortable through peak summer heat...</p>
+              <a href="blog-details.html?post=1" class="btn btn--outline btn--sm" style="margin-top: var(--sp-5);">Read Article →</a>
+            </div>
+          </div>
+          <!-- Post 2 -->
+          <div class="blog-card" data-cat="guide" data-post="2">
+            <div style="overflow:hidden; border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;">
+              <img src="https://plus.unsplash.com/premium_photo-1682126052466-d60d479d5188?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODR8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" alt="Inverter vs Non-Inverter" class="blog-card-img" loading="lazy">
+            </div>
+            <div class="blog-card-body" style="border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);">
+              <div class="blog-card-meta"><span class="badge badge--teal">Buying Guide</span><span>Aug 10</span></div>
+              <h3 class="blog-card-title"><a href="blog-details.html?post=2">Inverter vs Non-Inverter AC: The Complete Comparison Guide for 2025</a></h3>
+              <p class="card-text" style="margin-top: var(--sp-2);">Breaking down the real cost savings, performance differences and when each type makes sense.</p>
+              <a href="blog-details.html?post=2" class="btn btn--outline btn--sm" style="margin-top: var(--sp-4);">Read →</a>
+            </div>
+          </div>
+          <!-- Post 3 -->
+          <div class="blog-card" data-cat="energy" data-post="3">
+            <div style="overflow:hidden; border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;">
+              <img src="https://plus.unsplash.com/premium_photo-1661715583676-165c827b1cff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" alt="Energy saving tips" class="blog-card-img" loading="lazy">
+            </div>
+            <div class="blog-card-body" style="border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);">
+              <div class="blog-card-meta"><span class="badge badge--copper">Energy Tips</span><span>Jul 28</span></div>
+              <h3 class="blog-card-title"><a href="blog-details.html?post=3">10 Proven Ways to Cut Your AC Electricity Bill Without Sacrificing Comfort</a></h3>
+              <p class="card-text" style="margin-top: var(--sp-2);">Smart thermostat settings, maintenance habits, and positioning tips that actually work.</p>
+              <a href="blog-details.html?post=3" class="btn btn--outline btn--sm" style="margin-top: var(--sp-4);">Read →</a>
+            </div>
+          </div>
+          <!-- Post 4 -->
+          <div class="blog-card" data-cat="commercial" data-post="4">
+            <div style="overflow:hidden; border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;">
+              <img src="https://images.unsplash.com/photo-1693741535032-4c87dd35b191?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzh8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" alt="Commercial HVAC" class="blog-card-img" loading="lazy">
+            </div>
+            <div class="blog-card-body" style="border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);">
+              <div class="blog-card-meta"><span class="badge badge--arctic">Commercial</span><span>Jul 20</span></div>
+              <h3 class="blog-card-title"><a href="blog-details.html?post=4">Choosing the Right HVAC System for Commercial Spaces: A Manager's Guide</a></h3>
+              <p class="card-text" style="margin-top: var(--sp-2);">From small offices to sprawling malls — HVAC selection for commercial environments.</p>
+              <a href="blog-details.html?post=4" class="btn btn--outline btn--sm" style="margin-top: var(--sp-4);">Read →</a>
+            </div>
+          </div>
+          <!-- Post 5 -->
+          <div class="blog-card" data-cat="health" data-post="5">
+            <div style="overflow:hidden; border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;">
+              <img src="https://plus.unsplash.com/premium_photo-1661963078581-a4f091315692?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" alt="Air quality" class="blog-card-img" loading="lazy">
+            </div>
+            <div class="blog-card-body" style="border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);">
+              <div class="blog-card-meta"><span class="badge badge--teal">Health</span><span>Jul 12</span></div>
+              <h3 class="blog-card-title"><a href="blog-details.html?post=5">How Your AC Affects Indoor Air Quality: What You Must Know</a></h3>
+              <p class="card-text" style="margin-top: var(--sp-2);">Filters, coils and drainage — the hidden factors affecting the air you breathe at home.</p>
+              <a href="blog-details.html?post=5" class="btn btn--outline btn--sm" style="margin-top: var(--sp-4);">Read →</a>
+            </div>
+          </div>
+          <!-- Post 6 -->
+          <div class="blog-card" data-cat="technology" data-post="6">
+            <div style="overflow:hidden; border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;">
+              <img src="https://images.unsplash.com/photo-1667983453881-4992fe86ab1b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTl8fEFDJTIwc2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" alt="Smart AC" class="blog-card-img" loading="lazy">
+            </div>
+            <div class="blog-card-body" style="border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);">
+              <div class="blog-card-meta"><span class="badge badge--copper">Technology</span><span>Jul 5</span></div>
+              <h3 class="blog-card-title"><a href="blog-details.html?post=6">Smart ACs in 2025: Wi-Fi, AI and IoT Features Worth Paying For</a></h3>
+              <p class="card-text" style="margin-top: var(--sp-2);">A practical buyer's look at which connected features deliver real value vs. marketing hype.</p>
+              <a href="blog-details.html?post=6" class="btn btn--outline btn--sm" style="margin-top: var(--sp-4);">Read →</a>
+            </div>
+          </div>
+          <!-- Post 7 -->
+          <div class="blog-card" data-cat="maintenance" data-post="7">
+            <div style="overflow:hidden; border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;">
+              <img src="https://plus.unsplash.com/premium_photo-1663127242379-8b564954bb08?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA0fHxBQyUyMHNlcnZpY2V8ZW58MHx8MHx8fDA%3D" alt="AC maintenance checklist" class="blog-card-img" loading="lazy">
+            </div>
+            <div class="blog-card-body" style="border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);">
+              <div class="blog-card-meta"><span class="badge badge--arctic">Maintenance</span><span>Jun 28</span></div>
+              <h3 class="blog-card-title"><a href="blog-details.html?post=7">The Complete Seasonal AC Maintenance Checklist Every Homeowner Needs</a></h3>
+              <p class="card-text" style="margin-top: var(--sp-2);">Filter changes, coil cleaning and refrigerant checks — a simple routine that prevents expensive breakdowns.</p>
+              <a href="blog-details.html?post=7" class="btn btn--outline btn--sm" style="margin-top: var(--sp-4);">Read →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sidebar -->
+      <aside class="blog-sidebar reveal-right">
+        <!-- Search -->
+        <div class="sidebar-widget">
+          <div class="sidebar-title"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Search Articles</div>
+          <div class="dash-table-search" style="width:100%; border-radius: var(--radius-lg);">
+            <span><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+            <input type="search" placeholder="Search HVAC topics..." aria-label="Search blog">
+          </div>
+        </div>
+        <!-- Popular Posts -->
+        <div class="sidebar-widget">
+          <div class="sidebar-title"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> Trending Posts</div>
+          <a href="blog-details.html?post=2" class="sidebar-post">
+            <div>
+              <div class="sidebar-post-title">Inverter vs Non-Inverter AC Guide</div>
+              <div class="sidebar-post-meta"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Aug 10 · 7 min read</div>
+            </div>
+          </a>
+          <a href="blog-details.html?post=3" class="sidebar-post">
+            <div>
+              <div class="sidebar-post-title">10 Ways to Cut Your AC Bill</div>
+              <div class="sidebar-post-meta"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Jul 28 · 6 min read</div>
+            </div>
+          </a>
+          <a href="blog-details.html?post=5" class="sidebar-post">
+            <div>
+              <div class="sidebar-post-title">AC & Indoor Air Quality</div>
+              <div class="sidebar-post-meta"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Jul 12 · 8 min read</div>
+            </div>
+          </a>
+        </div>
+        <!-- Newsletter -->
+        <div class="sidebar-widget" style="background: linear-gradient(135deg, var(--arctic), var(--teal)); border: none;">
+          <div class="sidebar-title" style="color:white; border-color:rgba(255,255,255,0.2);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Newsletter</div>
+          <p style="font-size: var(--fs-sm); color: rgba(255,255,255,0.8); margin-bottom: var(--sp-4);">Get weekly HVAC tips and exclusive offers.</p>
+          <form style="display:flex; flex-direction: column; gap: var(--sp-3);" onsubmit="event.preventDefault(); window.ArcticCool?.ToastManager.show('Subscribed!','success');">
+            <input type="email" placeholder="Your email address" class="newsletter-input" required>
+            <button class="btn btn--sm" style="background:white;color:var(--teal);">Subscribe →</button>
+          </form>
+        </div>
+        <!-- Tags -->
+        <div class="sidebar-widget">
+          <div class="sidebar-title"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Tags</div>
+          <div class="tag-cloud">
+            <span class="tag">Split AC</span>
+            <span class="tag">Inverter</span>
+            <span class="tag">AMC</span>
+            <span class="tag">Energy Saving</span>
+            <span class="tag">Gas Refill</span>
+            <span class="tag">Daikin</span>
+            <span class="tag">LG</span>
+            <span class="tag">Samsung</span>
+            <span class="tag">Installation</span>
+            <span class="tag">Maintenance</span>
+            <span class="tag">Filter Cleaning</span>
+            <span class="tag">Commercial</span>
+          </div>
+        </div>
+        <!-- Popular Services -->
+        <div class="sidebar-widget">
+          <div class="sidebar-title"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Popular Services</div>
+          <div class="sidebar-links">
+            <a href="services.html#installation" class="sidebar-link"><span class="sidebar-link-arrow">→</span> AC Installation</a>
+            <a href="services.html#repair" class="sidebar-link"><span class="sidebar-link-arrow">→</span> Repair & Service</a>
+            <a href="services.html#amc" class="sidebar-link"><span class="sidebar-link-arrow">→</span> AMC Plans</a>
+            <a href="services.html" class="sidebar-link"><span class="sidebar-link-arrow">→</span> Deep Cleaning</a>
+            <a href="services.html" class="sidebar-link"><span class="sidebar-link-arrow">→</span> Gas Charging</a>
+          </div>
+        </div>
+        <!-- Quick Help -->
+        <div class="sidebar-widget" style="background: linear-gradient(135deg, var(--midnight) 0%, var(--midnight-700) 100%); border: 1px solid rgba(78,168,222,0.25);">
+          <div class="sidebar-title" style="color:white; border-color: rgba(255,255,255,0.15);"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Need Help?</div>
+          <p style="font-size: var(--fs-sm); color: rgba(255,255,255,0.8); margin-bottom: var(--sp-4);">Book a service or talk to our HVAC experts today.</p>
+          <a href="contact.html" class="btn btn--primary btn--full">Book a Service</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 6 — NEWSLETTER CTA -->
+<section class="section" aria-labelledby="newsletter-heading">
+  <div class="container">
+    <div class="newsletter-section reveal-up">
+      <span class="section-tag" style="margin: 0 auto var(--sp-5); display:inline-flex; background:rgba(78,168,222,0.2); color:#FFFFFF;">✉ Weekly Newsletter</span>
+      <h2 id="newsletter-heading" style="color:white; margin-bottom: var(--sp-4); font-size: clamp(1.8rem, 4vw, 3rem);">Stay Ahead of the <span style="color:var(--arctic);">Heat</span></h2>
+      <p style="color:rgba(255,255,255,0.7); max-width:50ch; margin: 0 auto var(--sp-8); font-size:var(--fs-md);">Expert HVAC insights, exclusive deals and maintenance reminders — delivered every week.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); window.ArcticCool?.ToastManager.show('Successfully subscribed to ArcticCool newsletter!','success');">
+        <input type="email" class="newsletter-input" placeholder="Enter your email address" required aria-label="Email for newsletter">
+        <button class="btn btn--primary btn--lg" style="background:white; color:var(--teal);">Subscribe Free</button>
+      </form>
+      <p style="color:rgba(255,255,255,0.45); font-size:var(--fs-xs); margin-top: var(--sp-4);">No spam. Unsubscribe anytime. Join 12,000+ subscribers.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo nav-logo" style="margin-bottom: var(--sp-4);">
+          <div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+          <span class="nav-logo-text">Arctic<span>Cool</span></span>
+        </a>
+        <p class="footer-desc">India's most trusted premium HVAC brand. Delivering world-class air conditioning solutions for homes and businesses since 2009.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-link" aria-label="YouTube"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
+        </div>
+      </div>
+      <!-- Services -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">AC Installation</a></li>
+          <li><a href="services.html">Repair & Service</a></li>
+          <li><a href="services.html">Deep Cleaning</a></li>
+          <li><a href="services.html">Gas Charging</a></li>
+          <li><a href="services.html">AMC Plans</a></li>
+          <li><a href="services.html">Commercial HVAC</a></li>
+        </ul>
+      </div>
+      <!-- Company & Portals -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="home2.html">Home 2</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog & Insights</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="dashboard.html">Customer Portal</a></li>
+          <li><a href="admin.html">Ops Command Center</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span>42, HVAC Tower, Andheri West, Mumbai 400053</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>+91 98200 12345</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <span>hello@arcticcool.in</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span>Mon–Sat 8am–8pm | Sun 9am–5pm</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ArcticCool Pvt Ltd. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">↑</button>
+<div class="toast-container" aria-live="polite"></div>
+<script src="js/core.js"></script>
+<script src="js/animations.js"></script>
+<script>
+  // Category filter
+  const blogCards = document.querySelectorAll('#blogGrid .blog-card');
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      blogCards.forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
