@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <style>
-    .page-hero { background: linear-gradient(135deg, rgba(23,33,43,0.82) 0%, rgba(23,33,43,0.65) 60%, rgba(15,116,143,0.45) 100%), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1600&q=80') center/cover no-repeat; padding: calc(72px + 6rem) 0 6rem; position: relative; overflow: hidden; }
+    .page-hero { background: linear-gradient(135deg, rgba(23,33,43,0.82) 0%, rgba(23,33,43,0.65) 60%, rgba(15,116,143,0.45) 100%), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1600&q=80') center/cover no-repeat; padding: calc(72px + var(--hero-padding-y)) 0 var(--hero-padding-y); position: relative; overflow: hidden; min-height: var(--hero-min-height); display: flex; align-items: center; }
+    .page-hero .container { width: 100%; }
     .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(78,168,222,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(78,168,222,0.05) 1px, transparent 1px); background-size: 50px 50px; }
     .page-hero-content { position: relative; z-index: 1; }
     .page-hero-title { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: var(--fw-extrabold); color: white; letter-spacing: -0.03em; margin-bottom: var(--sp-4); }
@@ -117,7 +118,7 @@
     @media (max-width: 768px) {
       .warranty-grid { grid-template-columns: 1fr; }
       .featured-service-grid { grid-template-columns: repeat(2, 1fr); }
-      .page-hero { padding: calc(72px + 4rem) 0 4rem; }
+      .page-hero { padding: calc(72px + var(--hero-padding-y-tablet)) 0 var(--hero-padding-y-tablet); min-height: var(--hero-min-height-tablet); }
     }
     @media (max-width: 480px) {
       .service-detail { gap: var(--sp-6); }
@@ -129,11 +130,13 @@
       .comparison-table { overflow-x: auto; }
       .featured-service-grid { grid-template-columns: 1fr; gap: var(--sp-4); }
       .featured-service-body { padding: var(--sp-5); }
+      .page-hero { padding: calc(60px + var(--hero-padding-y-mobile)) 0 var(--hero-padding-y-mobile); min-height: var(--hero-min-height-mobile); }
     }
     @media (max-width: 360px) {
       .service-detail { gap: var(--sp-5); }
       .warranty-years { font-size: 2.75rem; }
       .warranty-card { padding: var(--sp-5) var(--sp-3); }
+      .page-hero { padding: calc(56px + 2rem) 0 2rem; min-height: var(--hero-min-height-sm); }
       .page-hero-title { font-size: 1.75rem; }
     }
     @media (max-width: 320px) {
@@ -147,6 +150,7 @@
       .featured-service-icon { width: 40px; height: 40px; font-size: 1.15rem; margin-bottom: var(--sp-3); }
       .featured-service-title { font-size: var(--fs-sm); }
       .featured-service-desc { font-size: 12px; }
+      .page-hero { padding: calc(54px + 1.5rem) 0 1.5rem; min-height: var(--hero-min-height-xs); }
     }
   </style>
 </head>
@@ -204,7 +208,6 @@
       <div style="display:flex; gap: var(--sp-4); margin-top: var(--sp-8); flex-wrap:wrap;">
         <a href="#installation" class="btn btn--primary btn--lg">Installation</a>
         <a href="#repair" class="btn btn--outline-white">Repair & Service</a>
-        <a href="#amc" class="btn btn--outline-white">AMC Plans</a>
       </div>
     </div>
   </div>

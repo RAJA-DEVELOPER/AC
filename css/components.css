@@ -814,9 +814,9 @@
 }
 .slide-content {
   position: relative; z-index: 2;
-  min-height: 90vh;
+  min-height: var(--hero-min-height);
   display: flex; align-items: center;
-  padding: var(--sp-32) var(--container-pad);
+  padding: calc(72px + var(--hero-padding-y)) var(--container-pad) var(--hero-padding-y);
   max-width: var(--container-xl); margin: 0 auto;
 }
 .slide-inner { max-width: 620px; }
@@ -889,6 +889,38 @@
   transition: all var(--t-fast);
 }
 .slider-arrow:hover { background: var(--arctic); border-color: var(--arctic); }
+
+/* ──────────────────────────────────────────
+   UNIFIED HERO HEIGHT SYSTEM
+   Ensures .page-hero, .article-hero, .video-hero and .hero-slider
+   share an identical vertical rhythm across all pages.
+   ────────────────────────────────────────── */
+.page-hero,
+.article-hero,
+.video-hero {
+  min-height: var(--hero-min-height);
+  display: flex;
+  align-items: center;
+  padding-top: calc(72px + var(--hero-padding-y));
+  padding-bottom: var(--hero-padding-y);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero .container,
+.article-hero .container,
+.video-hero .video-content {
+  width: 100%;
+}
+.hero-slider {
+  min-height: var(--hero-min-height);
+}
+
+/* Fallback unified .page-hero base — inline per-page styles will
+   provide background images; this ensures height consistency even
+   if a page omits min-height/display */
+.page-hero {
+  /* background is defined per-page; height tokens are unified here */
+}
 
 /* ──────────────────────────────────────────
    AMC PLAN CARDS
@@ -1256,8 +1288,16 @@ svg.ac-ico { display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
   .footer-grid { grid-template-columns: 1fr; gap: var(--sp-8); }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--sp-4); }
   
-  .hero-slider { min-height: auto; }
-  .slide-content { min-height: auto; padding: calc(72px + 2.5rem) var(--container-pad) calc(var(--sp-12) + 130px); text-align: left; }
+  /* Unified hero — tablet */
+  .page-hero, .article-hero, .video-hero,
+  .hero-slider { min-height: var(--hero-min-height-tablet); }
+  .page-hero, .article-hero, .video-hero {
+    padding-top: calc(72px + var(--hero-padding-y-tablet));
+    padding-bottom: var(--hero-padding-y-tablet);
+  }
+
+  .hero-slider { min-height: var(--hero-min-height-tablet); }
+  .slide-content { min-height: var(--hero-min-height-tablet); padding: calc(72px + var(--hero-padding-y-tablet)) var(--container-pad) calc(var(--hero-padding-y-tablet) + 130px); text-align: left; }
   [dir="rtl"] .slide-content { text-align: right; }
   .slide-inner { max-width: 100%; }
   .slide-inner .slide-tag { margin-left: 0; margin-right: 0; }
@@ -1297,7 +1337,15 @@ svg.ac-ico { display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
   .footer-grid { gap: var(--sp-7); }
   .footer-bottom-links { flex-wrap: wrap; gap: var(--sp-3); }
 
-  .slide-content { padding: calc(60px + 2rem) 1.25rem calc(var(--sp-8) + 120px); }
+  /* Unified hero — 480 */
+  .page-hero, .article-hero, .video-hero,
+  .hero-slider { min-height: var(--hero-min-height-mobile); }
+  .page-hero, .article-hero, .video-hero {
+    padding-top: calc(60px + var(--hero-padding-y-mobile));
+    padding-bottom: var(--hero-padding-y-mobile);
+  }
+
+  .slide-content { min-height: var(--hero-min-height-mobile); padding: calc(60px + var(--hero-padding-y-mobile)) 1.25rem calc(var(--hero-padding-y-mobile) + 120px); }
   .hero-stats-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
   .slide-tag { font-size: 11px; padding: 3px 10px; margin-bottom: var(--sp-3); }
   .slide-title { font-size: clamp(1.65rem, 6vw, 2.2rem); margin-bottom: var(--sp-3); }
@@ -1361,7 +1409,15 @@ svg.ac-ico { display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
   .theme-toggle, .rtl-toggle, .profile-toggle { width: 32px; height: 32px; font-size: 0.8rem; }
   .nav-burger { width: 32px; height: 32px; }
 
-  .slide-content { padding: calc(56px + 1.5rem) 1rem calc(var(--sp-6) + 110px); }
+  /* Unified hero — 360 */
+  .page-hero, .article-hero, .video-hero,
+  .hero-slider { min-height: var(--hero-min-height-sm); }
+  .page-hero, .article-hero, .video-hero {
+    padding-top: calc(56px + 2rem);
+    padding-bottom: 2rem;
+  }
+
+  .slide-content { min-height: var(--hero-min-height-sm); padding: calc(56px + 2rem) 1rem calc(2rem + 110px); }
   .hero-stats-inner { padding-left: 1rem; padding-right: 1rem; }
   .slide-title { font-size: 1.5rem; line-height: 1.15; }
   .slide-desc { font-size: var(--fs-xs); margin-bottom: var(--sp-4); }
@@ -1402,7 +1458,15 @@ svg.ac-ico { display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
   .theme-toggle, .rtl-toggle, .profile-toggle, .nav-burger { width: 28px; height: 28px; font-size: 0.75rem; }
   .burger-line { width: 14px; }
 
-  .slide-content { padding: calc(54px + 1rem) 0.75rem calc(var(--sp-4) + 100px); min-height: auto; }
+  /* Unified hero — 320 */
+  .page-hero, .article-hero, .video-hero,
+  .hero-slider { min-height: var(--hero-min-height-xs); }
+  .page-hero, .article-hero, .video-hero {
+    padding-top: calc(54px + 1.5rem);
+    padding-bottom: 1.5rem;
+  }
+
+  .slide-content { padding: calc(54px + 1.5rem) 0.75rem calc(1.5rem + 100px); min-height: var(--hero-min-height-xs); }
   .hero-stats-inner { padding-left: 0.75rem; padding-right: 0.75rem; }
   .slide-tag { font-size: 10px; padding: 2px 8px; margin-bottom: var(--sp-2); }
   .slide-title { font-size: 1.35rem; line-height: 1.15; margin-bottom: var(--sp-2); }

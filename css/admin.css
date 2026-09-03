@@ -325,6 +325,17 @@
   flex-direction: column;
   gap: var(--sp-2);
 }
+.admin-nav-link--logout {
+  color: #ef4444;
+}
+.admin-nav-link--logout:hover {
+  background: rgba(239,68,68,0.08);
+  color: #dc2626;
+}
+.admin-logout-footer-btn:hover {
+  background: rgba(239,68,68,0.15) !important;
+  border-color: rgba(239,68,68,0.4) !important;
+}
 
 /* ── Content Viewport ── */
 .admin-viewport {

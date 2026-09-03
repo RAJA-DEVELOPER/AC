@@ -107,6 +107,16 @@
 }
 [dir="rtl"] .dash-nav-item.active::before { left: auto; right: 0; border-radius: 2px 0 0 2px; }
 .dash-nav-icon { font-size: 1.1rem; flex-shrink: 0; }
+.dash-nav-item--logout {
+  color: #dc2626;
+}
+.dash-nav-item--logout:hover {
+  background: rgba(239,68,68,0.08);
+  color: #b91c1c;
+}
+.dash-logout-section {
+  margin-top: var(--sp-6);
+}
 .dash-nav-badge {
   margin-left: auto;
   background: var(--arctic);

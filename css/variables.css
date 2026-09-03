@@ -154,6 +154,16 @@
 
   /* Section spacing */
   --section-py: clamp(4rem, 8vw, 7rem);
+
+  /* ── Unified Hero Height System ── */
+  --hero-min-height: 560px;
+  --hero-min-height-tablet: 480px;
+  --hero-min-height-mobile: 420px;
+  --hero-min-height-sm: 380px;
+  --hero-min-height-xs: 360px;
+  --hero-padding-y: 6rem;
+  --hero-padding-y-tablet: 4rem;
+  --hero-padding-y-mobile: 3rem;
 }
 
 /* ── Dark Mode (High Contrast & WCAG AAA Compliance) ── */

@@ -45,8 +45,9 @@
       padding: clamp(2rem, 5vw, 5rem);
     }
     .auth-form-inner { max-width: 400px; width: 100%; margin: 0 auto; }
-    .auth-form-title { font-family: var(--font-heading); font-size: var(--fs-2xl); font-weight: var(--fw-extrabold); color: var(--text-primary); margin-bottom: var(--sp-2); }
-    .auth-form-subtitle { color: var(--text-muted); font-size: var(--fs-sm); margin-bottom: var(--sp-8); }
+    .auth-form-title { font-family: var(--font-heading); font-size: var(--fs-2xl); font-weight: var(--fw-extrabold); color: var(--text-primary); margin-bottom: var(--sp-2); text-align: center; }
+    .auth-form-subtitle { color: var(--text-muted); font-size: var(--fs-sm); margin-bottom: var(--sp-8); text-align: center; }
+    .auth-logo--form { display: none; justify-content: center; margin-bottom: var(--sp-6); }
     .auth-divider { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-6) 0; }
     .auth-divider-line { flex: 1; height: 1px; background: var(--border-color); }
     .auth-divider-text { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
@@ -64,6 +65,7 @@
       .auth-layout { grid-template-columns: 1fr; }
       .auth-visual { display: none; }
       .auth-form-panel { min-height: 100vh; padding: var(--sp-10) var(--sp-6); }
+      .auth-logo--form { display: flex !important; }
     }
     @media (max-width: 480px) {
       .auth-form-panel { padding: var(--sp-8) var(--sp-5); }
@@ -114,7 +116,11 @@
   <!-- Form Panel -->
   <div class="auth-form-panel">
     <div class="auth-form-inner reveal-up">
-      <div style="margin-bottom:var(--sp-8);">
+      <a href="index.html" class="auth-logo auth-logo--form" aria-label="ArcticCool Home">
+        <div class="nav-logo-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div>
+        <span class="nav-logo-text" style="font-size:var(--fs-lg);">Arctic<span>Cool</span></span>
+      </a>
+      <div style="margin-bottom:var(--sp-8); text-align:center;">
         <div class="auth-form-title">Welcome back <svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></div>
         <div class="auth-form-subtitle">Sign in to your ArcticCool account</div>
       </div>
@@ -161,11 +167,7 @@
         </div>
       </form>
 
-      <!-- Theme toggle for auth page -->
-      <div style="display:flex; align-items:center; justify-content:center; gap:var(--sp-3); margin-top:var(--sp-8); padding-top:var(--sp-6); border-top:1px solid var(--border-color);">
-        <button class="theme-toggle" style="background:var(--bg-tertiary); border:1px solid var(--border-color); border-radius:var(--radius-full); padding:var(--sp-2) var(--sp-4);" aria-label="Toggle theme"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Dark Mode</button>
-        <a href="index.html" style="font-size:var(--fs-xs); color:var(--text-muted);">← Back to website</a>
-      </div>
+
     </div>
   </div>
 </div>

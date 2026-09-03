@@ -14,14 +14,15 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <style>
-    /* Article Hero */
+    /* Article Hero — Unified height system */
     .article-hero {
       background: var(--midnight);
-      padding: calc(72px + 4rem) 0 4rem;
+      padding: calc(72px + var(--hero-padding-y)) 0 var(--hero-padding-y);
       position: relative; overflow: hidden;
       display: flex; align-items: center;
-      min-height: 380px;
+      min-height: var(--hero-min-height);
     }
+    .article-hero .container { width: 100%; }
     .article-hero-bg {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -115,14 +116,14 @@
       .article-sidebar { position: static; }
     }
     @media (max-width: 768px) {
-      .article-hero { padding: calc(72px + 2.5rem) 0 2.5rem; min-height: auto; }
+      .article-hero { padding: calc(72px + var(--hero-padding-y-tablet)) 0 var(--hero-padding-y-tablet); min-height: var(--hero-min-height-tablet); }
       .article-hero-title { font-size: clamp(1.6rem, 5.5vw, 2.25rem); }
       .article-hero-subtitle { font-size: var(--fs-sm); }
       .article-meta { gap: var(--sp-3); }
       .author-card { padding: var(--sp-6) var(--sp-4); }
     }
     @media (max-width: 480px) {
-      .article-hero { padding: calc(60px + 2rem) 0 2rem; }
+      .article-hero { padding: calc(60px + var(--hero-padding-y-mobile)) 0 var(--hero-padding-y-mobile); min-height: var(--hero-min-height-mobile); }
       .article-hero-title { font-size: clamp(1.45rem, 5.5vw, 1.85rem); }
       .article-hero-subtitle { font-size: var(--fs-xs); }
       .article-meta { gap: var(--sp-2); }
@@ -135,14 +136,14 @@
       .prose h3 { font-size: var(--fs-lg); }
     }
     @media (max-width: 360px) {
-      .article-hero { padding: calc(56px + 1.5rem) 0 1.5rem; }
+      .article-hero { padding: calc(56px + 2rem) 0 2rem; min-height: var(--hero-min-height-sm); }
       .article-hero-title { font-size: 1.35rem; }
       .article-author-img { width: 36px; height: 36px; }
       .share-label { flex-basis: 100%; }
       .comment-body { padding: var(--sp-4); }
     }
     @media (max-width: 320px) {
-      .article-hero { padding: calc(54px + 1.25rem) 0 1.25rem; }
+      .article-hero { padding: calc(54px + 1.5rem) 0 1.5rem; min-height: var(--hero-min-height-xs); }
       .article-hero-title { font-size: 1.22rem; }
       .article-hero-subtitle { font-size: 11px; }
       .article-layout { padding: var(--sp-6) 0; }

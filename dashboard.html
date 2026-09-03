@@ -30,6 +30,7 @@
     </div>
     <div class="dash-topbar-right">
       <a href="index.html" class="btn btn--ghost btn--sm">← Back to Site</a>
+      <button class="btn btn--sm" id="dashTopbarLogoutBtn" style="background: rgba(239,68,68,0.08); color: #dc2626; border:1px solid rgba(239,68,68,0.2);" aria-label="Logout"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Logout</button>
     </div>
   </div>
 </header>
@@ -90,6 +91,13 @@
       </a>
       <a class="dash-nav-item" data-page="settings" role="button">
         <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Settings
+      </a>
+    </div>
+
+    <!-- Logout -->
+    <div class="dash-nav-section dash-logout-section" style="margin-top: var(--sp-6); border-top: 1px solid var(--border-color); padding-top: var(--sp-4);">
+      <a class="dash-nav-item dash-nav-item--logout" id="customerLogoutBtn" role="button" aria-label="Logout">
+        <span class="dash-nav-icon"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> Logout
       </a>
     </div>
   </aside>
@@ -715,8 +723,54 @@
 </div>
 
 <div class="toast-container" aria-live="polite"></div>
+<!-- Logout Confirmation Modal -->
+<div id="customerLogoutModal" style="display:none; position:fixed; inset:0; z-index:500; align-items:center; justify-content:center; padding: var(--sp-4);">
+  <div id="customerLogoutBackdrop" style="position:absolute; inset:0; background: rgba(23,33,43,0.6); backdrop-filter: blur(6px);"></div>
+  <div style="position:relative; background: var(--bg-card); border:1px solid var(--border-color); border-radius: var(--radius-2xl); max-width:420px; width:100%; padding: var(--sp-8); box-shadow: var(--shadow-2xl); text-align:center;">
+    <div style="width:56px; height:56px; border-radius:50%; background: rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto var(--sp-4); color:#ef4444; font-size:1.6rem;"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+    <h3 style="font-family: var(--font-heading); font-size: var(--fs-lg); font-weight: var(--fw-bold); margin-bottom: var(--sp-2);">Confirm Logout</h3>
+    <p style="color: var(--text-muted); font-size: var(--fs-sm); line-height: var(--lh-relaxed); margin-bottom: var(--sp-6);">Are you sure you want to logout? You will need to sign in again to access your dashboard.</p>
+    <div style="display:flex; gap: var(--sp-3); justify-content:center;">
+      <button class="btn btn--ghost" id="customerLogoutCancel" style="flex:1;">Cancel</button>
+      <button class="btn btn--primary" id="customerLogoutConfirm" style="flex:1; background:#ef4444; border-color:#ef4444;">Logout</button>
+    </div>
+  </div>
+</div>
 <script src="js/core.js"></script>
 <script src="js/animations.js"></script>
 <script src="js/dashboard.js"></script>
+<script>
+(function() {
+  function openCustomerLogoutModal() {
+    var m = document.getElementById('customerLogoutModal');
+    if (m) { m.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  }
+  function closeCustomerLogoutModal() {
+    var m = document.getElementById('customerLogoutModal');
+    if (m) { m.style.display = 'none'; document.body.style.overflow = ''; }
+  }
+  function doCustomerLogout() {
+    try {
+      var keepTheme = localStorage.getItem('ac_theme');
+      var keepDir = localStorage.getItem('ac_dir');
+      localStorage.clear();
+      sessionStorage.clear();
+      if (keepTheme) localStorage.setItem('ac_theme', keepTheme);
+      if (keepDir) localStorage.setItem('ac_dir', keepDir);
+      localStorage.removeItem('ac_user');
+      localStorage.removeItem('ac_session');
+    } catch(e) {}
+    closeCustomerLogoutModal();
+    window.ArcticCool && window.ArcticCool.ToastManager && window.ArcticCool.ToastManager.show('Logged out successfully. Redirecting to login...', 'success', 2000);
+    setTimeout(function(){ window.location.href = 'login.html'; }, 900);
+  }
+  document.getElementById('customerLogoutBtn') && document.getElementById('customerLogoutBtn').addEventListener('click', function(e){ e.preventDefault(); openCustomerLogoutModal(); });
+  document.getElementById('dashTopbarLogoutBtn') && document.getElementById('dashTopbarLogoutBtn').addEventListener('click', function(e){ e.preventDefault(); openCustomerLogoutModal(); });
+  document.getElementById('customerLogoutCancel') && document.getElementById('customerLogoutCancel').addEventListener('click', closeCustomerLogoutModal);
+  document.getElementById('customerLogoutConfirm') && document.getElementById('customerLogoutConfirm').addEventListener('click', doCustomerLogout);
+  document.getElementById('customerLogoutBackdrop') && document.getElementById('customerLogoutBackdrop').addEventListener('click', closeCustomerLogoutModal);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeCustomerLogoutModal(); });
+})();
+</script>
 </body>
 </html>

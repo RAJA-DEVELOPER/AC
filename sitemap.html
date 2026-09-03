@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <style>
-    .page-hero { background: linear-gradient(135deg, rgba(23,33,43,0.82) 0%, rgba(23,33,43,0.65) 60%, rgba(15,116,143,0.45) 100%), url('https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1600&q=80') center/cover no-repeat; padding: calc(72px + 5rem) 0 4rem; position: relative; overflow: hidden; }
+    .page-hero { background: linear-gradient(135deg, rgba(23,33,43,0.82) 0%, rgba(23,33,43,0.65) 60%, rgba(15,116,143,0.45) 100%), url('https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1600&q=80') center/cover no-repeat; padding: calc(72px + var(--hero-padding-y)) 0 var(--hero-padding-y); position: relative; overflow: hidden; min-height: var(--hero-min-height); display: flex; align-items: center; }
+    .page-hero .container { width: 100%; }
     .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(78,168,222,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(78,168,222,0.05) 1px, transparent 1px); background-size: 50px 50px; }
     .sitemap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
     .sitemap-category {
@@ -33,10 +34,10 @@
     .sitemap-link-arrow { font-size: 0.7rem; opacity: 0; transition: opacity var(--t-fast); }
     .sitemap-link:hover .sitemap-link-arrow { opacity: 1; }
     @media (max-width: 1024px) { .sitemap-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); } }
-    @media (max-width: 768px) { .sitemap-grid { grid-template-columns: 1fr; } .page-hero { padding: calc(72px + 4rem) 0 3.5rem; } }
-    @media (max-width: 480px) { .sitemap-grid { gap: var(--sp-4); } .sitemap-category { padding: var(--sp-5); } .sitemap-link { font-size: var(--fs-xs); } }
-    @media (max-width: 360px) { .sitemap-category { padding: var(--sp-4); } .page-hero-title { font-size: 1.75rem; } }
-    @media (max-width: 320px) { .sitemap-category { padding: var(--sp-3); } .sitemap-cat-name { font-size: var(--fs-sm); } .sitemap-link { font-size: 12px; padding: var(--sp-1); } .page-hero-title { font-size: 1.45rem; } }
+    @media (max-width: 768px) { .sitemap-grid { grid-template-columns: 1fr; } .page-hero { padding: calc(72px + var(--hero-padding-y-tablet)) 0 var(--hero-padding-y-tablet); min-height: var(--hero-min-height-tablet); } }
+    @media (max-width: 480px) { .sitemap-grid { gap: var(--sp-4); } .sitemap-category { padding: var(--sp-5); } .sitemap-link { font-size: var(--fs-xs); } .page-hero { padding: calc(60px + var(--hero-padding-y-mobile)) 0 var(--hero-padding-y-mobile); min-height: var(--hero-min-height-mobile); } }
+    @media (max-width: 360px) { .sitemap-category { padding: var(--sp-4); } .page-hero { padding: calc(56px + 2rem) 0 2rem; min-height: var(--hero-min-height-sm); } .page-hero-title { font-size: 1.75rem; } }
+    @media (max-width: 320px) { .sitemap-category { padding: var(--sp-3); } .sitemap-cat-name { font-size: var(--fs-sm); } .sitemap-link { font-size: 12px; padding: var(--sp-1); } .page-hero { padding: calc(54px + 1.5rem) 0 1.5rem; min-height: var(--hero-min-height-xs); } .page-hero-title { font-size: 1.45rem; } }
   </style>
 </head>
 <body>

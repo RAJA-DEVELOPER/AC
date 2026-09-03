@@ -14,12 +14,15 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <style>
-    /* Page Hero */
+    /* Page Hero — Unified height system */
     .page-hero {
       background: linear-gradient(135deg, rgba(23,33,43,0.82) 0%, rgba(23,33,43,0.65) 60%, rgba(15,116,143,0.45) 100%), url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&q=80') center/cover no-repeat;
-      padding: calc(72px + 6rem) 0 6rem;
+      padding: calc(72px + var(--hero-padding-y)) 0 var(--hero-padding-y);
       position: relative; overflow: hidden;
+      min-height: var(--hero-min-height);
+      display: flex; align-items: center;
     }
+    .page-hero .container { width: 100%; }
     .page-hero::before {
       content: '';
       position: absolute; inset: 0;
@@ -65,7 +68,7 @@
       color: var(--arctic); margin-bottom: var(--sp-2);
     }
     .story-text { font-size: var(--fs-sm); color: var(--text-muted); line-height: var(--lh-relaxed); }
-    /* Values Cards */
+    /* Values Cards — aligned text inside boxes */
     .value-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -73,6 +76,16 @@
       padding: var(--sp-8);
       text-align: center;
       transition: all var(--t-normal);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+    .value-card .card-text {
+      text-align: center;
+      max-width: 32ch;
+      margin-left: auto;
+      margin-right: auto;
     }
     .value-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
     .value-icon {
@@ -130,7 +143,7 @@
     @media (max-width: 768px) {
       .about-stats { grid-template-columns: 1fr 1fr; }
       .awards-grid { grid-template-columns: 1fr 1fr; }
-      .page-hero { padding: calc(72px + 4rem) 0 4rem; }
+      .page-hero { padding: calc(72px + var(--hero-padding-y-tablet)) 0 var(--hero-padding-y-tablet); min-height: var(--hero-min-height-tablet); }
     }
     @media (max-width: 480px) {
       .about-stats { grid-template-columns: 1fr 1fr; gap: var(--sp-4); padding: var(--sp-7) var(--sp-4); }
@@ -140,10 +153,12 @@
       .story-dot { left: -26px; width: 12px; height: 12px; }
       .value-card { padding: var(--sp-6) var(--sp-4); }
       .value-icon { width: 60px; height: 60px; font-size: 1.6rem; }
+      .page-hero { padding: calc(60px + var(--hero-padding-y-mobile)) 0 var(--hero-padding-y-mobile); min-height: var(--hero-min-height-mobile); }
     }
     @media (max-width: 360px) {
       .about-stats { grid-template-columns: 1fr; gap: var(--sp-5); }
       .awards-grid { grid-template-columns: 1fr; }
+      .page-hero { padding: calc(56px + 2rem) 0 2rem; min-height: var(--hero-min-height-sm); }
       .page-hero-title { font-size: 1.75rem; }
       .city-chip { font-size: var(--fs-xs); }
     }
@@ -159,6 +174,7 @@
       .award-card { padding: var(--sp-4) var(--sp-3); }
       .award-icon { font-size: 2rem; }
       .city-chip { font-size: 11px; padding: 2px 8px; }
+      .page-hero { padding: calc(54px + 1.5rem) 0 1.5rem; min-height: var(--hero-min-height-xs); }
     }
   </style>
 </head>
@@ -296,11 +312,11 @@
       <div class="value-card">
         <div class="value-icon" aria-hidden="true"><svg class="ac-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3L8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg></div>
         <h3 style="margin-bottom: var(--sp-3);">Our Values</h3>
-        <div style="display:flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-2);">
-          <div style="display:flex; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted);">✓ Integrity in every interaction</div>
-          <div style="display:flex; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted);">✓ Innovation in every solution</div>
-          <div style="display:flex; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted);">✓ Excellence in every install</div>
-          <div style="display:flex; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted);">✓ Sustainability in every decision</div>
+        <div style="display:flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-2); align-items: center;">
+          <div style="display:flex; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted); justify-content: center; text-align: center;">✓ Integrity in every interaction</div>
+          <div style="display:flex; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted); justify-content: center; text-align: center;">✓ Innovation in every solution</div>
+          <div style="display:flex; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted); justify-content: center; text-align: center;">✓ Excellence in every install</div>
+          <div style="display:flex; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted); justify-content: center; text-align: center;">✓ Sustainability in every decision</div>
         </div>
       </div>
     </div>
@@ -308,12 +324,31 @@
 </section>
 
 
-<!-- SECTION 4 — AWARDS & CERTIFICATIONS -->
+<!-- SECTION 4 — AWARDS & CERTIFICATIONS (with integrated stats) -->
 <section class="section" aria-labelledby="awards-heading">
   <div class="container">
     <div class="section-header section-header--center reveal-up">
       <span class="section-tag">Recognition</span>
       <h2 class="section-title" id="awards-heading">Awards & <span>Certifications</span></h2>
+    </div>
+    <!-- Stats integrated into above section -->
+    <div class="about-stats reveal-up" style="margin-bottom: var(--sp-12);">
+      <div class="about-stat">
+        <div class="about-stat-num"><span data-count="50000" data-suffix="+">0</span></div>
+        <div class="about-stat-label">Happy Customers</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num"><span data-count="500" data-suffix="+">0</span></div>
+        <div class="about-stat-label">Certified Technicians</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num"><span data-count="40" data-suffix="+">0</span></div>
+        <div class="about-stat-label">Cities Covered</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num"><span data-count="99" data-suffix="%">0</span></div>
+        <div class="about-stat-label">Satisfaction Rate</div>
+      </div>
     </div>
     <div class="awards-grid stagger">
       <div class="award-card">
@@ -361,32 +396,7 @@
 </section>
 
 
-<!-- SECTION 5 — STATS BANNER -->
-<section class="section" aria-label="Company statistics">
-  <div class="container">
-    <div class="about-stats reveal-up">
-      <div class="about-stat">
-        <div class="about-stat-num"><span data-count="50000" data-suffix="+">0</span></div>
-        <div class="about-stat-label">Happy Customers</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-num"><span data-count="500" data-suffix="+">0</span></div>
-        <div class="about-stat-label">Certified Technicians</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-num"><span data-count="40" data-suffix="+">0</span></div>
-        <div class="about-stat-label">Cities Covered</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-num"><span data-count="99" data-suffix="%">0</span></div>
-        <div class="about-stat-label">Satisfaction Rate</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- SECTION 6 — SERVICE AREAS + CTA -->
+<!-- SECTION 5 — SERVICE AREAS + CTA -->
 <section class="section section--ice" aria-labelledby="areas-heading">
   <div class="container">
     <div class="section-header section-header--center reveal-up">
